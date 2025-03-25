@@ -20,6 +20,7 @@ lv_obj_t * ui_ImgButton1;
 // SCREEN: ui_mainScreen
 void ui_mainScreen_screen_init(void);
 lv_obj_t * ui_mainScreen;
+void ui_event_lvRoom(lv_event_t * e);
 lv_obj_t * ui_lvRoom;
 lv_obj_t * ui_roomName1;
 lv_obj_t * ui_light1;
@@ -53,9 +54,9 @@ lv_obj_t * ui_eHumi;
 lv_obj_t * ui_envHumi;
 // CUSTOM VARIABLES
 
-// SCREEN: ui_bedRoom1Screen
-void ui_bedRoom1Screen_screen_init(void);
-lv_obj_t * ui_bedRoom1Screen;
+// SCREEN: ui_lvRoomScreen
+void ui_lvRoomScreen_screen_init(void);
+lv_obj_t * ui_lvRoomScreen;
 lv_obj_t * ui_Panel2;
 lv_obj_t * ui_dvName1;
 lv_obj_t * ui_lightName1;
@@ -76,6 +77,45 @@ void ui_event_Slider1(lv_event_t * e);
 lv_obj_t * ui_Slider1;
 lv_obj_t * ui_ACLvRoomTemp1;
 lv_obj_t * ui_Switch2;
+lv_obj_t * ui_Panel8;
+lv_obj_t * ui_ACName2;
+void ui_event_Slider3(lv_event_t * e);
+lv_obj_t * ui_Slider3;
+lv_obj_t * ui_ACLvRoomTemp2;
+lv_obj_t * ui_Switch3;
+void ui_event_ImgButton2(lv_event_t * e);
+lv_obj_t * ui_ImgButton2;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_bedRoomScreen1
+void ui_bedRoomScreen1_screen_init(void);
+lv_obj_t * ui_bedRoomScreen1;
+lv_obj_t * ui_Panel5;
+lv_obj_t * ui_dvName3;
+lv_obj_t * ui_lightName2;
+lv_obj_t * ui_LightBedRoom1;
+lv_obj_t * ui_LightBedRoom2;
+lv_obj_t * ui_LightBedRoom3;
+lv_obj_t * ui_LightBedRoom4;
+lv_obj_t * ui_LightBedRoom5;
+lv_obj_t * ui_LightBedRoom6;
+lv_obj_t * ui_Panel6;
+lv_obj_t * ui_dvName4;
+lv_obj_t * ui_fanName2;
+lv_obj_t * ui_FanBedRoom1;
+lv_obj_t * ui_FanBedRoom2;
+lv_obj_t * ui_Panel7;
+lv_obj_t * ui_ACName3;
+void ui_event_Slider2(lv_event_t * e);
+lv_obj_t * ui_Slider2;
+lv_obj_t * ui_ACBedRoomTemp1;
+lv_obj_t * ui_Switch1;
+lv_obj_t * ui_Panel9;
+lv_obj_t * ui_ACName4;
+void ui_event_Slider4(lv_event_t * e);
+lv_obj_t * ui_Slider4;
+lv_obj_t * ui_ACBedRoomTemp2;
+lv_obj_t * ui_Switch4;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -100,6 +140,15 @@ void ui_event_ImgButton1(lv_event_t * e)
 
     if(event_code == LV_EVENT_PRESSED) {
         _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 100, 0, &ui_mainScreen_screen_init);
+    }
+}
+
+void ui_event_lvRoom(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_lvRoomScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0, &ui_lvRoomScreen_screen_init);
     }
 }
 
@@ -133,6 +182,45 @@ void ui_event_Slider1(lv_event_t * e)
     }
 }
 
+void ui_event_Slider3(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        _ui_slider_set_text_value(ui_ACLvRoomTemp2, target, "", "°C");
+    }
+}
+
+void ui_event_ImgButton2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 500, 0, &ui_mainScreen_screen_init);
+    }
+}
+
+void ui_event_Slider2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        _ui_slider_set_text_value(ui_ACBedRoomTemp1, target, "", "°C");
+    }
+}
+
+void ui_event_Slider4(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        _ui_slider_set_text_value(ui_ACBedRoomTemp2, target, "", "°C");
+    }
+}
+
 ///////////////////// SCREENS ////////////////////
 
 void ui_init(void)
@@ -143,7 +231,8 @@ void ui_init(void)
     lv_disp_set_theme(dispp, theme);
     ui_FirstScreen_screen_init();
     ui_mainScreen_screen_init();
-    ui_bedRoom1Screen_screen_init();
+    ui_lvRoomScreen_screen_init();
+    ui_bedRoomScreen1_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_FirstScreen);
 }

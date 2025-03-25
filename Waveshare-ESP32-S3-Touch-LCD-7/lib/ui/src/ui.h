@@ -37,6 +37,7 @@ extern lv_obj_t * ui_ImgButton1;
 // SCREEN: ui_mainScreen
 void ui_mainScreen_screen_init(void);
 extern lv_obj_t * ui_mainScreen;
+void ui_event_lvRoom(lv_event_t * e);
 extern lv_obj_t * ui_lvRoom;
 extern lv_obj_t * ui_roomName1;
 extern lv_obj_t * ui_light1;
@@ -70,9 +71,9 @@ extern lv_obj_t * ui_eHumi;
 extern lv_obj_t * ui_envHumi;
 // CUSTOM VARIABLES
 
-// SCREEN: ui_bedRoom1Screen
-void ui_bedRoom1Screen_screen_init(void);
-extern lv_obj_t * ui_bedRoom1Screen;
+// SCREEN: ui_lvRoomScreen
+void ui_lvRoomScreen_screen_init(void);
+extern lv_obj_t * ui_lvRoomScreen;
 extern lv_obj_t * ui_Panel2;
 extern lv_obj_t * ui_dvName1;
 extern lv_obj_t * ui_lightName1;
@@ -93,6 +94,45 @@ void ui_event_Slider1(lv_event_t * e);
 extern lv_obj_t * ui_Slider1;
 extern lv_obj_t * ui_ACLvRoomTemp1;
 extern lv_obj_t * ui_Switch2;
+extern lv_obj_t * ui_Panel8;
+extern lv_obj_t * ui_ACName2;
+void ui_event_Slider3(lv_event_t * e);
+extern lv_obj_t * ui_Slider3;
+extern lv_obj_t * ui_ACLvRoomTemp2;
+extern lv_obj_t * ui_Switch3;
+void ui_event_ImgButton2(lv_event_t * e);
+extern lv_obj_t * ui_ImgButton2;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_bedRoomScreen1
+void ui_bedRoomScreen1_screen_init(void);
+extern lv_obj_t * ui_bedRoomScreen1;
+extern lv_obj_t * ui_Panel5;
+extern lv_obj_t * ui_dvName3;
+extern lv_obj_t * ui_lightName2;
+extern lv_obj_t * ui_LightBedRoom1;
+extern lv_obj_t * ui_LightBedRoom2;
+extern lv_obj_t * ui_LightBedRoom3;
+extern lv_obj_t * ui_LightBedRoom4;
+extern lv_obj_t * ui_LightBedRoom5;
+extern lv_obj_t * ui_LightBedRoom6;
+extern lv_obj_t * ui_Panel6;
+extern lv_obj_t * ui_dvName4;
+extern lv_obj_t * ui_fanName2;
+extern lv_obj_t * ui_FanBedRoom1;
+extern lv_obj_t * ui_FanBedRoom2;
+extern lv_obj_t * ui_Panel7;
+extern lv_obj_t * ui_ACName3;
+void ui_event_Slider2(lv_event_t * e);
+extern lv_obj_t * ui_Slider2;
+extern lv_obj_t * ui_ACBedRoomTemp1;
+extern lv_obj_t * ui_Switch1;
+extern lv_obj_t * ui_Panel9;
+extern lv_obj_t * ui_ACName4;
+void ui_event_Slider4(lv_event_t * e);
+extern lv_obj_t * ui_Slider4;
+extern lv_obj_t * ui_ACBedRoomTemp2;
+extern lv_obj_t * ui_Switch4;
 // CUSTOM VARIABLES
 
 // EVENTS

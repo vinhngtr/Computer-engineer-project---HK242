@@ -259,6 +259,7 @@ void ui_mainScreen_screen_init(void)
     lv_label_set_text(ui_envHumi, "70%");
     lv_obj_set_style_text_font(ui_envHumi, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_add_event_cb(ui_lvRoom, ui_event_lvRoom, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_eTemp, ui_event_eTemp, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_eHumi, ui_event_eHumi, LV_EVENT_ALL, NULL);
 
