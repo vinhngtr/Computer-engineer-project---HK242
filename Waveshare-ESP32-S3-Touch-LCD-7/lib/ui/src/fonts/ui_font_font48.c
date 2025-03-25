@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 48 px
  * Bpp: 1
- * Opts: --bpp 1 --size 48 --font C:/DAMH-KTMT/Waveshare-ESP32-S3-Touch-LCD-4.3/Waveshare-ESP32-S3-Touch-LCD-4.3-main/squareline/assets/SoulDaisy.otf -o C:/DAMH-KTMT/Waveshare-ESP32-S3-Touch-LCD-4.3/Waveshare-ESP32-S3-Touch-LCD-4.3-main/squareline/assets\ui_font_font48.c --format lvgl -r 0x20-0x7f --no-compress --no-prefilter
+ * Opts: --bpp 1 --size 48 --font C:/DAMH-GD1/Computer-engineer-project---HK242/squareline/assets/SoulDaisy.otf -o C:/DAMH-GD1/Computer-engineer-project---HK242/squareline/assets\ui_font_font48.c --format lvgl -r 0x20-0x7f --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"

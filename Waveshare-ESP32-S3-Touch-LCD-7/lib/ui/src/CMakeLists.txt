@@ -1,9 +1,12 @@
 SET(SOURCES screens/ui_FirstScreen.c
-    screens/ui_SecondScreen.c
+    screens/ui_mainScreen.c
+    screens/ui_bedRoom1Screen.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
     images/ui_img_115668498.c
-    fonts/ui_font_font48.c)
+    fonts/ui_font_font32.c
+    fonts/ui_font_font48.c
+    fonts/ui_font_font20.c)
 
 add_library(ui ${SOURCES})

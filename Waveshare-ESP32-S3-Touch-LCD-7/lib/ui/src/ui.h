@@ -34,12 +34,65 @@ void ui_event_ImgButton1(lv_event_t * e);
 extern lv_obj_t * ui_ImgButton1;
 // CUSTOM VARIABLES
 
-// SCREEN: ui_SecondScreen
-void ui_SecondScreen_screen_init(void);
-extern lv_obj_t * ui_SecondScreen;
-void ui_event_Button2(lv_event_t * e);
-extern lv_obj_t * ui_Button2;
-extern lv_obj_t * ui_Label2;
+// SCREEN: ui_mainScreen
+void ui_mainScreen_screen_init(void);
+extern lv_obj_t * ui_mainScreen;
+extern lv_obj_t * ui_lvRoom;
+extern lv_obj_t * ui_roomName1;
+extern lv_obj_t * ui_light1;
+extern lv_obj_t * ui_fan1;
+extern lv_obj_t * ui_ac1;
+extern lv_obj_t * ui_kitchenRoom;
+extern lv_obj_t * ui_roomName4;
+extern lv_obj_t * ui_light4;
+extern lv_obj_t * ui_fan4;
+extern lv_obj_t * ui_ac4;
+extern lv_obj_t * ui_bedRoom1;
+extern lv_obj_t * ui_roomName2;
+extern lv_obj_t * ui_light2;
+extern lv_obj_t * ui_fan2;
+extern lv_obj_t * ui_ac2;
+extern lv_obj_t * ui_bedRoom2;
+extern lv_obj_t * ui_roomName3;
+extern lv_obj_t * ui_light3;
+extern lv_obj_t * ui_fan3;
+extern lv_obj_t * ui_ac3;
+extern lv_obj_t * ui_bedRoom3;
+extern lv_obj_t * ui_roomName5;
+extern lv_obj_t * ui_light5;
+extern lv_obj_t * ui_fan5;
+extern lv_obj_t * ui_ac5;
+void ui_event_eTemp(lv_event_t * e);
+extern lv_obj_t * ui_eTemp;
+extern lv_obj_t * ui_envTemp;
+void ui_event_eHumi(lv_event_t * e);
+extern lv_obj_t * ui_eHumi;
+extern lv_obj_t * ui_envHumi;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_bedRoom1Screen
+void ui_bedRoom1Screen_screen_init(void);
+extern lv_obj_t * ui_bedRoom1Screen;
+extern lv_obj_t * ui_Panel2;
+extern lv_obj_t * ui_dvName1;
+extern lv_obj_t * ui_lightName1;
+extern lv_obj_t * ui_LightLvRoom1;
+extern lv_obj_t * ui_LightLvRoom2;
+extern lv_obj_t * ui_LightLvRoom3;
+extern lv_obj_t * ui_LightLvRoom4;
+extern lv_obj_t * ui_LightLvRoom5;
+extern lv_obj_t * ui_LightLvRoom6;
+extern lv_obj_t * ui_Panel3;
+extern lv_obj_t * ui_dvName2;
+extern lv_obj_t * ui_fanName1;
+extern lv_obj_t * ui_FanLvRoom1;
+extern lv_obj_t * ui_FanLvRoom2;
+extern lv_obj_t * ui_Panel4;
+extern lv_obj_t * ui_ACName1;
+void ui_event_Slider1(lv_event_t * e);
+extern lv_obj_t * ui_Slider1;
+extern lv_obj_t * ui_ACLvRoomTemp1;
+extern lv_obj_t * ui_Switch2;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -50,7 +103,9 @@ extern lv_obj_t * ui____initial_actions0;
 LV_IMG_DECLARE(ui_img_115668498);    // assets/next (1).png
 
 // FONTS
+LV_FONT_DECLARE(ui_font_font32);
 LV_FONT_DECLARE(ui_font_font48);
+LV_FONT_DECLARE(ui_font_font20);
 
 // UI INIT
 void ui_init(void);
