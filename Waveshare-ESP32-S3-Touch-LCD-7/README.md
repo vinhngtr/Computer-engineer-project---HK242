@@ -47,7 +47,7 @@ lib_deps =
 	lvgl/lvgl@8.3.11
 ```
 
-These are the equivalents for settings the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3) recommends for the Arduino IDE.
+These are the equivalents for settings the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-7) recommends for the Arduino IDE.
 
 ## Source
 
