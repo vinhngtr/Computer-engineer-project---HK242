@@ -138,6 +138,29 @@ void lvgl_port_task(void *arg)
     }
 }
 
+
+// /// @brief ///////////////////////////////////////////////////
+// void _ui_arc_set(lv_obj_t * target, int val) {
+//     lv_arc_set_value(target, val);
+//     lv_event_send(target, LV_EVENT_VALUE_CHANGED, 0);
+// }
+// 
+// void readSensorTask(void *parameter) {
+//     int dth = 0;
+//     uint32_t task_delay_ms = LVGL_TASK_MAX_DELAY_MS;
+//     while (1) {
+//         dth++;
+//         lvgl_port_lock(-1);
+//         task_delay_ms = lv_timer_handler();
+//         // Release the mutex
+//         lvgl_port_unlock();
+//         _ui_arc_set(ui_eTemp, dth % 40);  // Cập nhật Arc (0 - 99)
+//         vTaskDelay(pdMS_TO_TICKS(500)); // Chờ 2 giây trước lần cập nhật tiếp theo
+//     }
+// }
+
+// ////////////////////////////////////////////////////////////
+
 void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
@@ -213,7 +236,9 @@ void setup()
     /* Create a task to run the LVGL task periodically */
     lvgl_mux = xSemaphoreCreateRecursiveMutex();
     xTaskCreate(lvgl_port_task, "lvgl", LVGL_TASK_STACK_SIZE, NULL, LVGL_TASK_PRIORITY, NULL);
-
+    // ///////////////////////////////////////////////Đọc cảm biến////////////////////////////////
+    // xTaskCreate(readSensorTask, "Read Sensor Task", 2048, NULL, 1, NULL);
+    // ///////////////////////////////////////////////////////////////////////////////////////////
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_lock(-1);
 
@@ -222,7 +247,7 @@ void setup()
 
     /* Release the mutex */
     lvgl_port_unlock();
-
+    
     Serial.println("Setup done");
 }
 

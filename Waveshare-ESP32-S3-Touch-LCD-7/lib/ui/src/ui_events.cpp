@@ -5,7 +5,6 @@
 
 #include "ui.h"
 
-void func0055(lv_event_t * e)
-{
-	// Your code here
+void func0055(lv_event_t * e){
+	
 }
