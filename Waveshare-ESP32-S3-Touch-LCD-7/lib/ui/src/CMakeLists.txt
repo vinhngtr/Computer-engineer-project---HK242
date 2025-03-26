@@ -8,6 +8,7 @@ SET(SOURCES screens/ui_FirstScreen.c
     ui_helpers.c
     ui_events.cpp
     images/ui_img_115668498.c
+    images/ui_img_1692275422.c
     fonts/ui_font_font20.c
     fonts/ui_font_font32.c
     fonts/ui_font_font48.c)

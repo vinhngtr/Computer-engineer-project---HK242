@@ -82,32 +82,43 @@ extern lv_obj_t * ui_dvName1;
 extern lv_obj_t * ui_lightName1;
 void ui_event_LightLvRoom1(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom1;
+void ui_event_LightLvRoom2(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom2;
+void ui_event_LightLvRoom3(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom3;
+void ui_event_LightLvRoom4(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom4;
+void ui_event_LightLvRoom5(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom5;
+void ui_event_LightLvRoom6(lv_event_t * e);
 extern lv_obj_t * ui_LightLvRoom6;
 extern lv_obj_t * ui_Panel3;
 extern lv_obj_t * ui_dvName2;
 extern lv_obj_t * ui_fanName1;
 void ui_event_FanLvRoom1(lv_event_t * e);
 extern lv_obj_t * ui_FanLvRoom1;
+void ui_event_FanLvRoom2(lv_event_t * e);
 extern lv_obj_t * ui_FanLvRoom2;
 extern lv_obj_t * ui_Panel4;
 extern lv_obj_t * ui_ACName1;
-void ui_event_Slider1(lv_event_t * e);
-extern lv_obj_t * ui_Slider1;
+void ui_event_ac1controlLV1(lv_event_t * e);
+extern lv_obj_t * ui_ac1controlLV1;
 extern lv_obj_t * ui_ACLvRoomTemp1;
-extern lv_obj_t * ui_Switch2;
+extern lv_obj_t * ui_ACLivingRoom1;
 extern lv_obj_t * ui_Panel8;
 extern lv_obj_t * ui_ACName2;
-void ui_event_Slider3(lv_event_t * e);
-extern lv_obj_t * ui_Slider3;
+void ui_event_ac1controlLV2(lv_event_t * e);
+extern lv_obj_t * ui_ac1controlLV2;
 extern lv_obj_t * ui_ACLvRoomTemp2;
-extern lv_obj_t * ui_Switch3;
-void ui_event_ImgButton2(lv_event_t * e);
-extern lv_obj_t * ui_ImgButton2;
-extern lv_obj_t * ui_lvRoomValue;
+extern lv_obj_t * ui_ACLivingRoom2;
+void ui_event_lvRSlider1(lv_event_t * e);
+extern lv_obj_t * ui_lvRSlider1;
+void ui_event_lvRSlider2(lv_event_t * e);
+extern lv_obj_t * ui_lvRSlider2;
+void ui_event_lvRSlider3(lv_event_t * e);
+extern lv_obj_t * ui_lvRSlider3;
+void ui_event_HOME(lv_event_t * e);
+extern lv_obj_t * ui_HOME;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_bedRoomScreen1
@@ -148,14 +159,14 @@ void ui_event_ac2control(lv_event_t * e);
 extern lv_obj_t * ui_ac2control;
 extern lv_obj_t * ui_ACBedRoomTemp2;
 extern lv_obj_t * ui_ACBedRoom2;
-void ui_event_ImgButton4(lv_event_t * e);
-extern lv_obj_t * ui_ImgButton4;
 void ui_event_LBRSlider1(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider1;
 void ui_event_LBRSlider2(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider2;
 void ui_event_LBRSlider3(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider3;
+void ui_event_HOME2(lv_event_t * e);
+extern lv_obj_t * ui_HOME2;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_bedRoomScreen2
@@ -196,14 +207,14 @@ void ui_event_ac2control1(lv_event_t * e);
 extern lv_obj_t * ui_ac2control1;
 extern lv_obj_t * ui_ACBedRoomTemp4;
 extern lv_obj_t * ui_ACBedRoom4;
-void ui_event_ImgButton3(lv_event_t * e);
-extern lv_obj_t * ui_ImgButton3;
 void ui_event_LBRSlider4(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider4;
 void ui_event_LBRSlider5(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider5;
 void ui_event_LBRSlider6(lv_event_t * e);
 extern lv_obj_t * ui_LBRSlider6;
+void ui_event_HOME3(lv_event_t * e);
+extern lv_obj_t * ui_HOME3;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -212,6 +223,7 @@ extern lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
 LV_IMG_DECLARE(ui_img_115668498);    // assets/next (1).png
+LV_IMG_DECLARE(ui_img_1692275422);    // assets/home (3).png
 
 // FONTS
 LV_FONT_DECLARE(ui_font_font20);

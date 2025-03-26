@@ -196,21 +196,6 @@ void ui_bedRoomScreen2_screen_init(void)
     lv_obj_set_height(ui_ACBedRoom4, 35);
     lv_obj_set_align(ui_ACBedRoom4, LV_ALIGN_BOTTOM_RIGHT);
 
-    ui_ImgButton3 = lv_imgbtn_create(ui_bedRoomScreen2);
-    lv_imgbtn_set_src(ui_ImgButton3, LV_IMGBTN_STATE_RELEASED, NULL, &ui_img_115668498, NULL);
-    lv_imgbtn_set_src(ui_ImgButton3, LV_IMGBTN_STATE_PRESSED, NULL, &ui_img_115668498, NULL);
-    lv_obj_set_width(ui_ImgButton3, 125);
-    lv_obj_set_height(ui_ImgButton3, 101);
-    lv_obj_set_x(ui_ImgButton3, 111);
-    lv_obj_set_y(ui_ImgButton3, -24);
-    lv_obj_set_align(ui_ImgButton3, LV_ALIGN_BOTTOM_MID);
-    lv_obj_set_style_radius(ui_ImgButton3, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_ImgButton3, lv_color_hex(0x1089DE), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_ImgButton3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_transform_angle(ui_ImgButton3, 900, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_ImgButton3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_PRESSED);
-    lv_obj_set_style_bg_opa(ui_ImgButton3, 255, LV_PART_MAIN | LV_STATE_PRESSED);
-
     ui_LBRSlider4 = lv_slider_create(ui_bedRoomScreen2);
     lv_slider_set_range(ui_LBRSlider4, 0, 6);
     lv_slider_set_value(ui_LBRSlider4, 0, LV_ANIM_OFF);
@@ -238,6 +223,15 @@ void ui_bedRoomScreen2_screen_init(void)
     lv_obj_set_align(ui_LBRSlider6, LV_ALIGN_BOTTOM_MID);
     lv_obj_add_flag(ui_LBRSlider6, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
+    ui_HOME3 = lv_imgbtn_create(ui_bedRoomScreen2);
+    lv_imgbtn_set_src(ui_HOME3, LV_IMGBTN_STATE_RELEASED, NULL, &ui_img_1692275422, NULL);
+    lv_obj_set_width(ui_HOME3, 64);
+    lv_obj_set_height(ui_HOME3, 64);
+    lv_obj_set_align(ui_HOME3, LV_ALIGN_BOTTOM_MID);
+    lv_obj_set_style_radius(ui_HOME3, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HOME3, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HOME3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_LightBedRoom7, ui_event_LightBedRoom7, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LightBedRoom8, ui_event_LightBedRoom8, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LightBedRoom9, ui_event_LightBedRoom9, LV_EVENT_ALL, NULL);
@@ -249,9 +243,9 @@ void ui_bedRoomScreen2_screen_init(void)
     lv_obj_add_event_cb(ui_ac1control1, ui_event_ac1control1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ACBedRoom3, ui_event_ACBedRoom3, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ac2control1, ui_event_ac2control1, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_ImgButton3, ui_event_ImgButton3, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LBRSlider4, ui_event_LBRSlider4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LBRSlider5, ui_event_LBRSlider5, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LBRSlider6, ui_event_LBRSlider6, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HOME3, ui_event_HOME3, LV_EVENT_ALL, NULL);
 
 }
