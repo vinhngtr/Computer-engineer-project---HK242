@@ -1,6 +1,6 @@
-# Waveshare ESP32-S3-Touch-LCD-4.3 with Squareline Studio and PlatformIO
+# Waveshare ESP32-S3-Touch-LCD-7 with Squareline Studio and PlatformIO
 
-This is a first test with getting a Waveshare ESP32-S3-LCD-4.3 Touch running with an exported template project from SquareLine Studio.
+This is a first test with getting a Waveshare ESP32-S3-LCD-7 Touch running with an exported template project from SquareLine Studio.
 
 It is a very simple two-screen UI with buttons going back and forth.
 
@@ -44,14 +44,14 @@ board_build.arduino.memory_type = qio_opi
 board_build.f_flash = 80000000L
 board_build.flash_mode = qio
 lib_deps = 
-	lvgl/lvgl@8.3.8
+	lvgl/lvgl@8.3.11
 ```
 
 These are the equivalents for settings the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3) recommends for the Arduino IDE.
 
 ## Source
 
-The `src/main.cpp` is basically a combination of the `ESP32-S3-Touch-LCD-4.3_Code/Arduino/lvgl_Porting` example from the Waveshare wiki, with removed demo and `#include <ui.h>` from the exported SquareLine Studio project.
+The `src/main.cpp` is basically a combination of the `ESP32-S3-Touch-LCD-7_Code/Arduino/lvgl_Porting` example from the Waveshare wiki, with removed demo and `#include <ui.h>` from the exported SquareLine Studio project.
 
 ## Caveats
 
