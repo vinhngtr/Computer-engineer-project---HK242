@@ -237,7 +237,7 @@ void ui_event_bedRoom2(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_bedRoomScreen1, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0, &ui_bedRoomScreen1_screen_init);
+        _ui_screen_change(&ui_bedRoomScreen2, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0, &ui_bedRoomScreen2_screen_init);
     }
 }
 
@@ -498,7 +498,7 @@ void ui_event_LBRSlider3(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainACLVROOM, target, "FAN       ", "/6 ON");
+        _ui_slider_set_text_value(ui_mainACLVROOM, target, "AC       ", "/2 ON");
     }
 }
 
@@ -674,7 +674,7 @@ void ui_event_LBRSlider6(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainACBEDROOM2, target, "FAN       ", "/6 ON");
+        _ui_slider_set_text_value(ui_mainACBEDROOM2, target, "AC       ", "/2 ON");
     }
 }
 

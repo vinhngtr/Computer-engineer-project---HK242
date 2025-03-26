@@ -139,7 +139,7 @@ void ui_mainScreen_screen_init(void)
     lv_obj_set_x(ui_mainACBEDROOM1, -37);
     lv_obj_set_y(ui_mainACBEDROOM1, 33);
     lv_obj_set_align(ui_mainACBEDROOM1, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainACBEDROOM1, "AC        0/1 ON");
+    lv_label_set_text(ui_mainACBEDROOM1, "AC        0/2 ON");
 
     ui_bedRoom2 = lv_btn_create(ui_mainScreen);
     lv_obj_set_width(ui_bedRoom2, 230);

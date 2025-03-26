@@ -3224,7 +3224,7 @@
                   {
                     "nid": 1030,
                     "strtype": "LABEL/Text",
-                    "strval": "AC        0/1 ON",
+                    "strval": "AC        0/2 ON",
                     "InheritedType": 10
                   },
                   {
@@ -4237,7 +4237,7 @@
                       {
                         "nid": 1000199,
                         "strtype": "CHANGE SCREEN/Screen_to",
-                        "strval": "GUID65471335-440749S153484",
+                        "strval": "GUID42094775-808136S383485",
                         "InheritedType": 9
                       },
                       {
@@ -16113,13 +16113,13 @@
                       {
                         "nid": 1000234,
                         "strtype": "SET TEXT VALUE FROM SLIDER/Prefix",
-                        "strval": "FAN       ",
+                        "strval": "AC       ",
                         "InheritedType": 10
                       },
                       {
                         "nid": 1000235,
                         "strtype": "SET TEXT VALUE FROM SLIDER/Postfix",
-                        "strval": "/6 ON",
+                        "strval": "/2 ON",
                         "InheritedType": 10
                       }
                     ],
@@ -22000,13 +22000,13 @@
                       {
                         "nid": 1000234,
                         "strtype": "SET TEXT VALUE FROM SLIDER/Prefix",
-                        "strval": "FAN       ",
+                        "strval": "AC       ",
                         "InheritedType": 10
                       },
                       {
                         "nid": 1000235,
                         "strtype": "SET TEXT VALUE FROM SLIDER/Postfix",
-                        "strval": "/6 ON",
+                        "strval": "/2 ON",
                         "InheritedType": 10
                       }
                     ],
@@ -22194,7 +22194,7 @@
     "uiExportFolderPath": "C:\\DAMH-GD1\\Computer-engineer-project---HK242\\Waveshare-ESP32-S3-Touch-LCD-7\\lib\\ui\\src",
     "projectExportFolderPath": "C:\\DAMH-GD1\\Computer-engineer-project---HK242\\squareline",
     "custom_variable_prefix": "uic",
-    "backup_cnt": 20,
+    "backup_cnt": 28,
     "autosave_cnt": 0,
     "group_color_cnt": 2,
     "lvgl_version": "8.3.6",
