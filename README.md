@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Waveshare ESP32-S3-Touch-LCD-4.3 with Squareline Studio and PlatformIO
 
 This is a first test with getting a Waveshare ESP32-S3-LCD-4.3 Touch running with an exported template project from SquareLine Studio.
@@ -58,3 +59,7 @@ The `src/main.cpp` is basically a combination of the `ESP32-S3-Touch-LCD-4.3_Cod
 There are some yellow artifacts when doing animations. Also, I have not yet figured out how to rotate the screen.
 
 Feedback welcome!
+=======
+# Computer-engineer-project---HK242
+DACN GD1 
+>>>>>>> ec618aec913a22560a838ca34282b8e6c88be840
