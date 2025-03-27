@@ -1,0 +1,15 @@
+SET(SOURCES screens/ui_FirstScreen.c
+    screens/ui_mainScreen.c
+    screens/ui_lvRoomScreen.c
+    screens/ui_bedRoomScreen1.c
+    screens/ui_bedRoomScreen2.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    ui_events.cpp
+    images/ui_img_115668498.c
+    fonts/ui_font_font20.c
+    fonts/ui_font_font32.c
+    fonts/ui_font_font48.c)
+
+add_library(ui ${SOURCES})
