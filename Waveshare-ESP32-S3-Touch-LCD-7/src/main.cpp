@@ -16,7 +16,7 @@
  *
  * ```bash
  * ...
- * Hello LVGL! V8.3.8
+ * Hello LVGL! V8.3.11
  * I am ESP32_Display_Panel
  * Starting LVGL task
  * Setup done
