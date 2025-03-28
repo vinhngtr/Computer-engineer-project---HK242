@@ -14,7 +14,7 @@ It is a very simple two-screen UI with buttons going back and forth.
 
 ## Libraries
 
-The libraries are the ones provided on the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3): [S3-4.3-libraries.zip](https://files.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3/S3-4.3-libraries.zip), except for lvgl, which is added as library dependency in `platformio.ini`.
+The libraries are the ones provided on the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-7): [S3-7-libraries.zip](https://files.waveshare.com/wiki/ESP32-S3-Touch-LCD-7/S3-7-libraries.zip), except for lvgl, which is added as library dependency in `platformio.ini`.
 
 I tried to add the other two libraries as dependencies as well, but Waveshare made some changes:
 
