@@ -125,8 +125,8 @@ void ui_KitchenSceen_screen_init(void)
     ui_Panel12 = lv_obj_create(ui_KitchenSceen);
     lv_obj_set_width(ui_Panel12, lv_pct(50));
     lv_obj_set_height(ui_Panel12, lv_pct(23));
-    lv_obj_set_x(ui_Panel12, lv_pct(1));
-    lv_obj_set_y(ui_Panel12, lv_pct(-29));
+    lv_obj_set_x(ui_Panel12, lv_pct(0));
+    lv_obj_set_y(ui_Panel12, lv_pct(-30));
     lv_obj_set_align(ui_Panel12, LV_ALIGN_BOTTOM_LEFT);
     lv_obj_clear_flag(ui_Panel12, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Panel12, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -162,8 +162,8 @@ void ui_KitchenSceen_screen_init(void)
     ui_Panel13 = lv_obj_create(ui_KitchenSceen);
     lv_obj_set_width(ui_Panel13, lv_pct(50));
     lv_obj_set_height(ui_Panel13, lv_pct(23));
-    lv_obj_set_x(ui_Panel13, lv_pct(-49));
-    lv_obj_set_y(ui_Panel13, lv_pct(-3));
+    lv_obj_set_x(ui_Panel13, lv_pct(-50));
+    lv_obj_set_y(ui_Panel13, lv_pct(-4));
     lv_obj_set_align(ui_Panel13, LV_ALIGN_BOTTOM_RIGHT);
     lv_obj_clear_flag(ui_Panel13, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Panel13, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);

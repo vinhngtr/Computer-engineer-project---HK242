@@ -32,6 +32,8 @@
 #include <ESP_Panel_Library.h>
 #include <ESP_IOExpander_Library.h>
 #include <ui.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
 
 // Extend IO Pin define
 #define TP_RST 1
@@ -45,23 +47,40 @@
 #define I2C_MASTER_SDA_IO 8
 #define I2C_MASTER_SCL_IO 9
 
+/**************************DTH************************/
+// #define DHTPIN 26 // Gpio pin for dht
+// #define DHTTYPE DHT22
+// DHT dht(DHTPIN, DHTTYPE);
+
+/**************************DTH END************************/
+// Thời gian để cập nhật
+unsigned long previousMillis = 0;
+const long interval = 2000; // 2 giây
 /**
-/* To use the built-in examples and demos of LVGL uncomment the includes below respectively.
- * You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
- */
 // #include <demos/lv_demos.h>
 // #include <examples/lv_examples.h>
 
 /* LVGL porting configurations */
-#define LVGL_TICK_PERIOD_MS     (2)
-#define LVGL_TASK_MAX_DELAY_MS  (500)
-#define LVGL_TASK_MIN_DELAY_MS  (1)
-#define LVGL_TASK_STACK_SIZE    (4 * 1024)
-#define LVGL_TASK_PRIORITY      (2)
-#define LVGL_BUF_SIZE           (ESP_PANEL_LCD_H_RES * 20)
+#define LVGL_TICK_PERIOD_MS (2)
+#define LVGL_TASK_MAX_DELAY_MS (500)
+#define LVGL_TASK_MIN_DELAY_MS (1)
+#define LVGL_TASK_STACK_SIZE (4 * 1024)
+#define LVGL_TASK_PRIORITY (2)
+#define LVGL_BUF_SIZE (ESP_PANEL_LCD_H_RES * 20)
 
 ESP_Panel *panel = NULL;
-SemaphoreHandle_t lvgl_mux = NULL;                  // LVGL mutex
+SemaphoreHandle_t lvgl_mux = NULL; // LVGL mutex
+
+void lvgl_port_lock(int timeout_ms)
+{
+    const TickType_t timeout_ticks = (timeout_ms < 0) ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms);
+    xSemaphoreTakeRecursive(lvgl_mux, timeout_ticks);
+}
+
+void lvgl_port_unlock(void)
+{
+    xSemaphoreGiveRecursive(lvgl_mux);
+}
 
 #if ESP_PANEL_LCD_BUS_TYPE == ESP_PANEL_BUS_TYPE_RGB
 /* Display flushing */
@@ -87,14 +106,17 @@ bool notify_lvgl_flush_ready(void *user_ctx)
 
 #if ESP_PANEL_USE_LCD_TOUCH
 /* Read the touchpad */
-void lvgl_port_tp_read(lv_indev_drv_t * indev, lv_indev_data_t * data)
+void lvgl_port_tp_read(lv_indev_drv_t *indev, lv_indev_data_t *data)
 {
     panel->getLcdTouch()->readData();
 
     bool touched = panel->getLcdTouch()->getTouchState();
-    if(!touched) {
+    if (!touched)
+    {
         data->state = LV_INDEV_STATE_REL;
-    } else {
+    }
+    else
+    {
         TouchPoint point = panel->getLcdTouch()->getPoint();
 
         data->state = LV_INDEV_STATE_PR;
@@ -107,31 +129,24 @@ void lvgl_port_tp_read(lv_indev_drv_t * indev, lv_indev_data_t * data)
 }
 #endif
 
-void lvgl_port_lock(int timeout_ms)
-{
-    const TickType_t timeout_ticks = (timeout_ms < 0) ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms);
-    xSemaphoreTakeRecursive(lvgl_mux, timeout_ticks);
-}
-
-void lvgl_port_unlock(void)
-{
-    xSemaphoreGiveRecursive(lvgl_mux);
-}
-
 void lvgl_port_task(void *arg)
 {
     Serial.println("Starting LVGL task");
 
     uint32_t task_delay_ms = LVGL_TASK_MAX_DELAY_MS;
-    while (1) {
+    while (1)
+    {
         // Lock the mutex due to the LVGL APIs are not thread-safe
         lvgl_port_lock(-1);
         task_delay_ms = lv_timer_handler();
         // Release the mutex
         lvgl_port_unlock();
-        if (task_delay_ms > LVGL_TASK_MAX_DELAY_MS) {
+        if (task_delay_ms > LVGL_TASK_MAX_DELAY_MS)
+        {
             task_delay_ms = LVGL_TASK_MAX_DELAY_MS;
-        } else if (task_delay_ms < LVGL_TASK_MIN_DELAY_MS) {
+        }
+        else if (task_delay_ms < LVGL_TASK_MIN_DELAY_MS)
+        {
             task_delay_ms = LVGL_TASK_MIN_DELAY_MS;
         }
         vTaskDelay(pdMS_TO_TICKS(task_delay_ms));
@@ -141,7 +156,7 @@ void lvgl_port_task(void *arg)
 void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
-
+    // dht.begin();
     String LVGL_Arduino = "Hello LVGL! ";
     LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
 
@@ -216,18 +231,41 @@ void setup()
 
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_lock(-1);
-
-    
     ui_init();
-
     /* Release the mutex */
     lvgl_port_unlock();
-
     Serial.println("Setup done");
+}
+
+void update_sensor()
+{
+    float temp = random(200, 350) / 10.0; // Nhiệt độ từ 20.0 đến 35.0°C
+    float humi = random(300, 900) / 10.0; // Độ ẩm từ 30.0 đến 90.0%
+
+    // Cập nhật giá trị nhiệt độ và độ ẩm
+    lv_arc_set_value(ui_TempChart, int(temp));
+    lv_arc_set_value(ui_HumidityChart, int(humi));
+
+    String tempString = String(temp, 1) + "\u00B0C"; // Symbol degree
+    const char *tempValue = tempString.c_str();      // Convert string to const char*
+    lv_label_set_text(ui_ValueTemp, tempValue);
+
+    String humidString = String(humi, 1) + "%";
+    const char *humiValue = humidString.c_str();
+    lv_label_set_text(ui_ValueHumi, humiValue);
 }
 
 void loop()
 {
-    // Serial.println("Loop");
-    sleep(1);
+    // Xử lý sự kiện LVGL
+    lv_task_handler();
+    delay(5); // Để LVGL hoạt động mượt mà
+
+    // Kiểm tra thời gian để cập nhật giá trị
+    unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= interval)
+    {
+        previousMillis = currentMillis;
+        update_sensor(); // Cập nhật giá trị ngẫu nhiên
+    }
 }

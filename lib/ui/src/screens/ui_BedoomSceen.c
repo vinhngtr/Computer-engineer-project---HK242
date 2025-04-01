@@ -158,7 +158,7 @@ void ui_BedoomSceen_screen_init(void)
     lv_obj_set_width(ui_Panel9, lv_pct(50));
     lv_obj_set_height(ui_Panel9, lv_pct(23));
     lv_obj_set_x(ui_Panel9, lv_pct(-50));
-    lv_obj_set_y(ui_Panel9, lv_pct(-2));
+    lv_obj_set_y(ui_Panel9, lv_pct(-4));
     lv_obj_set_align(ui_Panel9, LV_ALIGN_BOTTOM_RIGHT);
     lv_obj_clear_flag(ui_Panel9, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Panel9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
