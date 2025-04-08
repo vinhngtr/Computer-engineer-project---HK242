@@ -1,0 +1,6 @@
+#include "config.h"
+#include "wifi_task.h"
+#include "coreiot_task.h"
+#include "telemetry_task.h"
+#include "attributes_task.h"
+#include "tbloop_task.h"

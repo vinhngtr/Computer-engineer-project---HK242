@@ -6,6 +6,7 @@
 #include <ESP_Panel_Library.h>
 #include <ESP_IOExpander_Library.h>
 #include <ui.h>
+#include "things_board/tb.h"
 
 // Extend IO Pin define
 #define TP_RST 1
