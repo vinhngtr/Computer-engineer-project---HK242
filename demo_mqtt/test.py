@@ -2,6 +2,7 @@ print("Hello Core IOT")
 import paho.mqtt.client as mqttclient
 import time
 import json
+import random
 
 BROKER_ADDRESS = "app.coreiot.io"
 PORT = 1883
@@ -60,20 +61,17 @@ client.on_message = recv_message
 
 temp = 30
 humi = 50
-light_intensity = 100
 
 while True:
     # Gửi dữ liệu cảm biến + trạng thái 6 relay lên telemetry
     collect_data = {
         'temperature': temp,
         'humidity': humi,
-        'light': light_intensity,
         **relay_states  # Gửi luôn trạng thái các switch
     }
     client.publish('v1/devices/me/attributes', json.dumps(relay_states), 1)
     client.publish('v1/devices/me/telemetry', json.dumps(collect_data), 1)
 
-    temp += 1
-    humi += 1
-    light_intensity += 1
+    temp = random.randint(16, 40)  # temp từ 16 đến 40
+    humi = random.randint(50, 100)  # humi từ 50 đến 100
     time.sleep(5)
