@@ -75,7 +75,8 @@ void attributesTask(void *pvParameters) {
   }
 
   // Đăng ký nhận shared attributes
-  tb.Shared_Attributes_Subscribe(handleSharedAttributeData);
+  tb.Shared_Attributes_Subscribe(Shared_Attribute_Callback(handleSharedAttributeData));
+
 
   const unsigned long updateInterval = attributesSendInterval;
   unsigned long lastUpdate = 0;

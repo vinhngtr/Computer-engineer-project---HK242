@@ -9,18 +9,18 @@ constexpr std::array<const char *, 2U> SHARED_ATTRIBUTES_LIST = {
   BLINKING_INTERVAL_ATTR
 };
 
-// RPC callbacks array
-const std::array<RPC_Callback, 1U> callbacks = {
-  RPC_Callback{ "setLedSwitchValue", setLedSwitchState }
-};
+// // RPC callbacks array
+// const std::array<RPC_Callback, 1U> callbacks = {
+//   RPC_Callback{ "setLedSwitchValue", setLedSwitchState }
+// };
 
-// Attribute callbacks
-const Shared_Attribute_Callback attributes_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
-const Attribute_Request_Callback attribute_shared_request_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
+// // Attribute callbacks
+// const Shared_Attribute_Callback attributes_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
+// const Attribute_Request_Callback attribute_shared_request_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
 
 // CoreIOT task function implementation
 void coreiotTask(void *pvParameters) {
-  Serial.println("CoreIOT task started");
+  //Serial.println("CoreIOT task started");
   
   for (;;) {
     bool isWifiConnected = false;

@@ -166,12 +166,30 @@ void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
 
-    String LVGL_Arduino = "Hello LVGL! ";
-    LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
+    //String LVGL_Arduino = "Hello LVGL! ";
+    //LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
 
-    Serial.println(LVGL_Arduino);
-    Serial.println("I am ESP32_Display_Panel");
+    //Serial.println(LVGL_Arduino);
+    //Serial.println("I am ESP32_Display_Panel");
 
+      // Set up GPIO
+    pinMode(LED_PIN, OUTPUT);
+    digitalWrite(LED_PIN, ledState);
+  
+    // Initialize I2C for DHT20
+    //Wire.begin(SDA_PIN, SCL_PIN);
+    //initRS485();
+
+
+    
+    // Initialize all tasks
+    // initWiFiTask();
+    // initCoreIOTTask();
+    // initTelemetryTask();
+    // initAttributesTask();
+    // initTbLoopTask();
+    
+    //Serial.println("All tasks created and started");
     panel = new ESP_Panel();
 
     /* Initialize LVGL core */
@@ -211,25 +229,25 @@ void setup()
     panel->getLcd()->setCallback(notify_lvgl_flush_ready, &disp_drv);
 #endif
 
-    /**
-     * These development boards require the use of an IO expander to configure the screen,
-     * so it needs to be initialized in advance and registered with the panel for use.
-     *
-     */
-    Serial.println("Initialize IO expander");
-    /* Initialize IO expander */
-    // ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000, I2C_MASTER_SCL_IO, I2C_MASTER_SDA_IO);
-    ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000);
-    expander->init();
-    expander->begin();
-    expander->multiPinMode(TP_RST | LCD_BL | LCD_RST | SD_CS | USB_SEL, OUTPUT);
-    expander->multiDigitalWrite(TP_RST | LCD_BL | LCD_RST | SD_CS, HIGH);
+    // /**
+    //  * These development boards require the use of an IO expander to configure the screen,
+    //  * so it needs to be initialized in advance and registered with the panel for use.
+    //  *
+    //  */
+    // Serial.println("Initialize IO expander");
+    // /* Initialize IO expander */
+    // // ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000, I2C_MASTER_SCL_IO, I2C_MASTER_SDA_IO);
+    // ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000);
+    // expander->init();
+    // expander->begin();
+    // expander->multiPinMode(TP_RST | LCD_BL | LCD_RST | SD_CS | USB_SEL, OUTPUT);
+    // expander->multiDigitalWrite(TP_RST | LCD_BL | LCD_RST | SD_CS, HIGH);
 
-    // Turn off backlight
+    // // Turn off backlight
+    // // expander->digitalWrite(USB_SEL, LOW);
     // expander->digitalWrite(USB_SEL, LOW);
-    expander->digitalWrite(USB_SEL, LOW);
-    /* Add into panel */
-    panel->addIOExpander(expander);
+    // /* Add into panel */
+    // panel->addIOExpander(expander);
 
     /* Start panel */
     panel->begin();
@@ -249,7 +267,25 @@ void setup()
     /* Release the mutex */
     lvgl_port_unlock();
     
-    Serial.println("Setup done");
+    
+        // Initial connection to WiFi
+        //Serial.println("Initial WiFi connection...");
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+        
+        int attempts = 0;
+        while (WiFi.status() != WL_CONNECTED && attempts < 20) {
+            delay(1500);
+            Serial.print(".");
+            attempts++;
+        }
+        
+        if (WiFi.status() == WL_CONNECTED) {
+         //   Serial.println("Connected to AP");
+            wifiConnected = true;
+        } else {
+          //  Serial.println("Initial WiFi connection failed, tasks will handle reconnection");
+        }
+    //Serial.println("Setup done");
 }
 
 void loop()

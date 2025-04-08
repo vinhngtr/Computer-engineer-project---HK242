@@ -10,8 +10,6 @@
 
 // Pin definitions
 #define LED_PIN 48
-#define SDA_PIN GPIO_NUM_11
-#define SCL_PIN GPIO_NUM_12
 
 // WiFi and ThingsBoard credentials
 extern const char WIFI_SSID[];
@@ -54,11 +52,11 @@ extern WiFiClient wifiClient;
 extern Arduino_MQTT_Client mqttClient;
 extern ThingsBoard tb;
 
-// Function declarations for callbacks
-RPC_Response setLedSwitchState(const RPC_Data &data);
-void processSharedAttributes(const Shared_Attribute_Data &data);
+// // Function declarations for callbacks
+// RPC_Response setLedSwitchState(const RPC_Data &data);
+// void processSharedAttributes(const Shared_Attribute_Data &data);
 
-// Handle LED blinking
-void handleLed();
+// // Handle LED blinking
+// void handleLed();
 
 #endif // CONFIG_H
