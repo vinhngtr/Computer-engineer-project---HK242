@@ -118,14 +118,6 @@ void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
 
-
-    
-    // Initialize all tasks
-    // initWiFiTask();
-    // initCoreIOTTask();
-    // initTelemetryTask();
-    // initAttributesTask();
-    // initTbLoopTask();
     
     //Serial.println("All tasks created and started");
     panel = new ESP_Panel();
@@ -203,6 +195,12 @@ void setup()
         } else {
           //  Serial.println("Initial WiFi connection failed, tasks will handle reconnection");
         }
+    //Initialize all tasks
+    initWiFiTask();
+    initCoreIOTTask();
+    //initTelemetryTask();
+    initAttributesTask();
+    initTbLoopTask();
     //Serial.println("Setup done");
 }
 
