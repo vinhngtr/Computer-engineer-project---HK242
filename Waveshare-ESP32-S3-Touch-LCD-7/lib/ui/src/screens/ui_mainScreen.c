@@ -9,260 +9,426 @@ void ui_mainScreen_screen_init(void)
 {
     ui_mainScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_mainScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_mainScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_mainScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui_mainScreen, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_mainScreen, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_top(ui_mainScreen, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_bottom(ui_mainScreen, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_lvRoom = lv_btn_create(ui_mainScreen);
-    lv_obj_set_width(ui_lvRoom, 230);
-    lv_obj_set_height(ui_lvRoom, 104);
-    lv_obj_set_x(ui_lvRoom, -250);
-    lv_obj_set_y(ui_lvRoom, 0);
-    lv_obj_set_align(ui_lvRoom, LV_ALIGN_TOP_RIGHT);
-    lv_obj_set_style_bg_color(ui_lvRoom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_lvRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_TabView1 = lv_tabview_create(ui_mainScreen, LV_DIR_TOP, 50);
+    lv_obj_set_width(ui_TabView1, 540);
+    lv_obj_set_height(ui_TabView1, 452);
+    lv_obj_set_x(ui_TabView1, 215);
+    lv_obj_set_y(ui_TabView1, -28);
+    lv_obj_clear_flag(ui_TabView1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_TabView1, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_TabView1, lv_color_hex(0xBCCCDC), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_TabView1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_roomName1 = lv_label_create(ui_lvRoom);
-    lv_obj_set_width(ui_roomName1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_roomName1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_roomName1, 0);
-    lv_obj_set_y(ui_roomName1, -7);
-    lv_obj_set_align(ui_roomName1, LV_ALIGN_TOP_MID);
-    lv_label_set_text(ui_roomName1, "LIVING ROOM");
-    lv_obj_set_style_text_font(ui_roomName1, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(lv_tabview_get_tab_btns(ui_TabView1), 0,  LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(lv_tabview_get_tab_btns(ui_TabView1), lv_color_hex(0xE1DEF8),
+                              LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(lv_tabview_get_tab_btns(ui_TabView1), 255,  LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainLightLVROOM = lv_label_create(ui_lvRoom);
-    lv_obj_set_width(ui_mainLightLVROOM, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainLightLVROOM, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainLightLVROOM, -37);
-    lv_obj_set_y(ui_mainLightLVROOM, 1);
-    lv_obj_set_align(ui_mainLightLVROOM, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainLightLVROOM, "LIGHT       3/4 ON");
-    lv_obj_set_style_text_align(ui_mainLightLVROOM, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_TabView2 = lv_tabview_create(ui_mainScreen, LV_DIR_TOP, 50);
+    lv_obj_set_width(ui_TabView2, 218);
+    lv_obj_set_height(ui_TabView2, 452);
+    lv_obj_set_x(ui_TabView2, -14);
+    lv_obj_set_y(ui_TabView2, -28);
+    lv_obj_clear_flag(ui_TabView2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_TabView2, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_TabView2, lv_color_hex(0xF0F0F0), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_TabView2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainFanLVROOM = lv_label_create(ui_lvRoom);
-    lv_obj_set_width(ui_mainFanLVROOM, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainFanLVROOM, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainFanLVROOM, -37);
-    lv_obj_set_y(ui_mainFanLVROOM, 17);
-    lv_obj_set_align(ui_mainFanLVROOM, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainFanLVROOM, "FAN       0/2 ON");
+    ui_KitchenRoom = lv_btn_create(ui_mainScreen);
+    lv_obj_set_width(ui_KitchenRoom, 250);
+    lv_obj_set_height(ui_KitchenRoom, 160);
+    lv_obj_set_x(ui_KitchenRoom, -116);
+    lv_obj_set_y(ui_KitchenRoom, 239);
+    lv_obj_set_align(ui_KitchenRoom, LV_ALIGN_TOP_RIGHT);
+    lv_obj_set_style_bg_color(ui_KitchenRoom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_KitchenRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui_KitchenRoom, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(ui_KitchenRoom, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_x(ui_KitchenRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_y(ui_KitchenRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainACLVROOM = lv_label_create(ui_lvRoom);
-    lv_obj_set_width(ui_mainACLVROOM, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainACLVROOM, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainACLVROOM, -37);
-    lv_obj_set_y(ui_mainACLVROOM, 33);
-    lv_obj_set_align(ui_mainACLVROOM, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainACLVROOM, "AC        0/1 ON");
-
-    ui_kitchenRoom = lv_btn_create(ui_mainScreen);
-    lv_obj_set_width(ui_kitchenRoom, 230);
-    lv_obj_set_height(ui_kitchenRoom, 104);
-    lv_obj_set_align(ui_kitchenRoom, LV_ALIGN_TOP_RIGHT);
-    lv_obj_set_style_bg_color(ui_kitchenRoom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_kitchenRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_roomName4 = lv_label_create(ui_kitchenRoom);
-    lv_obj_set_width(ui_roomName4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_roomName4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_roomName4, 0);
-    lv_obj_set_y(ui_roomName4, -7);
-    lv_obj_set_align(ui_roomName4, LV_ALIGN_TOP_MID);
-    lv_label_set_text(ui_roomName4, "KITCHEN");
-    lv_obj_set_style_text_font(ui_roomName4, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_light4 = lv_label_create(ui_kitchenRoom);
-    lv_obj_set_width(ui_light4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_light4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_light4, -37);
-    lv_obj_set_y(ui_light4, 1);
-    lv_obj_set_align(ui_light4, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_light4, "LIGHT       0/6 ON");
-    lv_obj_set_style_text_align(ui_light4, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_fan4 = lv_label_create(ui_kitchenRoom);
-    lv_obj_set_width(ui_fan4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_fan4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_fan4, -37);
-    lv_obj_set_y(ui_fan4, 17);
-    lv_obj_set_align(ui_fan4, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_fan4, "FAN       0/2 ON");
-
-    ui_ac4 = lv_label_create(ui_kitchenRoom);
-    lv_obj_set_width(ui_ac4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ac4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ac4, -37);
-    lv_obj_set_y(ui_ac4, 33);
-    lv_obj_set_align(ui_ac4, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_ac4, "AC        0/1 ON");
-
-    ui_bedRoom1 = lv_btn_create(ui_mainScreen);
-    lv_obj_set_width(ui_bedRoom1, 230);
-    lv_obj_set_height(ui_bedRoom1, 104);
-    lv_obj_set_x(ui_bedRoom1, -250);
-    lv_obj_set_y(ui_bedRoom1, 125);
-    lv_obj_set_align(ui_bedRoom1, LV_ALIGN_TOP_RIGHT);
-    lv_obj_set_style_bg_color(ui_bedRoom1, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_bedRoom1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_roomName2 = lv_label_create(ui_bedRoom1);
-    lv_obj_set_width(ui_roomName2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_roomName2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_roomName2, 0);
-    lv_obj_set_y(ui_roomName2, -7);
-    lv_obj_set_align(ui_roomName2, LV_ALIGN_TOP_MID);
-    lv_label_set_text(ui_roomName2, "BEDROOM 1");
-    lv_obj_set_style_text_font(ui_roomName2, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_mainLightBEDROOM1 = lv_label_create(ui_bedRoom1);
-    lv_obj_set_width(ui_mainLightBEDROOM1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainLightBEDROOM1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainLightBEDROOM1, -37);
-    lv_obj_set_y(ui_mainLightBEDROOM1, 1);
-    lv_obj_set_align(ui_mainLightBEDROOM1, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainLightBEDROOM1, "LIGHT       0/6 ON");
-    lv_obj_set_style_text_align(ui_mainLightBEDROOM1, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_mainFanBEDROOM1 = lv_label_create(ui_bedRoom1);
-    lv_obj_set_width(ui_mainFanBEDROOM1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainFanBEDROOM1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainFanBEDROOM1, -37);
-    lv_obj_set_y(ui_mainFanBEDROOM1, 17);
-    lv_obj_set_align(ui_mainFanBEDROOM1, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainFanBEDROOM1, "FAN       0/2 ON");
-
-    ui_mainACBEDROOM1 = lv_label_create(ui_bedRoom1);
-    lv_obj_set_width(ui_mainACBEDROOM1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainACBEDROOM1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainACBEDROOM1, -37);
-    lv_obj_set_y(ui_mainACBEDROOM1, 33);
-    lv_obj_set_align(ui_mainACBEDROOM1, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainACBEDROOM1, "AC        0/2 ON");
-
-    ui_bedRoom2 = lv_btn_create(ui_mainScreen);
-    lv_obj_set_width(ui_bedRoom2, 230);
-    lv_obj_set_height(ui_bedRoom2, 104);
-    lv_obj_set_x(ui_bedRoom2, 0);
-    lv_obj_set_y(ui_bedRoom2, 125);
-    lv_obj_set_align(ui_bedRoom2, LV_ALIGN_TOP_RIGHT);
-    lv_obj_set_style_bg_color(ui_bedRoom2, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_bedRoom2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_roomName3 = lv_label_create(ui_bedRoom2);
+    ui_roomName3 = lv_label_create(ui_KitchenRoom);
     lv_obj_set_width(ui_roomName3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_roomName3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_roomName3, 0);
-    lv_obj_set_y(ui_roomName3, -7);
+    lv_obj_set_x(ui_roomName3, 2);
+    lv_obj_set_y(ui_roomName3, 4);
     lv_obj_set_align(ui_roomName3, LV_ALIGN_TOP_MID);
-    lv_label_set_text(ui_roomName3, "BEDROOM 1");
+    lv_label_set_text(ui_roomName3, "KITCHEN ROOM");
+    lv_obj_set_style_text_decor(ui_roomName3, LV_TEXT_DECOR_UNDERLINE, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_roomName3, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainLightBEDROOM2 = lv_label_create(ui_bedRoom2);
-    lv_obj_set_width(ui_mainLightBEDROOM2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainLightBEDROOM2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainLightBEDROOM2, -37);
-    lv_obj_set_y(ui_mainLightBEDROOM2, 1);
-    lv_obj_set_align(ui_mainLightBEDROOM2, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainLightBEDROOM2, "LIGHT       0/6 ON");
-    lv_obj_set_style_text_align(ui_mainLightBEDROOM2, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_LightKitRoom = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_LightKitRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightKitRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightKitRoom, -1);
+    lv_obj_set_y(ui_LightKitRoom, 5);
+    lv_obj_set_align(ui_LightKitRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_LightKitRoom, "Lighting:");
+    lv_obj_set_style_text_align(ui_LightKitRoom, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightKitRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainFanBEDROOM2 = lv_label_create(ui_bedRoom2);
-    lv_obj_set_width(ui_mainFanBEDROOM2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainFanBEDROOM2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainFanBEDROOM2, -37);
-    lv_obj_set_y(ui_mainFanBEDROOM2, 17);
-    lv_obj_set_align(ui_mainFanBEDROOM2, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainFanBEDROOM2, "FAN       0/2 ON");
+    ui_FanKitRoom = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_FanKitRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanKitRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanKitRoom, -1);
+    lv_obj_set_y(ui_FanKitRoom, 32);
+    lv_obj_set_align(ui_FanKitRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_FanKitRoom, "Fan:");
+    lv_obj_set_style_text_font(ui_FanKitRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_mainACBEDROOM2 = lv_label_create(ui_bedRoom2);
-    lv_obj_set_width(ui_mainACBEDROOM2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_mainACBEDROOM2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_mainACBEDROOM2, -37);
-    lv_obj_set_y(ui_mainACBEDROOM2, 33);
-    lv_obj_set_align(ui_mainACBEDROOM2, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_mainACBEDROOM2, "AC        0/1 ON");
+    ui_AirKitRoom = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_AirKitRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirKitRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirKitRoom, -1);
+    lv_obj_set_y(ui_AirKitRoom, 59);
+    lv_obj_set_align(ui_AirKitRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_AirKitRoom, "Air Conditioner:");
+    lv_obj_set_style_text_font(ui_AirKitRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_resroom = lv_btn_create(ui_mainScreen);
-    lv_obj_set_width(ui_resroom, 230);
-    lv_obj_set_height(ui_resroom, 104);
-    lv_obj_set_x(ui_resroom, 0);
-    lv_obj_set_y(ui_resroom, 250);
-    lv_obj_set_align(ui_resroom, LV_ALIGN_TOP_RIGHT);
-    lv_obj_set_style_bg_color(ui_resroom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_resroom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_titleBtn2 = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_titleBtn2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_titleBtn2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_titleBtn2, 4);
+    lv_obj_set_y(ui_titleBtn2, -25);
+    lv_obj_set_align(ui_titleBtn2, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_titleBtn2, "Detail device:");
+    lv_obj_set_style_text_color(ui_titleBtn2, lv_color_hex(0x040404), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_titleBtn2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_titleBtn2, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_roomName5 = lv_label_create(ui_resroom);
-    lv_obj_set_width(ui_roomName5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_roomName5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_roomName5, 0);
-    lv_obj_set_y(ui_roomName5, -7);
-    lv_obj_set_align(ui_roomName5, LV_ALIGN_TOP_MID);
-    lv_label_set_text(ui_roomName5, "RESROOM");
-    lv_obj_set_style_text_font(ui_roomName5, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_LightActive2 = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_LightActive2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightActive2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightActive2, 75);
+    lv_obj_set_y(ui_LightActive2, 6);
+    lv_obj_set_align(ui_LightActive2, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LightActive2, "0/6 ON");
+    lv_obj_set_style_text_color(ui_LightActive2, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LightActive2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightActive2, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_light5 = lv_label_create(ui_resroom);
-    lv_obj_set_width(ui_light5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_light5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_light5, -37);
-    lv_obj_set_y(ui_light5, 1);
-    lv_obj_set_align(ui_light5, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_light5, "LIGHT       0/6 ON");
-    lv_obj_set_style_text_align(ui_light5, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_FanActive2 = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_FanActive2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanActive2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanActive2, 76);
+    lv_obj_set_y(ui_FanActive2, 33);
+    lv_obj_set_align(ui_FanActive2, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_FanActive2, "0/2 ON");
+    lv_obj_set_style_text_color(ui_FanActive2, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_FanActive2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_FanActive2, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_fan5 = lv_label_create(ui_resroom);
-    lv_obj_set_width(ui_fan5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_fan5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_fan5, -37);
-    lv_obj_set_y(ui_fan5, 17);
-    lv_obj_set_align(ui_fan5, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_fan5, "FAN       0/2 ON");
+    ui_AirActive2 = lv_label_create(ui_KitchenRoom);
+    lv_obj_set_width(ui_AirActive2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirActive2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirActive2, 76);
+    lv_obj_set_y(ui_AirActive2, 59);
+    lv_obj_set_align(ui_AirActive2, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_AirActive2, "0/2 ON");
+    lv_obj_set_style_text_color(ui_AirActive2, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_AirActive2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_AirActive2, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_ac5 = lv_label_create(ui_resroom);
-    lv_obj_set_width(ui_ac5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ac5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ac5, -37);
-    lv_obj_set_y(ui_ac5, 33);
-    lv_obj_set_align(ui_ac5, LV_ALIGN_RIGHT_MID);
-    lv_label_set_text(ui_ac5, "AC        0/1 ON");
+    ui_BedRoom = lv_btn_create(ui_mainScreen);
+    lv_obj_set_width(ui_BedRoom, 250);
+    lv_obj_set_height(ui_BedRoom, 160);
+    lv_obj_set_x(ui_BedRoom, 2);
+    lv_obj_set_y(ui_BedRoom, 60);
+    lv_obj_set_align(ui_BedRoom, LV_ALIGN_TOP_RIGHT);
+    lv_obj_set_style_bg_color(ui_BedRoom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_BedRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui_BedRoom, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(ui_BedRoom, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_x(ui_BedRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_y(ui_BedRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_eTemp = lv_arc_create(ui_mainScreen);
-    lv_obj_set_width(ui_eTemp, 200);
-    lv_obj_set_height(ui_eTemp, 200);
-    lv_arc_set_range(ui_eTemp, 0, 40);
-    lv_arc_set_value(ui_eTemp, 0);
-    lv_arc_set_bg_angles(ui_eTemp, 0, 360);
-    lv_arc_set_rotation(ui_eTemp, 180);
+    ui_roomName4 = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_roomName4, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_roomName4, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_roomName4, 2);
+    lv_obj_set_y(ui_roomName4, 4);
+    lv_obj_set_align(ui_roomName4, LV_ALIGN_TOP_MID);
+    lv_label_set_text(ui_roomName4, "BED ROOM");
+    lv_obj_set_style_text_decor(ui_roomName4, LV_TEXT_DECOR_UNDERLINE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_roomName4, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_envTemp = lv_label_create(ui_eTemp);
-    lv_obj_set_width(ui_envTemp, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_envTemp, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_envTemp, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_envTemp, "0°C");
-    lv_obj_set_style_text_font(ui_envTemp, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_LightBedRoom = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_LightBedRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightBedRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightBedRoom, -1);
+    lv_obj_set_y(ui_LightBedRoom, 5);
+    lv_obj_set_align(ui_LightBedRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_LightBedRoom, "Lighting:");
+    lv_obj_set_style_text_align(ui_LightBedRoom, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightBedRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_eHumi = lv_arc_create(ui_mainScreen);
-    lv_obj_set_width(ui_eHumi, 200);
-    lv_obj_set_height(ui_eHumi, 200);
-    lv_obj_set_x(ui_eHumi, 0);
-    lv_obj_set_y(ui_eHumi, -19);
-    lv_obj_set_align(ui_eHumi, LV_ALIGN_BOTTOM_LEFT);
-    lv_arc_set_value(ui_eHumi, 70);
-    lv_arc_set_bg_angles(ui_eHumi, 0, 360);
-    lv_arc_set_rotation(ui_eHumi, 180);
+    ui_FanBedRoom = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_FanBedRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanBedRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanBedRoom, -1);
+    lv_obj_set_y(ui_FanBedRoom, 32);
+    lv_obj_set_align(ui_FanBedRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_FanBedRoom, "Fan:");
+    lv_obj_set_style_text_font(ui_FanBedRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_envHumi = lv_label_create(ui_eHumi);
-    lv_obj_set_width(ui_envHumi, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_envHumi, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_envHumi, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_envHumi, "70%");
-    lv_obj_set_style_text_font(ui_envHumi, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_AirBedRoom = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_AirBedRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirBedRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirBedRoom, -1);
+    lv_obj_set_y(ui_AirBedRoom, 59);
+    lv_obj_set_align(ui_AirBedRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_AirBedRoom, "Air Conditioner:");
+    lv_obj_set_style_text_font(ui_AirBedRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_lvRoom, ui_event_lvRoom, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_bedRoom1, ui_event_bedRoom1, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_bedRoom2, ui_event_bedRoom2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_eTemp, ui_event_eTemp, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_eHumi, ui_event_eHumi, LV_EVENT_ALL, NULL);
+    ui_titleBtn3 = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_titleBtn3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_titleBtn3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_titleBtn3, 4);
+    lv_obj_set_y(ui_titleBtn3, -25);
+    lv_obj_set_align(ui_titleBtn3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_titleBtn3, "Detail device:");
+    lv_obj_set_style_text_color(ui_titleBtn3, lv_color_hex(0x040404), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_titleBtn3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_titleBtn3, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LightActive3 = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_LightActive3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightActive3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightActive3, 75);
+    lv_obj_set_y(ui_LightActive3, 6);
+    lv_obj_set_align(ui_LightActive3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LightActive3, "0/6 ON");
+    lv_obj_set_style_text_color(ui_LightActive3, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LightActive3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightActive3, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_FanActive3 = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_FanActive3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanActive3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanActive3, 76);
+    lv_obj_set_y(ui_FanActive3, 33);
+    lv_obj_set_align(ui_FanActive3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_FanActive3, "0/2 ON");
+    lv_obj_set_style_text_color(ui_FanActive3, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_FanActive3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_FanActive3, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_AirActive3 = lv_label_create(ui_BedRoom);
+    lv_obj_set_width(ui_AirActive3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirActive3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirActive3, 76);
+    lv_obj_set_y(ui_AirActive3, 59);
+    lv_obj_set_align(ui_AirActive3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_AirActive3, "0/2 ON");
+    lv_obj_set_style_text_color(ui_AirActive3, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_AirActive3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_AirActive3, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LvRoom = lv_btn_create(ui_mainScreen);
+    lv_obj_set_width(ui_LvRoom, 250);
+    lv_obj_set_height(ui_LvRoom, 160);
+    lv_obj_set_x(ui_LvRoom, -264);
+    lv_obj_set_y(ui_LvRoom, 60);
+    lv_obj_set_align(ui_LvRoom, LV_ALIGN_TOP_RIGHT);
+    lv_obj_set_style_bg_color(ui_LvRoom, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_LvRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(ui_LvRoom, lv_color_hex(0x292525), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(ui_LvRoom, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui_LvRoom, 2, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_spread(ui_LvRoom, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_x(ui_LvRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_ofs_y(ui_LvRoom, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_roomName1 = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_roomName1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_roomName1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_roomName1, 2);
+    lv_obj_set_y(ui_roomName1, 4);
+    lv_obj_set_align(ui_roomName1, LV_ALIGN_TOP_MID);
+    lv_label_set_text(ui_roomName1, "LIVING ROOM");
+    lv_obj_set_style_text_decor(ui_roomName1, LV_TEXT_DECOR_UNDERLINE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_roomName1, &ui_font_font32, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LightLvRoom = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_LightLvRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightLvRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightLvRoom, -1);
+    lv_obj_set_y(ui_LightLvRoom, 5);
+    lv_obj_set_align(ui_LightLvRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_LightLvRoom, "Lighting:");
+    lv_obj_set_style_text_align(ui_LightLvRoom, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightLvRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_FanLvRoom = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_FanLvRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanLvRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanLvRoom, -1);
+    lv_obj_set_y(ui_FanLvRoom, 32);
+    lv_obj_set_align(ui_FanLvRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_FanLvRoom, "Fan:");
+    lv_obj_set_style_text_font(ui_FanLvRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_AirLvRoom = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_AirLvRoom, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirLvRoom, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirLvRoom, -1);
+    lv_obj_set_y(ui_AirLvRoom, 59);
+    lv_obj_set_align(ui_AirLvRoom, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_AirLvRoom, "Air Conditioner:");
+    lv_obj_set_style_text_font(ui_AirLvRoom, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_titleBtn = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_titleBtn, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_titleBtn, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_titleBtn, 4);
+    lv_obj_set_y(ui_titleBtn, -25);
+    lv_obj_set_align(ui_titleBtn, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_titleBtn, "Detail device:");
+    lv_obj_set_style_text_color(ui_titleBtn, lv_color_hex(0x040404), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_titleBtn, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_titleBtn, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LightActive = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_LightActive, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LightActive, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LightActive, 75);
+    lv_obj_set_y(ui_LightActive, 6);
+    lv_obj_set_align(ui_LightActive, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LightActive, "0/6 ON");
+    lv_obj_set_style_text_color(ui_LightActive, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LightActive, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LightActive, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_FanActive = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_FanActive, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_FanActive, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_FanActive, 76);
+    lv_obj_set_y(ui_FanActive, 33);
+    lv_obj_set_align(ui_FanActive, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_FanActive, "0/2 ON");
+    lv_obj_set_style_text_color(ui_FanActive, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_FanActive, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_FanActive, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_AirActive = lv_label_create(ui_LvRoom);
+    lv_obj_set_width(ui_AirActive, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_AirActive, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_AirActive, 76);
+    lv_obj_set_y(ui_AirActive, 59);
+    lv_obj_set_align(ui_AirActive, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_AirActive, "0/2 ON");
+    lv_obj_set_style_text_color(ui_AirActive, lv_color_hex(0x3AFF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_AirActive, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_AirActive, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_TempChart = lv_arc_create(ui_mainScreen);
+    lv_obj_set_width(ui_TempChart, 200);
+    lv_obj_set_height(ui_TempChart, 200);
+    lv_obj_set_x(ui_TempChart, -274);
+    lv_obj_set_y(ui_TempChart, -80);
+    lv_obj_set_align(ui_TempChart, LV_ALIGN_CENTER);
+    lv_arc_set_value(ui_TempChart, 40);
+    lv_obj_set_style_arc_color(ui_TempChart, lv_color_hex(0xD3D0D0), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_TempChart, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_TempChart, lv_color_hex(0xAD0909), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_TempChart, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_TempChart, lv_color_hex(0xAD0909), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_TempChart, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_TitleTemp = lv_label_create(ui_TempChart);
+    lv_obj_set_width(ui_TitleTemp, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_TitleTemp, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_TitleTemp, 8);
+    lv_obj_set_y(ui_TitleTemp, -14);
+    lv_obj_set_align(ui_TitleTemp, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_TitleTemp, "Temperature:");
+    lv_obj_set_style_text_color(ui_TitleTemp, lv_color_hex(0xAD0909), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_TitleTemp, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_TitleTemp, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ValueTemp = lv_label_create(ui_TempChart);
+    lv_obj_set_width(ui_ValueTemp, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ValueTemp, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ValueTemp, 7);
+    lv_obj_set_y(ui_ValueTemp, 20);
+    lv_obj_set_align(ui_ValueTemp, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_ValueTemp, "40°C");
+    lv_obj_set_style_text_color(ui_ValueTemp, lv_color_hex(0xAD0909), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_ValueTemp, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_ValueTemp, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HumidityChart = lv_arc_create(ui_mainScreen);
+    lv_obj_set_width(ui_HumidityChart, 200);
+    lv_obj_set_height(ui_HumidityChart, 200);
+    lv_obj_set_x(ui_HumidityChart, -275);
+    lv_obj_set_y(ui_HumidityChart, 116);
+    lv_obj_set_align(ui_HumidityChart, LV_ALIGN_CENTER);
+    lv_arc_set_value(ui_HumidityChart, 50);
+    lv_obj_set_style_arc_color(ui_HumidityChart, lv_color_hex(0xB6B6C5), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_HumidityChart, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_HumidityChart, lv_color_hex(0x4040FF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_HumidityChart, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    ui_TitleHumi = lv_label_create(ui_HumidityChart);
+    lv_obj_set_width(ui_TitleHumi, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_TitleHumi, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_TitleHumi, 3);
+    lv_obj_set_y(ui_TitleHumi, -19);
+    lv_obj_set_align(ui_TitleHumi, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_TitleHumi, "Humidity:");
+    lv_obj_set_style_text_color(ui_TitleHumi, lv_color_hex(0x4040FF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_TitleHumi, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_TitleHumi, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ValueHumi = lv_label_create(ui_HumidityChart);
+    lv_obj_set_width(ui_ValueHumi, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ValueHumi, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ValueHumi, 6);
+    lv_obj_set_y(ui_ValueHumi, 17);
+    lv_obj_set_align(ui_ValueHumi, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_ValueHumi, "50%");
+    lv_obj_set_style_text_color(ui_ValueHumi, lv_color_hex(0x4040FF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_ValueHumi, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_ValueHumi, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HeaedMain = lv_label_create(ui_mainScreen);
+    lv_obj_set_width(ui_HeaedMain, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_HeaedMain, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_HeaedMain, 131);
+    lv_obj_set_y(ui_HeaedMain, -211);
+    lv_obj_set_align(ui_HeaedMain, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_HeaedMain, "MANAGER ROOM");
+    lv_obj_set_style_text_color(ui_HeaedMain, lv_color_hex(0x1A0ED8), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_HeaedMain, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui_HeaedMain, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui_HeaedMain, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_HeaedMain, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_TitleVIEW = lv_label_create(ui_mainScreen);
+    lv_obj_set_width(ui_TitleVIEW, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_TitleVIEW, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_TitleVIEW, -277);
+    lv_obj_set_y(ui_TitleVIEW, -219);
+    lv_obj_set_align(ui_TitleVIEW, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_TitleVIEW, "VIEW");
+    lv_obj_set_style_text_color(ui_TitleVIEW, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_TitleVIEW, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_TitleVIEW, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_KitchenRoom, ui_event_KitchenRoom, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_BedRoom, ui_event_BedRoom, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_LvRoom, ui_event_LvRoom, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_TempChart, ui_event_TempChart, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HumidityChart, ui_event_HumidityChart, LV_EVENT_ALL, NULL);
 
 }

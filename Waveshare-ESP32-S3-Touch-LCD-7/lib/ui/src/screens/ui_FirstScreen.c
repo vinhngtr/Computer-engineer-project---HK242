@@ -9,10 +9,14 @@ void ui_FirstScreen_screen_init(void)
 {
     ui_FirstScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_FirstScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_FirstScreen, lv_color_hex(0x232425), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_FirstScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Panel1 = lv_obj_create(ui_FirstScreen);
-    lv_obj_set_height(ui_Panel1, 220);
+    lv_obj_set_height(ui_Panel1, 178);
     lv_obj_set_width(ui_Panel1, lv_pct(87));
+    lv_obj_set_x(ui_Panel1, 1);
+    lv_obj_set_y(ui_Panel1, -50);
     lv_obj_set_align(ui_Panel1, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Panel1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Panel1, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -23,20 +27,29 @@ void ui_FirstScreen_screen_init(void)
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label3, "Smart home\nAPPLICATION");
+    lv_label_set_text(ui_Label3, "BK SMART HOME\n   APPLICATION");
     lv_obj_set_style_text_font(ui_Label3, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_ImgButton1 = lv_imgbtn_create(ui_FirstScreen);
-    lv_imgbtn_set_src(ui_ImgButton1, LV_IMGBTN_STATE_RELEASED, NULL, &ui_img_115668498, NULL);
-    lv_obj_set_width(ui_ImgButton1, 130);
-    lv_obj_set_height(ui_ImgButton1, 96);
-    lv_obj_set_x(ui_ImgButton1, 0);
-    lv_obj_set_y(ui_ImgButton1, lv_pct(-3));
-    lv_obj_set_align(ui_ImgButton1, LV_ALIGN_BOTTOM_MID);
-    lv_obj_set_style_radius(ui_ImgButton1, 30, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_ImgButton1, lv_color_hex(0x1089DE), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_ImgButton1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_btnHome = lv_btn_create(ui_FirstScreen);
+    lv_obj_set_width(ui_btnHome, 200);
+    lv_obj_set_height(ui_btnHome, 50);
+    lv_obj_set_x(ui_btnHome, -4);
+    lv_obj_set_y(ui_btnHome, 86);
+    lv_obj_set_align(ui_btnHome, LV_ALIGN_CENTER);
+    lv_obj_set_style_bg_color(ui_btnHome, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_btnHome, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_ImgButton1, ui_event_ImgButton1, LV_EVENT_ALL, NULL);
+    ui_Image3 = lv_img_create(ui_btnHome);
+    lv_img_set_src(ui_Image3, &ui_img_115668498);
+    lv_obj_set_width(ui_Image3, LV_SIZE_CONTENT);   /// 100
+    lv_obj_set_height(ui_Image3, LV_SIZE_CONTENT);    /// 100
+    lv_obj_set_x(ui_Image3, -3);
+    lv_obj_set_y(ui_Image3, -2);
+    lv_obj_set_align(ui_Image3, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Image3, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Image3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_Image3, 100);
+
+    lv_obj_add_event_cb(ui_btnHome, ui_event_btnHome, LV_EVENT_ALL, NULL);
 
 }

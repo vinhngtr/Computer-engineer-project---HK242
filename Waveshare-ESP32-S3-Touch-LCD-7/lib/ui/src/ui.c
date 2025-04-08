@@ -13,47 +13,56 @@ void ui_FirstScreen_screen_init(void);
 lv_obj_t * ui_FirstScreen;
 lv_obj_t * ui_Panel1;
 lv_obj_t * ui_Label3;
-void ui_event_ImgButton1(lv_event_t * e);
-lv_obj_t * ui_ImgButton1;
+void ui_event_btnHome(lv_event_t * e);
+lv_obj_t * ui_btnHome;
+lv_obj_t * ui_Image3;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_mainScreen
 void ui_mainScreen_screen_init(void);
 lv_obj_t * ui_mainScreen;
-void ui_event_lvRoom(lv_event_t * e);
-lv_obj_t * ui_lvRoom;
-lv_obj_t * ui_roomName1;
-lv_obj_t * ui_mainLightLVROOM;
-lv_obj_t * ui_mainFanLVROOM;
-lv_obj_t * ui_mainACLVROOM;
-lv_obj_t * ui_kitchenRoom;
-lv_obj_t * ui_roomName4;
-lv_obj_t * ui_light4;
-lv_obj_t * ui_fan4;
-lv_obj_t * ui_ac4;
-void ui_event_bedRoom1(lv_event_t * e);
-lv_obj_t * ui_bedRoom1;
-lv_obj_t * ui_roomName2;
-lv_obj_t * ui_mainLightBEDROOM1;
-lv_obj_t * ui_mainFanBEDROOM1;
-lv_obj_t * ui_mainACBEDROOM1;
-void ui_event_bedRoom2(lv_event_t * e);
-lv_obj_t * ui_bedRoom2;
+lv_obj_t * ui_TabView1;
+lv_obj_t * ui_TabView2;
+void ui_event_KitchenRoom(lv_event_t * e);
+lv_obj_t * ui_KitchenRoom;
 lv_obj_t * ui_roomName3;
-lv_obj_t * ui_mainLightBEDROOM2;
-lv_obj_t * ui_mainFanBEDROOM2;
-lv_obj_t * ui_mainACBEDROOM2;
-lv_obj_t * ui_resroom;
-lv_obj_t * ui_roomName5;
-lv_obj_t * ui_light5;
-lv_obj_t * ui_fan5;
-lv_obj_t * ui_ac5;
-void ui_event_eTemp(lv_event_t * e);
-lv_obj_t * ui_eTemp;
-lv_obj_t * ui_envTemp;
-void ui_event_eHumi(lv_event_t * e);
-lv_obj_t * ui_eHumi;
-lv_obj_t * ui_envHumi;
+lv_obj_t * ui_LightKitRoom;
+lv_obj_t * ui_FanKitRoom;
+lv_obj_t * ui_AirKitRoom;
+lv_obj_t * ui_titleBtn2;
+lv_obj_t * ui_LightActive2;
+lv_obj_t * ui_FanActive2;
+lv_obj_t * ui_AirActive2;
+void ui_event_BedRoom(lv_event_t * e);
+lv_obj_t * ui_BedRoom;
+lv_obj_t * ui_roomName4;
+lv_obj_t * ui_LightBedRoom;
+lv_obj_t * ui_FanBedRoom;
+lv_obj_t * ui_AirBedRoom;
+lv_obj_t * ui_titleBtn3;
+lv_obj_t * ui_LightActive3;
+lv_obj_t * ui_FanActive3;
+lv_obj_t * ui_AirActive3;
+void ui_event_LvRoom(lv_event_t * e);
+lv_obj_t * ui_LvRoom;
+lv_obj_t * ui_roomName1;
+lv_obj_t * ui_LightLvRoom;
+lv_obj_t * ui_FanLvRoom;
+lv_obj_t * ui_AirLvRoom;
+lv_obj_t * ui_titleBtn;
+lv_obj_t * ui_LightActive;
+lv_obj_t * ui_FanActive;
+lv_obj_t * ui_AirActive;
+void ui_event_TempChart(lv_event_t * e);
+lv_obj_t * ui_TempChart;
+lv_obj_t * ui_TitleTemp;
+lv_obj_t * ui_ValueTemp;
+void ui_event_HumidityChart(lv_event_t * e);
+lv_obj_t * ui_HumidityChart;
+lv_obj_t * ui_TitleHumi;
+lv_obj_t * ui_ValueHumi;
+lv_obj_t * ui_HeaedMain;
+lv_obj_t * ui_TitleVIEW;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_lvRoomScreen
@@ -63,141 +72,79 @@ lv_obj_t * ui_lvRoomScreen;
 lv_obj_t * ui_Panel2;
 lv_obj_t * ui_dvName1;
 lv_obj_t * ui_lightName1;
-void ui_event_LightLvRoom1(lv_event_t * e);
 lv_obj_t * ui_LightLvRoom1;
-void ui_event_LightLvRoom2(lv_event_t * e);
 lv_obj_t * ui_LightLvRoom2;
-void ui_event_LightLvRoom3(lv_event_t * e);
 lv_obj_t * ui_LightLvRoom3;
-void ui_event_LightLvRoom4(lv_event_t * e);
-lv_obj_t * ui_LightLvRoom4;
-void ui_event_LightLvRoom5(lv_event_t * e);
-lv_obj_t * ui_LightLvRoom5;
-void ui_event_LightLvRoom6(lv_event_t * e);
-lv_obj_t * ui_LightLvRoom6;
+void ui_event_BackHome(lv_event_t * e);
+lv_obj_t * ui_BackHome;
+lv_obj_t * ui_Image4;
 lv_obj_t * ui_Panel3;
 lv_obj_t * ui_dvName2;
 lv_obj_t * ui_fanName1;
-void ui_event_FanLvRoom1(lv_event_t * e);
 lv_obj_t * ui_FanLvRoom1;
-void ui_event_FanLvRoom2(lv_event_t * e);
 lv_obj_t * ui_FanLvRoom2;
 lv_obj_t * ui_Panel4;
 lv_obj_t * ui_ACName1;
-void ui_event_ac1controlLV1(lv_event_t * e);
-lv_obj_t * ui_ac1controlLV1;
 lv_obj_t * ui_ACLvRoomTemp1;
-lv_obj_t * ui_ACLivingRoom1;
+lv_obj_t * ui_Switch2;
 lv_obj_t * ui_Panel8;
 lv_obj_t * ui_ACName2;
-void ui_event_ac1controlLV2(lv_event_t * e);
-lv_obj_t * ui_ac1controlLV2;
 lv_obj_t * ui_ACLvRoomTemp2;
-lv_obj_t * ui_ACLivingRoom2;
-void ui_event_lvRSlider1(lv_event_t * e);
-lv_obj_t * ui_lvRSlider1;
-void ui_event_lvRSlider2(lv_event_t * e);
-lv_obj_t * ui_lvRSlider2;
-void ui_event_lvRSlider3(lv_event_t * e);
-lv_obj_t * ui_lvRSlider3;
-void ui_event_HOME(lv_event_t * e);
-lv_obj_t * ui_HOME;
+lv_obj_t * ui_Switch1;
 // CUSTOM VARIABLES
 
-// SCREEN: ui_bedRoomScreen1
-void ui_bedRoomScreen1_screen_init(void);
-lv_obj_t * ui_bedRoomScreen1;
+// SCREEN: ui_BedoomSceen
+void ui_BedoomSceen_screen_init(void);
+lv_obj_t * ui_BedoomSceen;
 lv_obj_t * ui_Panel5;
 lv_obj_t * ui_dvName3;
 lv_obj_t * ui_lightName2;
-void ui_event_LightBedRoom1(lv_event_t * e);
 lv_obj_t * ui_LightBedRoom1;
-void ui_event_LightBedRoom2(lv_event_t * e);
 lv_obj_t * ui_LightBedRoom2;
-void ui_event_LightBedRoom3(lv_event_t * e);
 lv_obj_t * ui_LightBedRoom3;
-void ui_event_LightBedRoom4(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom4;
-void ui_event_LightBedRoom5(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom5;
-void ui_event_LightBedRoom6(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom6;
+void ui_event_BackHome2(lv_event_t * e);
+lv_obj_t * ui_BackHome2;
+lv_obj_t * ui_Image2;
 lv_obj_t * ui_Panel6;
 lv_obj_t * ui_dvName4;
 lv_obj_t * ui_fanName2;
-void ui_event_FanBedRoom1(lv_event_t * e);
 lv_obj_t * ui_FanBedRoom1;
-void ui_event_FanBedRoom2(lv_event_t * e);
 lv_obj_t * ui_FanBedRoom2;
 lv_obj_t * ui_Panel7;
 lv_obj_t * ui_ACName3;
-void ui_event_ac1control(lv_event_t * e);
-lv_obj_t * ui_ac1control;
 lv_obj_t * ui_ACBedRoomTemp1;
-void ui_event_ACBedRoom1(lv_event_t * e);
 lv_obj_t * ui_ACBedRoom1;
 lv_obj_t * ui_Panel9;
 lv_obj_t * ui_ACName4;
-void ui_event_ac2control(lv_event_t * e);
-lv_obj_t * ui_ac2control;
 lv_obj_t * ui_ACBedRoomTemp2;
 lv_obj_t * ui_ACBedRoom2;
-void ui_event_LBRSlider1(lv_event_t * e);
-lv_obj_t * ui_LBRSlider1;
-void ui_event_LBRSlider2(lv_event_t * e);
-lv_obj_t * ui_LBRSlider2;
-void ui_event_LBRSlider3(lv_event_t * e);
-lv_obj_t * ui_LBRSlider3;
-void ui_event_HOME2(lv_event_t * e);
-lv_obj_t * ui_HOME2;
 // CUSTOM VARIABLES
 
-// SCREEN: ui_bedRoomScreen2
-void ui_bedRoomScreen2_screen_init(void);
-lv_obj_t * ui_bedRoomScreen2;
+// SCREEN: ui_KitchenSceen
+void ui_KitchenSceen_screen_init(void);
+lv_obj_t * ui_KitchenSceen;
 lv_obj_t * ui_Panel10;
 lv_obj_t * ui_dvName5;
 lv_obj_t * ui_lightName3;
-void ui_event_LightBedRoom7(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom7;
-void ui_event_LightBedRoom8(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom8;
-void ui_event_LightBedRoom9(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom9;
-void ui_event_LightBedRoom10(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom10;
-void ui_event_LightBedRoom11(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom11;
-void ui_event_LightBedRoom12(lv_event_t * e);
-lv_obj_t * ui_LightBedRoom12;
+lv_obj_t * ui_SWLightBed1;
+lv_obj_t * ui_SWLightBed2;
+lv_obj_t * ui_SWLightBed3;
+void ui_event_BackHome3(lv_event_t * e);
+lv_obj_t * ui_BackHome3;
+lv_obj_t * ui_Image5;
 lv_obj_t * ui_Panel11;
 lv_obj_t * ui_dvName6;
 lv_obj_t * ui_fanName3;
-void ui_event_FanBedRoom3(lv_event_t * e);
-lv_obj_t * ui_FanBedRoom3;
-void ui_event_FanBedRoom4(lv_event_t * e);
-lv_obj_t * ui_FanBedRoom4;
+lv_obj_t * ui_SWFanBed1;
+lv_obj_t * ui_SWFanBed2;
 lv_obj_t * ui_Panel12;
-lv_obj_t * ui_ACName5;
-void ui_event_ac1control1(lv_event_t * e);
-lv_obj_t * ui_ac1control1;
-lv_obj_t * ui_ACBedRoomTemp3;
-void ui_event_ACBedRoom3(lv_event_t * e);
-lv_obj_t * ui_ACBedRoom3;
+lv_obj_t * ui_AirKIT1;
+lv_obj_t * ui_valTempKIT;
+lv_obj_t * ui_SWAirKIT1;
 lv_obj_t * ui_Panel13;
 lv_obj_t * ui_ACName6;
-void ui_event_ac2control1(lv_event_t * e);
-lv_obj_t * ui_ac2control1;
-lv_obj_t * ui_ACBedRoomTemp4;
-lv_obj_t * ui_ACBedRoom4;
-void ui_event_LBRSlider4(lv_event_t * e);
-lv_obj_t * ui_LBRSlider4;
-void ui_event_LBRSlider5(lv_event_t * e);
-lv_obj_t * ui_LBRSlider5;
-void ui_event_LBRSlider6(lv_event_t * e);
-lv_obj_t * ui_LBRSlider6;
-void ui_event_HOME3(lv_event_t * e);
-lv_obj_t * ui_HOME3;
+lv_obj_t * ui_valTempKIT2;
+lv_obj_t * ui_SWAirKIT2;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -216,59 +163,59 @@ lv_obj_t * ui____initial_actions0;
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_ImgButton1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_PRESSED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 100, 0, &ui_mainScreen_screen_init);
-    }
-}
-
-void ui_event_lvRoom(lv_event_t * e)
+void ui_event_btnHome(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_lvRoomScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 200, 0, &ui_lvRoomScreen_screen_init);
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_mainScreen_screen_init);
     }
 }
 
-void ui_event_bedRoom1(lv_event_t * e)
+void ui_event_KitchenRoom(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_bedRoomScreen1, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0, &ui_bedRoomScreen1_screen_init);
+        _ui_screen_change(&ui_KitchenSceen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0, &ui_KitchenSceen_screen_init);
     }
 }
 
-void ui_event_bedRoom2(lv_event_t * e)
+void ui_event_BedRoom(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_bedRoomScreen2, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0, &ui_bedRoomScreen2_screen_init);
+        _ui_screen_change(&ui_BedoomSceen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0, &ui_BedoomSceen_screen_init);
     }
 }
 
-void ui_event_eTemp(lv_event_t * e)
+void ui_event_LvRoom(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_lvRoomScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0, &ui_lvRoomScreen_screen_init);
+    }
+}
+
+void ui_event_TempChart(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_arc_set_text_value(ui_envTemp, target, "", "°C");
+        _ui_arc_set_text_value(ui_ValueTemp, target, "", "°C");
     }
 }
 
-void ui_event_eHumi(lv_event_t * e)
+void ui_event_HumidityChart(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_arc_set_text_value(ui_envHumi, target, "", "%");
+        _ui_arc_set_text_value(ui_ValueHumi, target, "", "%");
     }
 }
 
@@ -282,518 +229,30 @@ void ui_event_lvRoomScreen(lv_event_t * e)
     }
 }
 
-void ui_event_LightLvRoom1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightLvRoom2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightLvRoom3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightLvRoom4(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightLvRoom5(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightLvRoom6(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider1, -100, LV_ANIM_ON);
-    }
-}
-
-void ui_event_FanLvRoom1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider2, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider2, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_FanLvRoom2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider2, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_lvRSlider2, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_ac1controlLV1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACLvRoomTemp1, target, "", "°C");
-    }
-}
-
-void ui_event_ac1controlLV2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACLvRoomTemp2, target, "", "°C");
-    }
-}
-
-void ui_event_lvRSlider1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainLightLVROOM, target, "LIGHT       ", "/6 ON");
-    }
-}
-
-void ui_event_lvRSlider2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainFanLVROOM, target, "FAN       ", "/6 ON");
-    }
-}
-
-void ui_event_lvRSlider3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainLightLVROOM, target, "AC       ", "/6 ON");
-    }
-}
-
-void ui_event_HOME(lv_event_t * e)
+void ui_event_BackHome(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_mainScreen_screen_init);
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
     }
 }
 
-void ui_event_LightBedRoom1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom4(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom5(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom6(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider1, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_FanBedRoom1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider2, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider2, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_FanBedRoom2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider2, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider2, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_ac1control(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACBedRoomTemp1, target, "", "°C");
-    }
-}
-
-void ui_event_ACBedRoom1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider3, 1, LV_ANIM_OFF);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider3, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_ac2control(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACBedRoomTemp2, target, "", "°C");
-    }
-}
-
-void ui_event_LBRSlider1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainLightBEDROOM1, target, "LIGHT       ", "/6 ON");
-    }
-}
-
-void ui_event_LBRSlider2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainFanBEDROOM1, target, "FAN       ", "/6 ON");
-    }
-}
-
-void ui_event_LBRSlider3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainACLVROOM, target, "AC       ", "/2 ON");
-    }
-}
-
-void ui_event_HOME2(lv_event_t * e)
+void ui_event_BackHome2(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_mainScreen_screen_init);
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
     }
 }
 
-void ui_event_LightBedRoom7(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom8(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom9(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom10(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom11(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_LightBedRoom12(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider4, -1, LV_ANIM_ON);
-    }
-}
-
-void ui_event_FanBedRoom3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider5, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider5, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_FanBedRoom4(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider5, 1, LV_ANIM_ON);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider5, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_ac1control1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACBedRoomTemp3, target, "", "°C");
-    }
-}
-
-void ui_event_ACBedRoom3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider6, 1, LV_ANIM_OFF);
-    }
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        _ui_slider_increment(ui_LBRSlider6, -1, LV_ANIM_OFF);
-    }
-}
-
-void ui_event_ac2control1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_ACBedRoomTemp4, target, "", "°C");
-    }
-}
-
-void ui_event_LBRSlider4(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainLightBEDROOM2, target, "LIGHT       ", "/6 ON");
-    }
-}
-
-void ui_event_LBRSlider5(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainFanBEDROOM2, target, "FAN       ", "/6 ON");
-    }
-}
-
-void ui_event_LBRSlider6(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        _ui_slider_set_text_value(ui_mainACBEDROOM2, target, "AC       ", "/2 ON");
-    }
-}
-
-void ui_event_HOME3(lv_event_t * e)
+void ui_event_BackHome3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_mainScreen_screen_init);
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
     }
 }
 
@@ -808,8 +267,8 @@ void ui_init(void)
     ui_FirstScreen_screen_init();
     ui_mainScreen_screen_init();
     ui_lvRoomScreen_screen_init();
-    ui_bedRoomScreen1_screen_init();
-    ui_bedRoomScreen2_screen_init();
+    ui_BedoomSceen_screen_init();
+    ui_KitchenSceen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_FirstScreen);
 }
