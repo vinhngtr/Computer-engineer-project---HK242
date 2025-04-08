@@ -1,37 +1,11 @@
 #include "main.h"
 #include <Arduino.h>
 
-/**
- * The example demonstrates how to port LVGL.
- *
- * ## How to Use
- *
- * To use this example, please firstly install `ESP32_Display_Panel` (including its dependent libraries) and
- * `lvgl` (v8.3.x) libraries, then follow the steps to configure them:
- *
- * 1. [Configure ESP32_Display_Panel](https://github.com/esp-arduino-libs/ESP32_Display_Panel#configure-esp32_display_panel)
- * 2. [Configure LVGL](https://github.com/esp-arduino-libs/ESP32_Display_Panel#configure-lvgl)
- * 3. [Configure Board](https://github.com/esp-arduino-libs/ESP32_Display_Panel#configure-board)
- *
- * ## Example Output
- *
- * ```bash
- * ...
- * Hello LVGL! V8.3.11
- * I am ESP32_Display_Panel
- * Starting LVGL task
- * Setup done
- * Loop
- * Loop
- * Loop
- * Loop
- * ...
- * ```
- */
+
 
 #include <lvgl.h>
 #include <ESP_Panel_Library.h>
-#include <ESP_IOExpander_Library.h>
+//#include <ESP_IOExpander_Library.h>
 #include <ui.h>
 
 // Extend IO Pin define
@@ -140,45 +114,9 @@ void lvgl_port_task(void *arg)
 }
 
 
-// /// @brief ///////////////////////////////////////////////////
-// void _ui_arc_set(lv_obj_t * target, int val) {
-//     lv_arc_set_value(target, val);
-//     lv_event_send(target, LV_EVENT_VALUE_CHANGED, 0);
-// }
-// 
-// void readSensorTask(void *parameter) {
-//     int dth = 0;
-//     uint32_t task_delay_ms = LVGL_TASK_MAX_DELAY_MS;
-//     while (1) {
-//         dth++;
-//         lvgl_port_lock(-1);
-//         task_delay_ms = lv_timer_handler();
-//         // Release the mutex
-//         lvgl_port_unlock();
-//         _ui_arc_set(ui_eTemp, dth % 40);  // Cập nhật Arc (0 - 99)
-//         vTaskDelay(pdMS_TO_TICKS(500)); // Chờ 2 giây trước lần cập nhật tiếp theo
-//     }
-// }
-
-// ////////////////////////////////////////////////////////////
-
 void setup()
 {
     Serial.begin(115200); /* prepare for possible serial debug */
-
-    //String LVGL_Arduino = "Hello LVGL! ";
-    //LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
-
-    //Serial.println(LVGL_Arduino);
-    //Serial.println("I am ESP32_Display_Panel");
-
-      // Set up GPIO
-    pinMode(LED_PIN, OUTPUT);
-    digitalWrite(LED_PIN, ledState);
-  
-    // Initialize I2C for DHT20
-    //Wire.begin(SDA_PIN, SCL_PIN);
-    //initRS485();
 
 
     
@@ -229,25 +167,7 @@ void setup()
     panel->getLcd()->setCallback(notify_lvgl_flush_ready, &disp_drv);
 #endif
 
-    // /**
-    //  * These development boards require the use of an IO expander to configure the screen,
-    //  * so it needs to be initialized in advance and registered with the panel for use.
-    //  *
-    //  */
-    // Serial.println("Initialize IO expander");
-    // /* Initialize IO expander */
-    // // ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000, I2C_MASTER_SCL_IO, I2C_MASTER_SDA_IO);
-    // ESP_IOExpander *expander = new ESP_IOExpander_CH422G(I2C_MASTER_NUM, ESP_IO_EXPANDER_I2C_CH422G_ADDRESS_000);
-    // expander->init();
-    // expander->begin();
-    // expander->multiPinMode(TP_RST | LCD_BL | LCD_RST | SD_CS | USB_SEL, OUTPUT);
-    // expander->multiDigitalWrite(TP_RST | LCD_BL | LCD_RST | SD_CS, HIGH);
-
-    // // Turn off backlight
-    // // expander->digitalWrite(USB_SEL, LOW);
-    // expander->digitalWrite(USB_SEL, LOW);
-    // /* Add into panel */
-    // panel->addIOExpander(expander);
+ 
 
     /* Start panel */
     panel->begin();
@@ -255,9 +175,7 @@ void setup()
     /* Create a task to run the LVGL task periodically */
     lvgl_mux = xSemaphoreCreateRecursiveMutex();
     xTaskCreate(lvgl_port_task, "lvgl", LVGL_TASK_STACK_SIZE, NULL, LVGL_TASK_PRIORITY, NULL);
-    // ///////////////////////////////////////////////Đọc cảm biến////////////////////////////////
-    // xTaskCreate(readSensorTask, "Read Sensor Task", 2048, NULL, 1, NULL);
-    // ///////////////////////////////////////////////////////////////////////////////////////////
+
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_lock(-1);
 
