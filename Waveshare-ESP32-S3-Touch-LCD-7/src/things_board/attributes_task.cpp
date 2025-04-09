@@ -8,8 +8,8 @@ TaskHandle_t attributesTaskHandle = NULL;
 std::array<bool, RELAY_COUNT> relayStates = {false, false, false, false, false, false};
 
 // Biến lưu dữ liệu cảm biến đọc từ ThingsBoard về
-float remoteTemperature = NAN;
-float remoteHumidity = NAN;
+float temperature = NAN;
+float humidity = NAN;
 
 // Điều khiển relay
 void setRelay(uint8_t index, bool state) {
@@ -39,15 +39,15 @@ RPC_Response processRelayRPC(const RPC_Data &data) {
 // Callback nhận dữ liệu từ ThingsBoard (telemetry or shared attribute)
 void handleSharedAttributeData(const Shared_Attribute_Data &data) {
   if (data.containsKey("temperature")) {
-    remoteTemperature = data["temperature"].as<float>();
+    temperature = data["temperature"].as<float>();
     Serial.print("Received temperature from server: ");
-    Serial.println(remoteTemperature);
+    Serial.println(temperature);
   }
 
   if (data.containsKey("humidity")) {
-    remoteHumidity = data["humidity"].as<float>();
+    humidity = data["humidity"].as<float>();
     Serial.print("Received humidity from server: ");
-    Serial.println(remoteHumidity);
+    Serial.println(humidity);
   }
 }
 

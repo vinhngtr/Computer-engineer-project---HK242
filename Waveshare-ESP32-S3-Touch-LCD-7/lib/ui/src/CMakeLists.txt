@@ -1,6 +1,6 @@
 SET(SOURCES screens/ui_FirstScreen.c
     screens/ui_mainScreen.c
-    screens/ui_lvRoomScreen.c
+    screens/ui_LVRoomScreen.c
     screens/ui_BedoomSceen.c
     screens/ui_KitchenSceen.c
     ui.c

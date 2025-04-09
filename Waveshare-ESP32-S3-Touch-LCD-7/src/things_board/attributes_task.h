@@ -22,8 +22,8 @@ const uint8_t RELAY_PINS[RELAY_COUNT] = {
 extern std::array<bool, RELAY_COUNT> relayStates;
 
 // Biến đọc dữ liệu cảm biến từ ThingsBoard về
-extern float remoteTemperature;
-extern float remoteHumidity;
+extern float temperature;
+extern float humidity;
 
 // Task handle
 extern TaskHandle_t attributesTaskHandle;

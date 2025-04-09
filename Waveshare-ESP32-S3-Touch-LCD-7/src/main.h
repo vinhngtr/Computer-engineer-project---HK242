@@ -7,6 +7,7 @@
 //#include <ESP_IOExpander_Library.h>
 #include <ui.h>
 #include "things_board/tb.h"
+#include "sensor-UI/tb2UI.h"
 
 // Extend IO Pin define
 #define TP_RST 1

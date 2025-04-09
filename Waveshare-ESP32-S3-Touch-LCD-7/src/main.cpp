@@ -166,7 +166,16 @@ void setup()
 
     /* Create a task to run the LVGL task periodically */
     lvgl_mux = xSemaphoreCreateRecursiveMutex();
-    xTaskCreate(lvgl_port_task, "lvgl", LVGL_TASK_STACK_SIZE, NULL, LVGL_TASK_PRIORITY, NULL);
+    xTaskCreatePinnedToCore(
+        lvgl_port_task,           // Task function
+        "lvgl",                   // Tên task
+        LVGL_TASK_STACK_SIZE,     // Kích thước stack
+        NULL,                     // Tham số truyền vào
+        LVGL_TASK_PRIORITY,       // Ưu tiên
+        NULL,                     // Task handle
+        1                         // Core 1 (thường dành cho user code)
+    );
+    
 
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_lock(-1);
@@ -201,6 +210,7 @@ void setup()
     //initTelemetryTask();
     initAttributesTask();
     initTbLoopTask();
+    initUITB();
     //Serial.println("Setup done");
 }
 

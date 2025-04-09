@@ -68,33 +68,6 @@ void coreiotTask(void *pvParameters) {
       portENTER_CRITICAL(&tbMux);
       isSubscribed = subscribed;
       portEXIT_CRITICAL(&tbMux);
-      
-      // bool isTbStillConnected = tb.connected();
-      // if (isTbStillConnected && !isSubscribed) {
-        // Subscribe for RPC
-        // Serial.println("Subscribing for RPC...");
-        // bool rpcSubscribed = tb.RPC_Subscribe(callbacks.cbegin(), callbacks.cend());
-        
-        // // Subscribe for shared attributes
-        // Serial.println("Subscribing for shared attributes...");
-        // bool attrSubscribed = tb.Shared_Attributes_Subscribe(attributes_callback);
-        
-        // // Request shared attributes
-        // Serial.println("Requesting shared attributes...");
-        // bool attrRequested = tb.Shared_Attributes_Request(attribute_shared_request_callback);
-        
-        // if (rpcSubscribed && attrSubscribed && attrRequested) {
-        //   Serial.println("All subscriptions successful");
-        //   portENTER_CRITICAL(&tbMux);
-        //   subscribed = true;
-        //   portEXIT_CRITICAL(&tbMux);
-          
-        //   // Send device MAC address after successful connection
-        //   tb.sendAttributeData("macAddress", WiFi.macAddress().c_str());
-        // } else {
-        //   Serial.println("Subscription failed, will retry");
-        // }
-      // }
     }
     
     // Check CoreIOT connection every 3 seconds
