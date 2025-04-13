@@ -1,0 +1,40 @@
+\chapter{Tổng quan về đề tài}
+\section{Giới thiệu}
+\tab Trong thời đại hiện nay, drone (thiết bị bay không người lái) đang trở thành một công nghệ ngày càng phổ biến và quan trọng trong nhiều lĩnh vực, từ giám sát đến giao hàng và cứu hộ. Sức mạnh của chúng không chỉ là khả năng tiếp cận các khu vực khó tiếp cận mà còn là sự linh hoạt và hiệu quả trong thực hiện các nhiệm vụ.\\
+\tab Tuy nhiên, việc điều khiển drone trong môi trường đa dạng và không gian hạn chế đặt ra nhiều thách thức. Một trong những thách thức chính là việc duy trì cân bằng và tránh vật cản trong quá trình di chuyển.\\
+\tab Hệ thống tự cân bằng không chỉ tăng cường an toàn mà còn mở ra nhiều cơ hội ứng dụng mới trong các ngành công nghiệp khác nhau. Từ giao hàng hàng hóa đến giám sát môi trường và nông nghiệp, drone có thể phục vụ một loạt các mục đích với sự hỗ trợ của hệ thống cân bằng.\\
+\tab Chính vì vậy, nhóm chúng em đã chọn đề tài \textbf{Hệ thống cân bằng cho thiết bị bay không người lái}, nhằm nghiên cứu và phát triển các giải pháp để giải quyết những thách thức này. Đồng thời, chúng em hy vọng rằng việc thành công trong dự án này sẽ mang lại những đóng góp quan trọng cho sự phát triển của công nghệ drone trong tương lai.
+\section{Mục tiêu}
+\tab Mục tiêu của nhóm chúng em trong dự án này là: Phát triển một hệ thống cân bằng tự động cho drone, nhằm đảm bảo khả năng hoạt động ổn định và chính xác trong quá trình bay để giúp người điều khiển có thể dễ dàng điều khiển drone. Hệ thống này sẽ sử dụng các thuật toán điều khiển tiên tiến, kết hợp với các cảm biến hiện đại để đọc và xử lý dữ liệu về trạng thái của drone, từ đó đưa ra các tín hiệu điều khiển động cơ phù hợp, giúp duy trì trạng thái cân bằng theo thời gian thực. Cụ thể, mục tiêu của dự án bao gồm:
+\begin{itemize}
+    \item \textbf{Xây dựng hệ thống phần cứng}: Thiết kế và tích hợp các thành phần chính của drone, bao gồm vi điều khiển (Teensy), mô-đun kết nối không dây (ESP8266), cảm biến (MPU6050 và barometer), và các bộ điều khiển động cơ (ESC). Đảm bảo sự phối hợp mượt mà giữa các thành phần để tạo thành một hệ thống hoàn chỉnh.
+    \item \textbf{Phát triển thuật toán điều khiển cân bằng}: Ứng dụng thuật toán PID (Proportional-Integral-Derivative) để tính toán các tín hiệu điều khiển dựa trên dữ liệu từ cảm biến. Thuật toán sẽ liên tục điều chỉnh tốc độ quay của động cơ, nhằm giữ drone cân bằng và thực hiện các thao tác bay chính xác theo mong muốn của người điều khiển.
+    \item \textbf{Tăng cường khả năng ổn định và tin cậy}: Sử dụng bộ lọc Kalman để loại bỏ nhiễu trong dữ liệu cảm biến, cải thiện độ chính xác của hệ thống. Đồng thời, tích hợp cơ chế kiểm tra và giám sát tính toàn vẹn của dữ liệu, đảm bảo sự ổn định và an toàn khi vận hành.
+    \item \textbf{Kết nối và điều khiển từ xa}: Phát triển giao diện kết nối giữa drone và ứng dụng desktop thông qua Wi-Fi, giúp người dùng dễ dàng cấu hình thông số và theo dõi trạng thái của drone theo thời gian thực.
+\end{itemize}
+Thông qua việc đạt được các mục tiêu trên, đề tài không chỉ tập trung vào việc tạo ra một hệ thống cân bằng tự động cho drone, mà còn hướng tới việc xây dựng nền tảng công nghệ có thể được mở rộng cho các ứng dụng khác trong tương lai, như quay phim, khảo sát địa hình, và vận chuyển hàng hóa.
+\section{Thực trạng}
+\tab Bây giờ nền công nghiệp về drone đã phát triển vượt bậc, vẫn còn tồn tại một số hạn chế trong các hệ thống điều khiển hiện tại. Đặc biệt, khả năng cân bằng của drone trong môi trường đa dạng vẫn còn hạn chế, đặc biệt là khi di chuyển theo quỹ đạo cụ thể hoặc trong điều kiện thời tiết không lý tưởng.\\
+\tab Mặc dù đã có sự tiến bộ đáng kể trong việc phát triển các hệ thống cân bằng cho drone, nhưng vấn đề vẫn còn tồn tại và đòi hỏi sự nghiên cứu và phát triển tiếp tục để tối ưu hóa hiệu suất và độ chính xác của chúng trong các ứng dụng thực tế. Có thể kể đến một số thách thức như:
+\begin{itemize} [label = --]
+    \item Độ chính xác của cảm biến: Các hệ thống cân bằng phụ thuộc nhiều vào độ chính xác của cảm biến, như cảm biến gia tốc, cảm biến áp suất, và cảm biến khoảng cách. Sự không chính xác hoặc nhiễu từ các cảm biến này có thể dẫn đến sai lệch trong việc đo lường và điều khiển.
+    \item Xử lý dữ liệu và thời gian phản ứng: Trong khi cân bằng đòi hỏi phản ứng nhanh chóng từ drone, việc xử lý dữ liệu từ các cảm biến và áp dụng các thuật toán phức tạp có thể gây trễ trong quá trình điều khiển.
+    \item Điều kiện môi trường biến đổi: Drone thường phải hoạt động trong các điều kiện môi trường biến đổi, từ thời tiết không ổn định đến ánh sáng yếu và môi trường địa hình khắc nghiệt. Điều này làm tăng thêm độ khó trong việc cân bằng.
+\end{itemize}
+\section{Phạm vi dự án}
+\tab Trước những khó khăn khi thực hiện dự án, chúng em đã giới hạn những tính năng của hệ thống nhằm đảm bảo dự án nằm trong khả năng kiến thức cũng như đảm bảo dự án được hoàn thành đúng tiến độ. Loại thiết bị bay không người lại nhóm em chọn là loại có 4 cánh (quadcopter) hình chữ X. Hệ thống cân bằng sẽ được triển khai trên bốn bậc tự do là độ cao và ba góc xoay pitch, roll yaw trong đó quan trọng nhất là tập trung vào hai góc pitch và roll để giữ cho drone nằm yên trên mặt phẳng. khi hoạt động drone có thể duy trì cân bằng ổn định, các góc nghiêng không lệch quá lớn, độ cao được giữ ổn định.\\
+\tab Vì thời gian thực hiện hạn chế và tránh các tác động ngẫu nhiên của thời tiết để nghiên cứu và thực hiện đề tài này, trước tiên nhóm em sẽ tiến hành trong môi trường phòng thí nghiệm trước, từ đó sẽ mở rộng, thêm các yếu tố ngoại vi gắn liền hơn với thực tế nếu còn đủ thời gian.
+
+\section{Ý nghĩa thực tiễn}
+\tab Hệ thống cân bằng góp phần là cơ sở nền tảng để phát triển những ứng dụng của drone vào trong thực tiễn. Trong thời đại công nghệ 4.0, drone ngày càng xuất hiện phổ biến và rộng rãi. Hiện tại có rất nhiều thứ để con người tận dụng drone trong công việc và cả giải trí, ví dụ như: 
+\begin{enumerate}
+    \item Chụp ảnh và quay phim: Drone được sử dụng rộng rãi trong lĩnh vực chụp ảnh và quay phim, giúp ghi lại những hình ảnh và thước phim độc đáo từ trên cao.
+    \item Kiểm tra và giám sát: Drone được sử dụng để kiểm tra và giám sát các công trình xây dựng, đường dây điện, đường ống, cánh đồng, v.v., giúp phát hiện sớm các vấn đề và đưa ra giải pháp kịp thời.
+    \item Giao hàng: Drone được sử dụng để giao hàng ở những khu vực khó tiếp cận, giúp rút ngắn thời gian giao hàng và tiết kiệm chi phí vận chuyển.
+    \item Tìm kiếm cứu nạn: Drone được sử dụng để tìm kiếm người mất tích, nạn nhân trong các thảm họa thiên tai, giúp cứu trợ kịp thời và hiệu quả.
+    \item Nông nghiệp: Drone được sử dụng để phun thuốc trừ sâu, bón phân, tưới nước cho cây trồng, giúp nâng cao năng suất và hiệu quả sản xuất nông nghiệp.
+    \item Khảo sát địa hình: Drone được sử dụng để khảo sát địa hình ở những nơi con người khó tiếp cận, lập bản đồ, cung cấp dữ liệu cho các dự án xây dựng, quy hoạch đô thị, v.v.
+    \item Giải trí: Drone được sử dụng cho các hoạt động giải trí như đua drone, biểu diễn drone và nhiều hoạt động giải trí khác.
+\end{enumerate}
+\newpage
+
