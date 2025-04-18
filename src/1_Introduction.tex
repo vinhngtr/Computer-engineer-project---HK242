@@ -1,50 +1,44 @@
 \chapter{Tổng quan về đề tài}
 \section{Giới thiệu}
-\tab Trong thời đại công nghệ số ngày càng phát triển, nhà thông minh (Smart Home) đã trở thành một xu hướng tất yếu trong việc nâng cao chất lượng sống. Các hệ thống tự động hóa giúp tối ưu hóa việc sử dụng năng lượng, tăng cường tính an toàn và mang lại sự tiện nghi cho người dùng.\\
-\tab Với sự hỗ trợ của các công nghệ hiện đại như vi điều khiển ESP32-S3, màn hình cảm ứng 7 inch, và phần mềm thiết kế giao diện trực quan SquareLine Studio, việc xây dựng hệ thống điều khiển trực tiếp trên màn hình cảm ứng trở nên đơn giản và hiệu quả. Đồng thời, nền tảng CoreIOT đóng vai trò như một cầu nối IoT, cho phép hệ thống gửi dữ liệu cảm biến, nhận lệnh điều khiển và đồng bộ trạng thái thiết bị lên đám mây theo thời gian thực.\\
-\tab Ngoài ra, hệ thống còn tích hợp các cảm biến nhiệt độ và độ ẩm sử dụng giao tiếp RS485, giúp giám sát điều kiện môi trường tại nhiều khu vực khác nhau trong ngôi nhà. Thông tin từ các cảm biến sẽ được xử lý bởi ESP32-S3, hiển thị trực tiếp trên màn hình cảm ứng và đồng thời gửi lên nền tảng CoreIOT để người dùng có thể theo dõi và điều khiển từ xa thông qua internet. Việc điều khiển các thiết bị điện được thực hiện thông qua mạch relay ESP32, đảm bảo hoạt động ổn định và linh hoạt.\\
-\tab Với đề tài \textbf{Phát triển thư viện giao diện cho mạch nhúng ESP32 sử dụng LVGL}, nhóm chúng em hướng đến mục tiêu xây dựng một mô hình điều khiển thông minh, trực quan và dễ mở rộng, đồng thời làm quen với các công nghệ IoT đang được ứng dụng rộng rãi trong thực tế.
+\tab Trong thời đại công nghệ số phát triển mạnh mẽ, việc phát triển giao diện người dùng (GUI) cho các hệ thống nhúng đang trở thành một nhu cầu thiết yếu trong các ứng dụng công nghiệp, dân dụng và IoT. Giao diện trực quan không chỉ giúp người dùng tương tác thuận tiện hơn với hệ thống, mà còn nâng cao giá trị sử dụng và tính chuyên nghiệp của sản phẩm.\\ 
+\tab Với sự phổ biến của vi điều khiển ESP32-S3 và sự phát triển của các thư viện mã nguồn mở như LVGL (Light and Versatile Graphics Library), việc xây dựng các giao diện đồ họa phức tạp trên các hệ thống nhúng trở nên khả thi và hiệu quả. LVGL cung cấp đầy đủ các thành phần UI như nút bấm, slider, bảng thông tin... và hỗ trợ cảm ứng, animation, đa ngôn ngữ, rất phù hợp cho các ứng dụng có màn hình tích hợp.\\ 
+\tab Trong khuôn khổ đề tài \textbf{“Phát triển thư viện giao diện cho mạch nhúng ESP32 sử dụng thư viện đồ họa LVGL”}, nhóm chúng em tập trung nghiên cứu, thiết kế và hiện thực một thư viện giao diện đồ họa tùy biến, sử dụng ESP32-S3 kết hợp với màn hình cảm ứng 7 inch. Giao diện này sẽ hỗ trợ hiển thị và tương tác với các thông tin cảm biến như nhiệt độ, độ ẩm và trạng thái các thiết bị điều khiển trong mô hình thử nghiệm.Dự án cũng tích hợp kết nối với Web Server riêng, cho phép ESP32 đồng bộ dữ liệu cảm biến và nhận lệnh điều khiển thông qua giao thức HTTP hoặc WebSocket. Việc này hỗ trợ khả năng giám sát và điều khiển từ xa qua giao diện web một cách linh hoạt, không phụ thuộc vào nền tảng IoT bên thứ ba.
 \section{Mục tiêu}
-\tab Mục tiêu của nhóm chúng em trong dự án này là phát triển một hệ thống nhà thông minh sử dụng ESP32-S3 kết hợp với màn hình cảm ứng 7 inch LCD, cảm biến nhiệt độ và độ ẩm qua RS485, và mạch relay ESP32. Hệ thống này nhằm mục đích giám sát và điều khiển các thiết bị trong nhà một cách tự động và thông minh, tạo ra một môi trường sống tiện nghi và an toàn cho người sử dụng. Cụ thể, mục tiêu của dự án bao gồm:
+\tab Mục tiêu chính của đề tài là xây dựng một thư viện giao diện người dùng trực quan dành cho hệ thống nhúng sử dụng vi điều khiển ESP32-S3 và thư viện LVGL. Thư viện này sẽ giúp đơn giản hóa quá trình phát triển ứng dụng trên nền tảng ESP32 có tích hợp màn hình cảm ứng. Các mục tiêu cụ thể bao gồm:
+
 \begin{itemize} 
-\item \textbf{Xây dựng hệ thống phần cứng}: Thiết kế và tích hợp các thành phần chính của hệ thống nhà thông minh, bao gồm vi điều khiển ESP32-S3, màn hình cảm ứng 7 inch LCD, các cảm biến môi trường như cảm biến nhiệt độ và độ ẩm qua RS485, và các bộ relay ESP32 để điều khiển các thiết bị đầu ra như đèn, quạt, máy lạnh... Đảm bảo sự kết nối mượt mà và ổn định giữa các thành phần này để tạo thành một hệ thống hoạt động hiệu quả. 
-\item \textbf{Phát triển giao diện người dùng và kết nối IoT}: Xây dựng giao diện trực quan trên màn hình cảm ứng, cho phép người dùng dễ dàng giám sát và điều khiển các thiết bị trong nhà. Tích hợp nền tảng CoreIOT để truyền tải dữ liệu cảm biến và điều khiển thiết bị từ xa qua mạng Wi-Fi, giúp người dùng theo dõi tình trạng của ngôi nhà mọi lúc, mọi nơi. 
-\item \textbf{Cải thiện độ ổn định và chính xác của cảm biến}: Sử dụng các cảm biến RS485 để đo nhiệt độ và độ ẩm, đồng thời xử lý dữ liệu cảm biến để hiển thị chính xác trên giao diện người dùng. Đảm bảo hệ thống có thể hoạt động ổn định trong điều kiện thực tế, loại bỏ các nhiễu dữ liệu không mong muốn và cung cấp thông tin đáng tin cậy cho người dùng. 
-\item \textbf{Tăng cường khả năng điều khiển tự động và tiện ích}: Phát triển các tính năng tự động hóa như bật/tắt thiết bị theo điều kiện môi trường (nhiệt độ, độ ẩm), điều khiển thiết bị theo thời gian biểu và từ xa qua ứng dụng. Mở rộng khả năng của hệ thống để dễ dàng kết nối với các thiết bị khác trong tương lai. 
+\item \textbf{Tìm hiểu và tích hợp LVGL vào hệ thống ESP32-S3}: Cấu hình hệ thống phần mềm để chạy thư viện LVGL mượt mà trên màn hình cảm ứng 7 inch sử dụng giao tiếp SPI/Parallel. 
+\item \textbf{Thiết kế thư viện giao diện tái sử dụng}: Phát triển các thành phần UI có thể tái sử dụng như các nút điều khiển, thẻ thông tin cảm biến, màn hình chính, màn hình cài đặt, v.v... phục vụ cho các hệ thống nhúng có màn hình. 
+\item \textbf{Tích hợp cảm biến và hệ thống điều khiển}: Hiển thị thông tin từ các cảm biến nhiệt độ, độ ẩm (kết nối RS485 hoặc UART) và điều khiển thiết bị đầu ra (qua relay) thông qua giao diện đồ họa. 
+\item \textbf{Kết nối và tương tác với Web Server}: ESP32 có khả năng gửi dữ liệu cảm biến đến Web Server thông qua HTTP hoặc WebSocket, đồng thời nhận lệnh điều khiển để cập nhật trạng thái giao diện và các thiết bị đầu ra. Hệ thống có thể được giám sát và điều khiển từ xa qua trình duyệt web.
+\item \textbf{Tối ưu hiệu năng}: Đảm bảo giao diện hoạt động mượt mà, tiêu tốn tài nguyên hợp lý và có khả năng mở rộng cho các ứng dụng thực tế khác. 
 \end{itemize}
-Thông qua việc đạt được các mục tiêu trên, nhóm chúng em không chỉ tạo ra một hệ thống nhà thông minh có khả năng điều khiển linh hoạt và giám sát hiệu quả, mà còn góp phần phát triển nền tảng công nghệ IoT, ứng dụng được trong các mô hình nhà ở thông minh, tiết kiệm năng lượng, và cải thiện chất lượng sống.
 \section{Thực trạng}
-\tab Trong những năm gần đây, công nghệ nhà thông minh đã phát triển mạnh mẽ, với sự kết hợp của các thiết bị IoT, cảm biến và các nền tảng điều khiển từ xa. Tuy nhiên, vẫn còn tồn tại một số hạn chế trong các hệ thống điều khiển và giám sát hiện tại. Đặc biệt, sự tương thích giữa các thiết bị khác nhau và khả năng kết nối ổn định trong môi trường mạng không dây vẫn gặp một số thách thức.\
-Mặc dù các hệ thống nhà thông minh đã trở nên phổ biến và có nhiều cải tiến, nhưng vẫn còn nhiều yếu tố cần được tối ưu hóa để mang lại hiệu quả và độ tin cậy cao hơn. Một số vấn đề hiện tại bao gồm:
-
-\begin{itemize} [label = --] 
-\item Độ chính xác của cảm biến: Các hệ thống nhà thông minh phụ thuộc vào cảm biến nhiệt độ, độ ẩm và các cảm biến môi trường khác để thu thập dữ liệu và điều khiển thiết bị. Tuy nhiên, chất lượng và độ chính xác của các cảm biến, đặc biệt là khi sử dụng giao tiếp RS485, có thể bị ảnh hưởng bởi nhiễu tín hiệu và môi trường. Điều này có thể dẫn đến sai lệch trong việc thu thập thông tin và ảnh hưởng đến hiệu quả hoạt động của hệ thống. 
-\item Kết nối và độ trễ trong điều khiển: Hệ thống nhà thông minh cần một mạng lưới kết nối ổn định để người dùng có thể điều khiển các thiết bị từ xa. Tuy nhiên, trong môi trường mạng không dây (Wi-Fi), có thể gặp phải vấn đề về độ trễ khi điều khiển thiết bị hoặc đồng bộ hóa trạng thái giữa các thiết bị. Điều này có thể làm giảm trải nghiệm người dùng và ảnh hưởng đến tính linh hoạt của hệ thống. 
-\item Tính mở rộng và tương thích với các thiết bị khác: Dù công nghệ nhà thông minh ngày càng phát triển, nhưng vẫn tồn tại vấn đề về tính mở rộng của các hệ thống. Việc tích hợp và điều khiển các thiết bị từ các nhà sản xuất khác nhau có thể gặp khó khăn, do thiếu sự đồng nhất trong các giao thức kết nối và giao diện điều khiển. 
-\item Điều kiện môi trường thay đổi: Các hệ thống nhà thông minh cần phải hoạt động ổn định trong nhiều điều kiện môi trường khác nhau. Ví dụ, trong môi trường có độ ẩm cao hoặc nhiệt độ thay đổi nhanh chóng, các cảm biến có thể bị ảnh hưởng, dẫn đến việc điều khiển thiết bị không chính xác hoặc không đáp ứng đúng yêu cầu. 
-\end{itemize}
-
+\tab Việc phát triển giao diện người dùng trên các thiết bị nhúng trước đây thường gặp nhiều khó khăn do hạn chế về tài nguyên phần cứng, thiếu công cụ hỗ trợ và chi phí cao. Tuy nhiên, trong những năm gần đây, sự xuất hiện của các thư viện đồ họa nhẹ như LVGL đã thay đổi đáng kể cục diện.\\ 
+\tab Mặc dù LVGL đã được cộng đồng mã nguồn mở sử dụng rộng rãi, nhưng việc tích hợp và sử dụng thư viện này trên ESP32-S3 vẫn đòi hỏi kiến thức chuyên sâu về cấu trúc hệ thống nhúng, quản lý bộ nhớ, cảm ứng và hiển thị. Ngoài ra, hầu hết các giao diện hiện tại vẫn chưa tối ưu về tính trực quan, khả năng tái sử dụng và mở rộng.\\ 
+\tab Do đó, việc phát triển một thư viện giao diện chuyên dụng, dễ tùy chỉnh, thân thiện với người dùng và phù hợp với ứng dụng IoT thực tế là điều cần thiết.
 
 \section{Phạm vi dự án}
-\tab Trong quá trình thực hiện dự án, chúng em đã xác định và giới hạn các tính năng của hệ thống để đảm bảo dự án hoàn thành đúng tiến độ và phù hợp với khả năng nghiên cứu và kiến thức hiện có. Đối với hệ thống nhà thông minh, chúng em đã lựa chọn sử dụng các thiết bị và công nghệ đơn giản nhưng hiệu quả, bao gồm ESP32-S3 Touch 7 inch LCD, cảm biến nhiệt độ và độ ẩm qua giao thức RS485, cùng với mạch relay của ESP32 để điều khiển các thiết bị điện trong nhà.\\
-\tab Phạm vi dự án sẽ tập trung vào việc phát triển hệ thống điều khiển và giám sát từ xa các thiết bị trong nhà, đảm bảo tính ổn định và hiệu quả của hệ thống. Cụ thể, các yếu tố cần triển khai bao gồm:
-
-\begin{itemize} \item \textbf{Giám sát và điều khiển từ xa}: Hệ thống sẽ cho phép người dùng giám sát các thông số như nhiệt độ, độ ẩm qua cảm biến, và điều khiển các thiết bị như quạt, đèn, điều hòa thông qua mạch relay ESP32. \item \textbf{Kết nối và đồng bộ dữ liệu}: Tất cả các thiết bị sẽ được kết nối với nhau thông qua Wi-Fi, sử dụng ESP32 và các cảm biến RS485 để truyền tải dữ liệu đến một nền tảng giám sát như CoreIOT. Người dùng có thể theo dõi trạng thái của các thiết bị trong thời gian thực và thực hiện các điều chỉnh từ xa. \item \textbf{Môi trường thử nghiệm}: Do thời gian thực hiện dự án có hạn và để tránh các yếu tố không kiểm soát được như thời tiết, nhóm em sẽ thực hiện các thử nghiệm trong môi trường phòng thí nghiệm. Khi có thêm thời gian, hệ thống sẽ được mở rộng và thử nghiệm trong môi trường thực tế để đánh giá hiệu quả hoạt động của toàn bộ hệ thống. \end{itemize}
-
-\tab Với các mục tiêu và phạm vi nghiên cứu rõ ràng như vậy, nhóm chúng em hy vọng sẽ có thể hoàn thiện dự án đúng tiến độ và mang lại kết quả thực tiễn cho việc phát triển các hệ thống nhà thông minh trong tương lai.
+\tab Phạm vi nghiên cứu của đề tài tập trung vào việc phát triển và thử nghiệm thư viện giao diện đồ họa trên hệ thống phần cứng bao gồm: \begin{itemize} 
+\item ESP32-S3 kết hợp với màn hình cảm ứng 7 inch. 
+\item Giao diện được xây dựng bằng LVGL, hiển thị dữ liệu cảm biến (nhiệt độ, độ ẩm). 
+\item Hỗ trợ điều khiển thiết bị đầu ra thông qua các nút điều khiển trên giao diện. 
+\item Tích hợp truyền nhận dữ liệu cảm biến qua giao tiếp RS485. 
+\item Giao tiếp với Web Server nội bộ hoặc trên mạng thông qua giao thức HTTP/WebSocket để truyền nhận dữ liệu và thực hiện điều khiển từ xa.
+\end{itemize} 
+\tab Đề tài không đi sâu vào phát triển phần cứng cấp thấp hay các thuật toán điều khiển phức tạp, mà tập trung vào phần giao diện, tính năng kết nối và khả năng mở rộng.
 
 \section{Ý nghĩa thực tiễn}  
-\tab Hệ thống nhà thông minh sử dụng ESP32-S3 Touch 7 inch LCD, cảm biến RS485 và mạch relay mang lại nhiều lợi ích quan trọng trong cuộc sống hiện đại, đặc biệt trong việc tối ưu hóa quản lý và điều khiển các thiết bị trong gia đình:
-
-\begin{enumerate}
-    \item \textbf{Quản lý năng lượng hiệu quả}: Hệ thống có khả năng tự động điều khiển các thiết bị điện như đèn, quạt, điều hòa, giúp tiết kiệm năng lượng và giảm thiểu chi phí điện năng trong gia đình.
-    \item \textbf{Tăng cường an ninh}: Hệ thống hỗ trợ giám sát và điều khiển hệ thống an ninh từ xa, bao gồm cảm biến chuyển động, camera và hệ thống báo động, giúp tăng cường bảo vệ ngôi nhà.
-    \item \textbf{Tiện lợi và tự động hóa}: Các thiết bị trong nhà có thể được điều khiển thông qua màn hình cảm ứng 7 inch hoặc ứng dụng di động, mang lại sự tiện lợi và tự động hóa cho người sử dụng.
-    \item \textbf{Giám sát và bảo trì từ xa}: Hệ thống cho phép theo dõi tình trạng hoạt động của các thiết bị trong nhà, phát hiện sự cố sớm và hỗ trợ bảo trì kịp thời, giúp duy trì hoạt động ổn định của hệ thống.
-    \item \textbf{Điều khiển thông minh qua RS485}: Việc sử dụng giao thức RS485 giúp kết nối các thiết bị ngoại vi, mở rộng khả năng điều khiển và giám sát các thiết bị không dây trong hệ thống nhà thông minh, tăng cường tính linh hoạt và khả năng mở rộng.
-    \item \textbf{Tăng cường trải nghiệm người dùng}: Với giao diện màn hình cảm ứng 7 inch, người dùng có thể dễ dàng thao tác và điều khiển các thiết bị trong nhà một cách trực quan và tiện lợi, nâng cao trải nghiệm sử dụng.
+\tab Việc phát triển thư viện giao diện sử dụng LVGL trên ESP32-S3 không chỉ giúp chuẩn hóa và tối ưu quy trình thiết kế giao diện cho hệ thống nhúng, mà còn mang lại nhiều ý nghĩa thực tiễn như: 
+\begin{enumerate} 
+\item \textbf{Tăng tính tương tác người dùng}: Cung cấp giao diện trực quan, hiện đại cho các thiết bị IoT hoặc hệ thống nhúng, giúp người dùng dễ thao tác và theo dõi. 
+\item \textbf{Rút ngắn thời gian phát triển sản phẩm}: Thư viện giao diện có thể tái sử dụng, giúp đẩy nhanh quá trình tích hợp và triển khai các sản phẩm nhúng mới. 
+\item \textbf{Tăng cường tính chuyên nghiệp}: Giao diện đẹp và ổn định góp phần nâng cao giá trị của sản phẩm công nghệ và tăng tính cạnh tranh. 
+\item \textbf{Khả năng mở rộng cao}: Thư viện có thể được áp dụng cho nhiều loại thiết bị khác nhau như máy đo môi trường, bảng điều khiển, hệ thống giám sát từ xa, v.v. 
 \end{enumerate}
 
-Hệ thống này không chỉ tối ưu hóa các tác vụ quản lý trong nhà mà còn mang lại sự thuận tiện, an toàn và hiệu quả. Nó mở ra cơ hội phát triển mạnh mẽ cho hệ thống nhà thông minh trong tương lai, góp phần nâng cao chất lượng cuộc sống và hướng tới một không gian sống hiện đại.
+\tab Đề tài góp phần vào việc xây dựng nền tảng phần mềm mở cho các hệ thống nhúng hiện đại, đặc biệt là trong lĩnh vực nhà thông minh, nông nghiệp công nghệ cao và công nghiệp 4.0.
+
+
 \newpage
 
