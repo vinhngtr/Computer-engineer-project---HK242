@@ -1,50 +1,40 @@
 \chapter{CƠ SỞ LÝ THUYẾT}
-\section{Tổng quan về vi điều khiển ESP32-S3}
-\tab ESP32-S3 là một vi điều khiển thuộc dòng ESP32 do Espressif Systems phát triển, được thiết kế đặc biệt cho các ứng dụng AIoT (Artificial Intelligence of Things), tích hợp khả năng xử lý tín hiệu số, hỗ trợ tăng tốc AI và xử lý đồ họa hiệu quả. Với kiến trúc mạnh mẽ, khả năng kết nối không dây linh hoạt và hỗ trợ phần cứng cho các tác vụ học máy, ESP32-S3 trở thành lựa chọn lý tưởng cho các ứng dụng IoT hiện đại như điều khiển thông minh, nhận diện hình ảnh, và giao diện người dùng đồ họa.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{Images/ESP32-S3_on_paper.jpg}
-    \caption{ESP32-S3}
-\end{figure}
-\subsection{Kiến trúc phần cứng của ESP32-S3}
-\tab ESP32-S3 sử dụng vi xử lý dual-core Tensilica Xtensa LX7, chạy ở tốc độ lên đến 240 MHz. So với LX6 trên ESP32 tiêu chuẩn, LX7 cung cấp hiệu suất cao hơn và hiệu quả năng lượng tốt hơn, đặc biệt trong các tác vụ xử lý tín hiệu và AI.\\
-\tab Bộ vi xử lý hỗ trợ bộ chỉ dẫn vector SIMD (Single Instruction, Multiple Data) và có tích hợp tăng tốc phần cứng cho các tác vụ AI như nhận diện giọng nói, phân loại hình ảnh, hoặc phát hiện đối tượng. Điều này cho phép ESP32-S3 thực hiện các ứng dụng machine learning ở mức edge mà không cần đến bộ xử lý trung tâm.\\
-\tab Bộ nhớ tích hợp gồm 512KB SRAM, 384KB ROM, và hỗ trợ bộ nhớ flash ngoài lên đến 16MB. Ngoài ra, bộ nhớ PSRAM ngoài có thể được tích hợp để hỗ trợ các ứng dụng yêu cầu dung lượng lớn như LVGL hoặc TensorFlow Lite Micro.\\ 
-\tab ESP32-S3 có tổng cộng 45 chân GPIO, hỗ trợ chức năng đa dạng như PWM, ADC, DAC, SPI, I2C, UART, I2S, SDIO và USB-OTG. Đặc biệt, chip hỗ trợ giao tiếp USB đầy đủ (USB 1.1 OTG), giúp kết nối trực tiếp với máy tính hoặc thiết bị ngoại vi mà không cần chip chuyển đổi USB-UART.
+\section{Tổng quan về mô-đun ESP32-S3-HMI-V3} 
+\tab ESP32-S3-HMI-V3 là một mô-đun phát triển tích hợp màn hình cảm ứng và vi điều khiển ESP32-S3, được thiết kế đặc biệt cho các ứng dụng giao diện người dùng đồ họa (HMI - Human Machine Interface) trong lĩnh vực IoT và nhúng. Mô-đun này được phát triển bởi công ty Waveshare, tích hợp đầy đủ phần cứng cần thiết để xây dựng các ứng dụng tương tác trực quan như bảng điều khiển cảm ứng, hệ thống giám sát từ xa, thiết bị cầm tay thông minh và nhiều ứng dụng khác.\\
+\tab ESP32-S3-HMI-V3 không chỉ thừa hưởng sức mạnh xử lý của dòng vi điều khiển ESP32-S3 mà còn được tối ưu hóa cho các ứng dụng cần hiển thị giao diện người dùng với hiệu suất cao nhờ tích hợp màn hình cảm ứng IPS và các thành phần ngoại vi như bộ nhớ ngoài, bộ điều khiển cảm ứng, và hệ thống cấp nguồn ổn định. Với kích thước nhỏ gọn và khả năng lập trình linh hoạt, mô-đun này mang lại một nền tảng lý tưởng để phát triển các hệ thống HMI nhúng trong môi trường công nghiệp lẫn dân dụng.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{Images/ESP32-S3_2.1.1.jpg}
-  \caption{Kiến trúc phần cứng ESP32-S3}
+  \includegraphics[width=0.3\textwidth]{Images/ESP32-S3-HMI-V3.png} 
+  \caption{ESP32-S3-HMI-V3}
 \end{figure}
-\subsection{Các tính năng kết nối không dây}
-\tab ESP32-S3 hỗ trợ Wi-Fi IEEE 802.11 b/g/n (2.4GHz) và Bluetooth 5.0 LE với các tính năng mở rộng như BLE Mesh và Advertising Extensions, giúp xây dựng các mạng thiết bị IoT phức tạp và tiết kiệm năng lượng hơn.\\
-\tab Mặc dù ESP32-S3 không hỗ trợ Bluetooth cổ điển (BR/EDR), nhưng BLE 5.0 đủ mạnh để đáp ứng phần lớn các ứng dụng IoT hiện đại, đặc biệt là thiết bị wearable, cảm biến không dây, và các thiết bị cần truyền dữ liệu định kỳ.\\
-\tab ESP32-S3 tích hợp nhiều cơ chế bảo mật phần cứng: Secure Boot, Flash Encryption, hỗ trợ các thuật toán mã hóa AES, SHA, RSA, ECC thông qua bộ tăng tốc phần cứng, đảm bảo an toàn cho dữ liệu và firmware.
-\subsection{Các giao tiếp ngoại vi}
-\tab ESP32-S3 cung cấp đầy đủ các giao tiếp ngoại vi tương tự như ESP32 tiêu chuẩn nhưng được mở rộng và cải tiến hơn:
+\subsection{Cấu hình phần cứng của mô-đun ESP32-S3-HMI-V3} 
+\tab Trung tâm xử lý của mô-đun là vi điều khiển ESP32-S3 do Espressif phát triển, sử dụng kiến trúc dual-core Xtensa LX7, hoạt động ở tần số lên đến 240MHz. Vi xử lý này được trang bị các tập lệnh SIMD và phần cứng tăng tốc AI giúp tăng cường khả năng xử lý tín hiệu số và các tác vụ học máy ngay tại thiết bị mà không cần gửi dữ liệu lên máy chủ.\\
+\tab Mô-đun được tích hợp màn hình cảm ứng điện dung kích thước 2.8 inch (hoặc tùy chọn 4.3 inch tùy phiên bản), sử dụng tấm nền IPS với độ phân giải 320x240 (hoặc 800x480). Màn hình này được điều khiển bởi chip ST7789V hoặc ILI9488, kết nối qua giao tiếp SPI tốc độ cao, cho phép hiển thị giao diện người dùng sắc nét và mượt mà, đặc biệt phù hợp với các thư viện đồ họa như LVGL.\\
+\tab Ngoài bộ nhớ trong 512KB SRAM và 384KB ROM tích hợp trên vi điều khiển ESP32-S3, mô-đun còn hỗ trợ mở rộng bộ nhớ ngoài với flash SPI 8MB và PSRAM 8MB. Đây là yếu tố quan trọng cho các ứng dụng đồ họa hoặc xử lý AI, giúp lưu trữ hình ảnh, giao diện và dữ liệu tạm thời với tốc độ truy cập nhanh.\\
+\tab Mô-đun còn có sẵn khe cắm thẻ TF (microSD), giao tiếp USB Type-C hỗ trợ USB-OTG và debug UART, cùng các chân mở rộng GPIO qua header 2.54mm, hỗ trợ kết nối với cảm biến, thiết bị đầu cuối hoặc các mô-đun mở rộng khác. Ngoài ra, hệ thống còn tích hợp mạch sạc pin Li-ion/Li-Po và bảo vệ nguồn, thích hợp cho các ứng dụng di động hoặc thiết bị không dây dùng pin.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Images/ESP32-S3-Funtion-diagram.png} 
+  \caption{ESP32-S3 Functional Block Diagram}
+\end{figure}
+\subsection{Khả năng kết nối và truyền thông} 
+\tab ESP32-S3-HMI-V3 hỗ trợ đầy đủ các chuẩn kết nối không dây hiện đại thông qua Wi-Fi 802.11 b/g/n và Bluetooth 5.0 LE. Điều này cho phép mô-đun dễ dàng tích hợp vào hệ thống mạng nội bộ hoặc điều khiển từ xa qua internet, phù hợp với các ứng dụng như điều khiển nhà thông minh, cập nhật firmware OTA hoặc đồng bộ dữ liệu thời gian thực với server.\\
+\tab Mô-đun cũng hỗ trợ các giao thức truyền thông phổ biến như UART, SPI, I2C và RS485 (qua chip mở rộng), giúp giao tiếp dễ dàng với cảm biến, thiết bị ngoại vi và hệ thống SCADA công nghiệp. Giao tiếp RS485 đặc biệt quan trọng trong môi trường công nghiệp, nơi tín hiệu cần truyền đi xa và chống nhiễu tốt.
+\subsection{Hỗ trợ phần mềm và phát triển ứng dụng} 
+\tab ESP32-S3-HMI-V3 được hỗ trợ chính thức bởi ESP-IDF, bộ SDK mạnh mẽ của Espressif, tích hợp FreeRTOS, các thư viện giao tiếp mạng, AI và hỗ trợ thư viện đồ họa như LVGL để xây dựng giao diện người dùng hiện đại. Việc sử dụng LVGL giúp phát triển nhanh chóng các màn hình cảm ứng với button, menu, slider, biểu đồ v.v. mà không cần tự vẽ từng pixel.\\
+\tab Đối với người dùng Arduino, mô-đun này cũng tương thích với Arduino IDE thông qua bộ lõi ESP32-S3, cho phép viết code nhanh chóng bằng ngôn ngữ Arduino, sử dụng các thư viện như TFT\_eSPI hoặc LovyanGFX để điều khiển màn hình.\\
 
-\textbf{GPIO:} 45 chân có thể lập trình, hỗ trợ ngắt, và nhiều chức năng đặc biệt.
-
-\textbf{SPI, I2C, UART:} Hỗ trợ đa kênh, tốc độ cao và cấu hình linh hoạt.
-
-\textbf{USB-OTG:} Cho phép thiết bị hoạt động như USB Host hoặc Device.
-
-\textbf{ADC/DAC:} 20 kênh ADC độ phân giải 12-bit, cùng với 2 kênh DAC.
-
-\textbf{PWM:} 8 bộ định thời PWM, mỗi bộ có 4 kênh đầu ra, đủ cho điều khiển động cơ, đèn LED RGB, v.v.
-
-\textbf{SD/MMC/SDIO:} Giao tiếp với thẻ nhớ hoặc thiết bị lưu trữ.
-
-\textbf{Camera Interface:} ESP32-S3 hỗ trợ giao tiếp camera (DVP), rất thích hợp cho ứng dụng nhận diện hình ảnh.
-
-\subsection{Hệ điều hành và môi trường phát triển}
-\tab ESP32-S3 được hỗ trợ đầy đủ bởi ESP-IDF – bộ SDK chính thức của Espressif, đi kèm FreeRTOS, tích hợp nhiều thư viện cho AI, LVGL, và các giao thức mạng (MQTT, HTTP, mDNS, v.v.).\\
-\tab Bên cạnh ESP-IDF, ESP32-S3 cũng có thể được lập trình bằng Arduino IDE với lõi hỗ trợ riêng, thích hợp cho lập trình viên mới bắt đầu.\\
-\tab Ngoài ra, ESP32-S3 hỗ trợ MicroPython, TensorFlow Lite Micro, và các công cụ debug nâng cao như JTAG thông qua USB.\\
-\tab Với khả năng xử lý mạnh mẽ, tích hợp tăng tốc AI, hỗ trợ đồ họa, và nhiều phương thức kết nối, ESP32-S3 là nền tảng lý tưởng cho các hệ thống IoT có giao diện phức tạp, thiết bị thông minh, và các ứng dụng học máy nhúng.
+\tab Mô-đun còn hỗ trợ lập trình bằng MicroPython – một lựa chọn tuyệt vời cho những ứng dụng nhẹ, dạy học, hoặc triển khai nhanh mẫu thử (prototype). Ngoài ra, mô-đun tương thích với các công cụ debug nâng cao như JTAG, OpenOCD thông qua USB hoặc header mở rộng.
+\subsection{Ứng dụng thực tế} 
+\tab Nhờ tích hợp màn hình cảm ứng, khả năng kết nối đa dạng, hiệu năng xử lý mạnh và hỗ trợ AI, mô-đun ESP32-S3-HMI-V3 được sử dụng rộng rãi trong các ứng dụng như:
+\begin{itemize} 
+\item Hệ thống điều khiển giám sát công nghiệp (HMI Panel) 
+\item Màn hình cảm ứng cho thiết bị điện thông minh (bảng điều khiển đèn, máy lạnh, cửa cuốn) 
+\item Giao diện cho thiết bị IoT trong nông nghiệp, y tế, logistics 
+\item Thiết bị cầm tay với màn hình cảm ứng dùng pin 
+\item Thiết bị nhận diện khuôn mặt, nhận diện âm thanh hoặc các hệ thống nhúng sử dụng AI 
+\end{itemize}
 \section{Cơ sở lý thuyết về module RS485}
-
 \subsection{Giới thiệu chung về module RS485} 
 \tab Module RS485 là một thiết bị trung gian giúp chuyển đổi tín hiệu UART (TTL) từ vi điều khiển sang chuẩn truyền thông RS485, cho phép giao tiếp trong các hệ thống truyền dữ liệu công nghiệp hoặc khoảng cách xa. Các module này thường được tích hợp sẵn mạch điện trở kéo, bảo vệ điện áp và mạch truyền nhận để đảm bảo tín hiệu ổn định và an toàn trong quá trình truyền thông.\\
 \tab RS485 hỗ trợ giao tiếp đa điểm (multi-point), cho phép kết nối nhiều thiết bị với nhau trên cùng một đường truyền dữ liệu (bus), giúp đơn giản hóa hệ thống dây và giảm chi phí triển khai trong các ứng dụng như hệ thống giám sát, tự động hóa tòa nhà, mạng cảm biến môi trường, v.v.
