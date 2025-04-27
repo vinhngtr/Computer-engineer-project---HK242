@@ -1,38 +1,70 @@
 \chapter{CƠ SỞ LÝ THUYẾT}
-\section{Tổng quan về mô-đun ESP32-S3-HMI-V3} 
-\tab ESP32-S3-HMI-V3 là một mô-đun phát triển tích hợp màn hình cảm ứng và vi điều khiển ESP32-S3, được thiết kế đặc biệt cho các ứng dụng giao diện người dùng đồ họa (HMI - Human Machine Interface) trong lĩnh vực IoT và nhúng. Mô-đun này được phát triển bởi công ty Waveshare, tích hợp đầy đủ phần cứng cần thiết để xây dựng các ứng dụng tương tác trực quan như bảng điều khiển cảm ứng, hệ thống giám sát từ xa, thiết bị cầm tay thông minh và nhiều ứng dụng khác.\\
-\tab ESP32-S3-HMI-V3 không chỉ thừa hưởng sức mạnh xử lý của dòng vi điều khiển ESP32-S3 mà còn được tối ưu hóa cho các ứng dụng cần hiển thị giao diện người dùng với hiệu suất cao nhờ tích hợp màn hình cảm ứng IPS và các thành phần ngoại vi như bộ nhớ ngoài, bộ điều khiển cảm ứng, và hệ thống cấp nguồn ổn định. Với kích thước nhỏ gọn và khả năng lập trình linh hoạt, mô-đun này mang lại một nền tảng lý tưởng để phát triển các hệ thống HMI nhúng trong môi trường công nghiệp lẫn dân dụng.
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.3\textwidth]{Images/ESP32-S3-HMI-V3.png} 
-  \caption{ESP32-S3-HMI-V3}
-\end{figure}
-\subsection{Cấu hình phần cứng của mô-đun ESP32-S3-HMI-V3} 
-\tab Trung tâm xử lý của mô-đun là vi điều khiển ESP32-S3 do Espressif phát triển, sử dụng kiến trúc dual-core Xtensa LX7, hoạt động ở tần số lên đến 240MHz. Vi xử lý này được trang bị các tập lệnh SIMD và phần cứng tăng tốc AI giúp tăng cường khả năng xử lý tín hiệu số và các tác vụ học máy ngay tại thiết bị mà không cần gửi dữ liệu lên máy chủ.\\
-\tab Mô-đun được tích hợp màn hình cảm ứng điện dung kích thước 2.8 inch (hoặc tùy chọn 4.3 inch tùy phiên bản), sử dụng tấm nền IPS với độ phân giải 320x240 (hoặc 800x480). Màn hình này được điều khiển bởi chip ST7789V hoặc ILI9488, kết nối qua giao tiếp SPI tốc độ cao, cho phép hiển thị giao diện người dùng sắc nét và mượt mà, đặc biệt phù hợp với các thư viện đồ họa như LVGL.\\
-\tab Ngoài bộ nhớ trong 512KB SRAM và 384KB ROM tích hợp trên vi điều khiển ESP32-S3, mô-đun còn hỗ trợ mở rộng bộ nhớ ngoài với flash SPI 8MB và PSRAM 8MB. Đây là yếu tố quan trọng cho các ứng dụng đồ họa hoặc xử lý AI, giúp lưu trữ hình ảnh, giao diện và dữ liệu tạm thời với tốc độ truy cập nhanh.\\
-\tab Mô-đun còn có sẵn khe cắm thẻ TF (microSD), giao tiếp USB Type-C hỗ trợ USB-OTG và debug UART, cùng các chân mở rộng GPIO qua header 2.54mm, hỗ trợ kết nối với cảm biến, thiết bị đầu cuối hoặc các mô-đun mở rộng khác. Ngoài ra, hệ thống còn tích hợp mạch sạc pin Li-ion/Li-Po và bảo vệ nguồn, thích hợp cho các ứng dụng di động hoặc thiết bị không dây dùng pin.
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{Images/ESP32-S3-Funtion-diagram.png} 
-  \caption{ESP32-S3 Functional Block Diagram}
-\end{figure}
-\subsection{Khả năng kết nối và truyền thông} 
-\tab ESP32-S3-HMI-V3 hỗ trợ đầy đủ các chuẩn kết nối không dây hiện đại thông qua Wi-Fi 802.11 b/g/n và Bluetooth 5.0 LE. Điều này cho phép mô-đun dễ dàng tích hợp vào hệ thống mạng nội bộ hoặc điều khiển từ xa qua internet, phù hợp với các ứng dụng như điều khiển nhà thông minh, cập nhật firmware OTA hoặc đồng bộ dữ liệu thời gian thực với server.\\
-\tab Mô-đun cũng hỗ trợ các giao thức truyền thông phổ biến như UART, SPI, I2C và RS485 (qua chip mở rộng), giúp giao tiếp dễ dàng với cảm biến, thiết bị ngoại vi và hệ thống SCADA công nghiệp. Giao tiếp RS485 đặc biệt quan trọng trong môi trường công nghiệp, nơi tín hiệu cần truyền đi xa và chống nhiễu tốt.
-\subsection{Hỗ trợ phần mềm và phát triển ứng dụng} 
-\tab ESP32-S3-HMI-V3 được hỗ trợ chính thức bởi ESP-IDF, bộ SDK mạnh mẽ của Espressif, tích hợp FreeRTOS, các thư viện giao tiếp mạng, AI và hỗ trợ thư viện đồ họa như LVGL để xây dựng giao diện người dùng hiện đại. Việc sử dụng LVGL giúp phát triển nhanh chóng các màn hình cảm ứng với button, menu, slider, biểu đồ v.v. mà không cần tự vẽ từng pixel.\\
-\tab Đối với người dùng Arduino, mô-đun này cũng tương thích với Arduino IDE thông qua bộ lõi ESP32-S3, cho phép viết code nhanh chóng bằng ngôn ngữ Arduino, sử dụng các thư viện như TFT\_eSPI hoặc LovyanGFX để điều khiển màn hình.\\
+\section{Tổng quan về ESP32-S3-Touch-LCD-7}
+\tab ESP32-S3-Touch-LCD-7 là một nền tảng phát triển mạnh mẽ, kết hợp giữa khả năng tính toán cao cấp của vi điều khiển ESP32-S3 và trải nghiệm giao diện người dùng vượt trội với màn hình cảm ứng điện dung 7 inch. Được thiết kế và phát triển bởi Waveshare, thiết bị này hướng tới các ứng dụng yêu cầu sự giao tiếp trực quan, khả năng xử lý dữ liệu nhanh chóng và tính linh hoạt cao trong môi trường IoT và công nghiệp.
 
-\tab Mô-đun còn hỗ trợ lập trình bằng MicroPython – một lựa chọn tuyệt vời cho những ứng dụng nhẹ, dạy học, hoặc triển khai nhanh mẫu thử (prototype). Ngoài ra, mô-đun tương thích với các công cụ debug nâng cao như JTAG, OpenOCD thông qua USB hoặc header mở rộng.
-\subsection{Ứng dụng thực tế} 
-\tab Nhờ tích hợp màn hình cảm ứng, khả năng kết nối đa dạng, hiệu năng xử lý mạnh và hỗ trợ AI, mô-đun ESP32-S3-HMI-V3 được sử dụng rộng rãi trong các ứng dụng như:
+\tab Sự hội tụ giữa công nghệ hiển thị IPS tiên tiến, khả năng cảm ứng đa điểm nhạy bén, cùng với khả năng kết nối mạng không dây Wi-Fi/Bluetooth 5.0, đã biến ESP32-S3-Touch-LCD-7 trở thành lựa chọn lý tưởng cho các dự án giao diện người máy (HMI), hệ thống điều khiển tự động, các thiết bị điện tử tiêu dùng cao cấp và những giải pháp IoT cần tính năng tương tác trực quan.
+
+\begin{figure}[H] 
+  \centering 
+  \includegraphics[width=0.8\textwidth]{Images/ESP32-S3-Touch-LCD-7-details-1.jpg} 
+  \caption{ESP32-S3-Touch-LCD-7 (Giao diện mặt trước)} 
+\end{figure}
+
+\subsection{Cấu hình phần cứng tổng quan}
+\tab Trung tâm của mô-đun ESP32-S3-Touch-LCD-7 là bộ vi điều khiển ESP32-S3R8, một phiên bản mạnh mẽ thuộc dòng ESP32-S3 với các tính năng chuyên biệt dành cho AI và xử lý đồ họa. Cấu trúc vi xử lý bao gồm:
 \begin{itemize} 
-\item Hệ thống điều khiển giám sát công nghiệp (HMI Panel) 
-\item Màn hình cảm ứng cho thiết bị điện thông minh (bảng điều khiển đèn, máy lạnh, cửa cuốn) 
-\item Giao diện cho thiết bị IoT trong nông nghiệp, y tế, logistics 
-\item Thiết bị cầm tay với màn hình cảm ứng dùng pin 
-\item Thiết bị nhận diện khuôn mặt, nhận diện âm thanh hoặc các hệ thống nhúng sử dụng AI 
+  \item \textbf{CPU:} 2 nhân Xtensa LX7 tốc độ tối đa 240MHz, hỗ trợ tập lệnh SIMD tăng tốc xử lý song song. 
+  \item \textbf{RAM nội:} 512KB SRAM + 8MB PSRAM ngoài, đảm bảo khả năng lưu trữ bộ đệm lớn cho các tác vụ đồ họa nặng. 
+  \item \textbf{Flash:} 16MB Flash SPI tốc độ cao, đáp ứng nhu cầu lưu trữ chương trình và dữ liệu lớn. 
+  \item \textbf{Màn hình:} IPS LCD 7.0 inch, độ phân giải 1024x600 pixel, hiển thị màu sắc sống động với góc nhìn rộng lên tới 170 độ. 
+  \item \textbf{Cảm ứng điện dung:} Hỗ trợ đa điểm, sử dụng chip điều khiển cảm ứng GT911, đem lại trải nghiệm chạm, vuốt mượt mà. 
+\end{itemize}
+\tab Ngoài ra, mô-đun còn được tích hợp các phần tử giao tiếp ngoại vi mạnh mẽ như USB Type-C hỗ trợ chức năng OTG, cổng mở rộng GPIO đầy đủ chức năng (SPI, I2C, UART, ADC, PWM, SDIO), khe cắm thẻ nhớ microSD và giao tiếp Camera (DVP), mang lại khả năng mở rộng tối đa cho các dự án đa dạng.
+\subsection{Khả năng kết nối không dây và bảo mật}
+\tab ESP32-S3-Touch-LCD-7 kế thừa đầy đủ sức mạnh kết nối không dây từ vi điều khiển ESP32-S3:
+
+\begin{itemize} 
+  \item \textbf{Wi-Fi 2.4GHz (802.11 b/g/n):} Cho phép mô-đun giao tiếp mạng LAN, Internet hoặc tạo mạng nội bộ (SoftAP) để kết nối các thiết bị khác. 
+  \item \textbf{Bluetooth 5.0 LE:} Hỗ trợ BLE Mesh, Extended Advertising giúp mở rộng phạm vi và tăng hiệu quả truyền dữ liệu. 
+\end{itemize}
+
+\tab Bên cạnh đó, hệ thống còn được tích hợp nhiều cơ chế bảo mật phần cứng như:
+
+\textbf{Secure Boot:} Bảo vệ quá trình khởi động khỏi firmware trái phép.
+
+\textbf{Flash Encryption:} Mã hóa nội dung bộ nhớ flash, đảm bảo dữ liệu và chương trình an toàn trước tấn công vật lý.
+
+\textbf{Bộ tăng tốc phần cứng:} Hỗ trợ các thuật toán mã hóa AES, SHA-2, RSA, ECC phục vụ các ứng dụng bảo mật cao cấp.
+
+\subsection{Khả năng hiển thị đồ họa và tương tác cảm ứng}
+\tab Điểm nhấn ấn tượng nhất của ESP32-S3-Touch-LCD-7 nằm ở khả năng hiển thị đồ họa sắc nét kết hợp với cảm ứng điện dung hiện đại. Sử dụng giao tiếp Parallel RGB tốc độ cao giữa vi xử lý và màn hình, thiết bị đảm bảo tốc độ làm tươi hình ảnh nhanh chóng, mang lại trải nghiệm hình ảnh mượt mà, không giật lag.
+
+\tab Màn hình IPS LCD 7 inch không chỉ mang lại độ phân giải cao (1024x600 pixel) mà còn có độ sáng lớn và độ tương phản cao, giúp hiển thị tốt ngay cả trong môi trường ánh sáng mạnh.
+
+\tab Cảm biến cảm ứng điện dung hỗ trợ đa điểm, cho phép thực hiện các thao tác chạm, kéo, vuốt, phóng to/thu nhỏ (multi-touch gestures) mượt mà, đáp ứng yêu cầu giao diện người dùng thân thiện và hiện đại.
+
+
+\subsection{Môi trường phát triển phần mềm}
+\tab Để hỗ trợ lập trình và phát triển phần mềm, ESP32-S3-Touch-LCD-7 tương thích với nhiều công cụ đa dạng, cho phép lập trình viên lựa chọn theo nhu cầu:
+
+\begin{itemize} 
+  \item \textbf{ESP-IDF:} Bộ công cụ chính thức từ Espressif, hỗ trợ đầy đủ FreeRTOS, LVGL, giao thức mạng MQTT, HTTP, mDNS, OTA update, bảo mật TLS. 
+  \item \textbf{Arduino IDE:} Dễ sử dụng cho những người mới làm quen với ESP32, với thư viện hỗ trợ màn hình cảm ứng và kết nối mạng phong phú. 
+  \item \textbf{LVGL (Light and Versatile Graphics Library):} Thư viện đồ họa mã nguồn mở mạnh mẽ, tối ưu hóa cho ESP32-S3, hỗ trợ tạo giao diện người dùng đẹp mắt, chuyên nghiệp. 
+  \item \textbf{MicroPython:} Hỗ trợ lập trình nhanh gọn bằng ngôn ngữ Python. 
+\end{itemize}
+
+\tab Ngoài ra, thiết bị còn hỗ trợ các công cụ debug tiên tiến như OpenOCD, GDB Debugger, và ESP-Prog để hỗ trợ phân tích lỗi và tối ưu chương trình.
+
+\subsection{Ứng dụng thực tế}
+\tab Nhờ sự kết hợp hài hòa giữa phần cứng mạnh mẽ, giao diện người dùng hiện đại và khả năng kết nối linh hoạt, ESP32-S3-Touch-LCD-7 có thể được ứng dụng trong rất nhiều lĩnh vực:
+
+\begin{itemize} 
+  \item \textbf{Thiết bị nhà thông minh:} Bảng điều khiển trung tâm cho hệ thống ánh sáng, điều hòa, an ninh. 
+  \item \textbf{HMI công nghiệp:} Giao diện điều khiển máy móc, giám sát trạng thái sản xuất theo thời gian thực. 
+  \item \textbf{Thiết bị chăm sóc sức khỏe:} Máy đo chỉ số sức khỏe, thiết bị y tế cá nhân thông minh. 
+  \item \textbf{Bảng điều khiển ô tô điện/xe máy điện:} Hiển thị tốc độ, quãng đường, trạng thái pin. 
+  \item \textbf{Các sản phẩm tiêu dùng cao cấp:} Bếp thông minh, hệ thống POS, máy bán hàng tự động. 
 \end{itemize}
 \section{Cơ sở lý thuyết về module RS485}
 \subsection{Giới thiệu chung về module RS485} 
