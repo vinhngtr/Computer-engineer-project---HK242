@@ -138,15 +138,6 @@ void ui_BedoomSceen_screen_init(void)
     lv_label_set_text(ui_ACName3, "Air 1");
     lv_obj_set_style_text_font(ui_ACName3, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_ACBedRoomTemp1 = lv_label_create(ui_Panel7);
-    lv_obj_set_width(ui_ACBedRoomTemp1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ACBedRoomTemp1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACBedRoomTemp1, -116);
-    lv_obj_set_y(ui_ACBedRoomTemp1, 4);
-    lv_obj_set_align(ui_ACBedRoomTemp1, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_ACBedRoomTemp1, "20°C");
-    lv_obj_set_style_text_font(ui_ACBedRoomTemp1, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_ACBedRoom1 = lv_switch_create(ui_Panel7);
     lv_obj_set_width(ui_ACBedRoom1, 70);
     lv_obj_set_height(ui_ACBedRoom1, 35);
@@ -174,15 +165,6 @@ void ui_BedoomSceen_screen_init(void)
     lv_obj_set_align(ui_ACName4, LV_ALIGN_BOTTOM_LEFT);
     lv_label_set_text(ui_ACName4, "Air 2");
     lv_obj_set_style_text_font(ui_ACName4, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_ACBedRoomTemp2 = lv_label_create(ui_Panel9);
-    lv_obj_set_width(ui_ACBedRoomTemp2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ACBedRoomTemp2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACBedRoomTemp2, -116);
-    lv_obj_set_y(ui_ACBedRoomTemp2, 4);
-    lv_obj_set_align(ui_ACBedRoomTemp2, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_ACBedRoomTemp2, "20°C");
-    lv_obj_set_style_text_font(ui_ACBedRoomTemp2, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_ACBedRoom2 = lv_switch_create(ui_Panel9);
     lv_obj_set_width(ui_ACBedRoom2, 70);

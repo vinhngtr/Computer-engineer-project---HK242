@@ -9,23 +9,25 @@ void ui_FirstScreen_screen_init(void)
 {
     ui_FirstScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_FirstScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_FirstScreen, lv_color_hex(0x232425), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_FirstScreen, lv_color_hex(0x1966B3), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_FirstScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Panel1 = lv_obj_create(ui_FirstScreen);
-    lv_obj_set_height(ui_Panel1, 178);
+    lv_obj_set_height(ui_Panel1, 271);
     lv_obj_set_width(ui_Panel1, lv_pct(87));
     lv_obj_set_x(ui_Panel1, 1);
     lv_obj_set_y(ui_Panel1, -50);
     lv_obj_set_align(ui_Panel1, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Panel1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_radius(ui_Panel1, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_Panel1, lv_color_hex(0x002894), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Panel1, lv_color_hex(0x091127), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Panel1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label3 = lv_label_create(ui_Panel1);
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label3, 25);
+    lv_obj_set_y(ui_Label3, 0);
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "BK SMART HOME\n   APPLICATION");
     lv_obj_set_style_text_font(ui_Label3, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -33,8 +35,8 @@ void ui_FirstScreen_screen_init(void)
     ui_btnHome = lv_btn_create(ui_FirstScreen);
     lv_obj_set_width(ui_btnHome, 200);
     lv_obj_set_height(ui_btnHome, 50);
-    lv_obj_set_x(ui_btnHome, -4);
-    lv_obj_set_y(ui_btnHome, 86);
+    lv_obj_set_x(ui_btnHome, 16);
+    lv_obj_set_y(ui_btnHome, 145);
     lv_obj_set_align(ui_btnHome, LV_ALIGN_CENTER);
     lv_obj_set_style_bg_color(ui_btnHome, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_btnHome, 255, LV_PART_MAIN | LV_STATE_DEFAULT);

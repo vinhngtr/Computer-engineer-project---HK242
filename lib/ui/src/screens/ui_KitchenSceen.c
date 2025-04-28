@@ -43,26 +43,26 @@ void ui_KitchenSceen_screen_init(void)
     lv_label_set_text(ui_lightName3, "LIGHT Bulb 1             LIGHT Bulb 2               LIGHT Bulb 3\n\n\n\n");
     lv_obj_set_style_text_font(ui_lightName3, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SWLightBed1 = lv_switch_create(ui_Panel10);
-    lv_obj_set_width(ui_SWLightBed1, 100);
-    lv_obj_set_height(ui_SWLightBed1, 50);
-    lv_obj_set_x(ui_SWLightBed1, 9);
-    lv_obj_set_y(ui_SWLightBed1, 39);
-    lv_obj_set_align(ui_SWLightBed1, LV_ALIGN_LEFT_MID);
+    ui_LightKit1 = lv_switch_create(ui_Panel10);
+    lv_obj_set_width(ui_LightKit1, 100);
+    lv_obj_set_height(ui_LightKit1, 50);
+    lv_obj_set_x(ui_LightKit1, 9);
+    lv_obj_set_y(ui_LightKit1, 39);
+    lv_obj_set_align(ui_LightKit1, LV_ALIGN_LEFT_MID);
 
-    ui_SWLightBed2 = lv_switch_create(ui_Panel10);
-    lv_obj_set_width(ui_SWLightBed2, 100);
-    lv_obj_set_height(ui_SWLightBed2, 50);
-    lv_obj_set_x(ui_SWLightBed2, 203);
-    lv_obj_set_y(ui_SWLightBed2, 40);
-    lv_obj_set_align(ui_SWLightBed2, LV_ALIGN_LEFT_MID);
+    ui_LightKit2 = lv_switch_create(ui_Panel10);
+    lv_obj_set_width(ui_LightKit2, 100);
+    lv_obj_set_height(ui_LightKit2, 50);
+    lv_obj_set_x(ui_LightKit2, 203);
+    lv_obj_set_y(ui_LightKit2, 40);
+    lv_obj_set_align(ui_LightKit2, LV_ALIGN_LEFT_MID);
 
-    ui_SWLightBed3 = lv_switch_create(ui_Panel10);
-    lv_obj_set_width(ui_SWLightBed3, 100);
-    lv_obj_set_height(ui_SWLightBed3, 50);
-    lv_obj_set_x(ui_SWLightBed3, 417);
-    lv_obj_set_y(ui_SWLightBed3, 40);
-    lv_obj_set_align(ui_SWLightBed3, LV_ALIGN_LEFT_MID);
+    ui_LightKit3 = lv_switch_create(ui_Panel10);
+    lv_obj_set_width(ui_LightKit3, 100);
+    lv_obj_set_height(ui_LightKit3, 50);
+    lv_obj_set_x(ui_LightKit3, 417);
+    lv_obj_set_y(ui_LightKit3, 40);
+    lv_obj_set_align(ui_LightKit3, LV_ALIGN_LEFT_MID);
 
     ui_BackHome3 = lv_btn_create(ui_Panel10);
     lv_obj_set_width(ui_BackHome3, 50);
@@ -110,17 +110,17 @@ void ui_KitchenSceen_screen_init(void)
     lv_label_set_text(ui_fanName3, "FAN 1\n\n\n\nFAN 2");
     lv_obj_set_style_text_font(ui_fanName3, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SWFanBed1 = lv_switch_create(ui_Panel11);
-    lv_obj_set_width(ui_SWFanBed1, 100);
-    lv_obj_set_height(ui_SWFanBed1, 50);
-    lv_obj_set_align(ui_SWFanBed1, LV_ALIGN_CENTER);
+    ui_FanKit1 = lv_switch_create(ui_Panel11);
+    lv_obj_set_width(ui_FanKit1, 100);
+    lv_obj_set_height(ui_FanKit1, 50);
+    lv_obj_set_align(ui_FanKit1, LV_ALIGN_CENTER);
 
-    ui_SWFanBed2 = lv_switch_create(ui_Panel11);
-    lv_obj_set_width(ui_SWFanBed2, 100);
-    lv_obj_set_height(ui_SWFanBed2, 50);
-    lv_obj_set_x(ui_SWFanBed2, 0);
-    lv_obj_set_y(ui_SWFanBed2, 95);
-    lv_obj_set_align(ui_SWFanBed2, LV_ALIGN_CENTER);
+    ui_FanKit2 = lv_switch_create(ui_Panel11);
+    lv_obj_set_width(ui_FanKit2, 100);
+    lv_obj_set_height(ui_FanKit2, 50);
+    lv_obj_set_x(ui_FanKit2, 0);
+    lv_obj_set_y(ui_FanKit2, 95);
+    lv_obj_set_align(ui_FanKit2, LV_ALIGN_CENTER);
 
     ui_Panel12 = lv_obj_create(ui_KitchenSceen);
     lv_obj_set_width(ui_Panel12, lv_pct(50));
@@ -142,15 +142,6 @@ void ui_KitchenSceen_screen_init(void)
     lv_obj_set_align(ui_AirKIT1, LV_ALIGN_BOTTOM_LEFT);
     lv_label_set_text(ui_AirKIT1, "Air 1");
     lv_obj_set_style_text_font(ui_AirKIT1, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_valTempKIT = lv_label_create(ui_Panel12);
-    lv_obj_set_width(ui_valTempKIT, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_valTempKIT, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_valTempKIT, -112);
-    lv_obj_set_y(ui_valTempKIT, 11);
-    lv_obj_set_align(ui_valTempKIT, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_valTempKIT, "20°C");
-    lv_obj_set_style_text_font(ui_valTempKIT, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SWAirKIT1 = lv_switch_create(ui_Panel12);
     lv_obj_set_width(ui_SWAirKIT1, 70);
@@ -179,15 +170,6 @@ void ui_KitchenSceen_screen_init(void)
     lv_obj_set_align(ui_ACName6, LV_ALIGN_BOTTOM_LEFT);
     lv_label_set_text(ui_ACName6, "Air 2");
     lv_obj_set_style_text_font(ui_ACName6, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_valTempKIT2 = lv_label_create(ui_Panel13);
-    lv_obj_set_width(ui_valTempKIT2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_valTempKIT2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_valTempKIT2, -113);
-    lv_obj_set_y(ui_valTempKIT2, 12);
-    lv_obj_set_align(ui_valTempKIT2, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_valTempKIT2, "20°C");
-    lv_obj_set_style_text_font(ui_valTempKIT2, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SWAirKIT2 = lv_switch_create(ui_Panel13);
     lv_obj_set_width(ui_SWAirKIT2, 70);

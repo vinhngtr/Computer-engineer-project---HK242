@@ -5,16 +5,17 @@
 
 #include "../ui.h"
 
-void ui_lvRoomScreen_screen_init(void)
+void ui_LVRoomScreen_screen_init(void)
 {
-    ui_lvRoomScreen = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_lvRoomScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_pad_left(ui_lvRoomScreen, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(ui_lvRoomScreen, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(ui_lvRoomScreen, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(ui_lvRoomScreen, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_LVRoomScreen = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_LVRoomScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_grad_dir(ui_LVRoomScreen, LV_GRAD_DIR_VER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui_LVRoomScreen, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui_LVRoomScreen, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui_LVRoomScreen, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui_LVRoomScreen, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Panel2 = lv_obj_create(ui_lvRoomScreen);
+    ui_Panel2 = lv_obj_create(ui_LVRoomScreen);
     lv_obj_set_width(ui_Panel2, lv_pct(74));
     lv_obj_set_height(ui_Panel2, lv_pct(45));
     lv_obj_set_x(ui_Panel2, -101);
@@ -47,23 +48,20 @@ void ui_lvRoomScreen_screen_init(void)
     ui_LightLvRoom1 = lv_switch_create(ui_Panel2);
     lv_obj_set_width(ui_LightLvRoom1, 100);
     lv_obj_set_height(ui_LightLvRoom1, 50);
-    lv_obj_set_x(ui_LightLvRoom1, 5);
-    lv_obj_set_y(ui_LightLvRoom1, 39);
-    lv_obj_set_align(ui_LightLvRoom1, LV_ALIGN_LEFT_MID);
+    lv_obj_set_x(ui_LightLvRoom1, 3);
+    lv_obj_set_y(ui_LightLvRoom1, 84);
 
     ui_LightLvRoom2 = lv_switch_create(ui_Panel2);
     lv_obj_set_width(ui_LightLvRoom2, 100);
     lv_obj_set_height(ui_LightLvRoom2, 50);
-    lv_obj_set_x(ui_LightLvRoom2, -12);
-    lv_obj_set_y(ui_LightLvRoom2, 40);
-    lv_obj_set_align(ui_LightLvRoom2, LV_ALIGN_CENTER);
+    lv_obj_set_x(ui_LightLvRoom2, 201);
+    lv_obj_set_y(ui_LightLvRoom2, 84);
 
     ui_LightLvRoom3 = lv_switch_create(ui_Panel2);
     lv_obj_set_width(ui_LightLvRoom3, 100);
     lv_obj_set_height(ui_LightLvRoom3, 50);
-    lv_obj_set_x(ui_LightLvRoom3, 199);
-    lv_obj_set_y(ui_LightLvRoom3, 39);
-    lv_obj_set_align(ui_LightLvRoom3, LV_ALIGN_CENTER);
+    lv_obj_set_x(ui_LightLvRoom3, 409);
+    lv_obj_set_y(ui_LightLvRoom3, 83);
 
     ui_BackHome = lv_btn_create(ui_Panel2);
     lv_obj_set_width(ui_BackHome, 50);
@@ -85,7 +83,7 @@ void ui_lvRoomScreen_screen_init(void)
     lv_obj_add_flag(ui_Image4, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Image4, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_Panel3 = lv_obj_create(ui_lvRoomScreen);
+    ui_Panel3 = lv_obj_create(ui_LVRoomScreen);
     lv_obj_set_width(ui_Panel3, lv_pct(25));
     lv_obj_set_height(ui_Panel3, lv_pct(70));
     lv_obj_set_x(ui_Panel3, 9);
@@ -108,7 +106,7 @@ void ui_lvRoomScreen_screen_init(void)
     lv_obj_set_width(ui_fanName1, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_fanName1, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_fanName1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_fanName1, "FAN 1\n\n\n\nFAN 2");
+    lv_label_set_text(ui_fanName1, "FAN 1\n\n\n\n\nFAN 2");
     lv_obj_set_style_text_font(ui_fanName1, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_FanLvRoom1 = lv_switch_create(ui_Panel3);
@@ -123,7 +121,7 @@ void ui_lvRoomScreen_screen_init(void)
     lv_obj_set_y(ui_FanLvRoom2, 100);
     lv_obj_set_align(ui_FanLvRoom2, LV_ALIGN_CENTER);
 
-    ui_Panel4 = lv_obj_create(ui_lvRoomScreen);
+    ui_Panel4 = lv_obj_create(ui_LVRoomScreen);
     lv_obj_set_width(ui_Panel4, lv_pct(50));
     lv_obj_set_height(ui_Panel4, lv_pct(23));
     lv_obj_set_x(ui_Panel4, lv_pct(0));
@@ -137,20 +135,10 @@ void ui_lvRoomScreen_screen_init(void)
     ui_ACName1 = lv_label_create(ui_Panel4);
     lv_obj_set_width(ui_ACName1, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ACName1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACName1, 4);
-    lv_obj_set_y(ui_ACName1, 4);
-    lv_obj_set_align(ui_ACName1, LV_ALIGN_BOTTOM_LEFT);
+    lv_obj_set_x(ui_ACName1, 5);
+    lv_obj_set_y(ui_ACName1, -2);
     lv_label_set_text(ui_ACName1, "Air 1");
     lv_obj_set_style_text_font(ui_ACName1, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_ACLvRoomTemp1 = lv_label_create(ui_Panel4);
-    lv_obj_set_width(ui_ACLvRoomTemp1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ACLvRoomTemp1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACLvRoomTemp1, -115);
-    lv_obj_set_y(ui_ACLvRoomTemp1, 5);
-    lv_obj_set_align(ui_ACLvRoomTemp1, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_ACLvRoomTemp1, "20°C");
-    lv_obj_set_style_text_font(ui_ACLvRoomTemp1, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Switch2 = lv_switch_create(ui_Panel4);
     lv_obj_set_width(ui_Switch2, 70);
@@ -159,7 +147,10 @@ void ui_lvRoomScreen_screen_init(void)
     lv_obj_set_y(ui_Switch2, -8);
     lv_obj_set_align(ui_Switch2, LV_ALIGN_BOTTOM_RIGHT);
 
-    ui_Panel8 = lv_obj_create(ui_lvRoomScreen);
+    lv_obj_set_style_bg_color(ui_Switch2, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Switch2, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_Panel8 = lv_obj_create(ui_LVRoomScreen);
     lv_obj_set_width(ui_Panel8, lv_pct(50));
     lv_obj_set_height(ui_Panel8, lv_pct(23));
     lv_obj_set_x(ui_Panel8, lv_pct(0));
@@ -173,20 +164,10 @@ void ui_lvRoomScreen_screen_init(void)
     ui_ACName2 = lv_label_create(ui_Panel8);
     lv_obj_set_width(ui_ACName2, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ACName2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACName2, 4);
-    lv_obj_set_y(ui_ACName2, 4);
-    lv_obj_set_align(ui_ACName2, LV_ALIGN_BOTTOM_LEFT);
-    lv_label_set_text(ui_ACName2, "Air 1");
+    lv_obj_set_x(ui_ACName2, 8);
+    lv_obj_set_y(ui_ACName2, -1);
+    lv_label_set_text(ui_ACName2, "Air 2");
     lv_obj_set_style_text_font(ui_ACName2, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_ACLvRoomTemp2 = lv_label_create(ui_Panel8);
-    lv_obj_set_width(ui_ACLvRoomTemp2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ACLvRoomTemp2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACLvRoomTemp2, -115);
-    lv_obj_set_y(ui_ACLvRoomTemp2, 5);
-    lv_obj_set_align(ui_ACLvRoomTemp2, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_ACLvRoomTemp2, "20°C");
-    lv_obj_set_style_text_font(ui_ACLvRoomTemp2, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Switch1 = lv_switch_create(ui_Panel8);
     lv_obj_set_width(ui_Switch1, 70);
@@ -199,6 +180,8 @@ void ui_lvRoomScreen_screen_init(void)
     lv_obj_add_event_cb(ui_LightLvRoom2, ui_event_LightLvRoom2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LightLvRoom3, ui_event_LightLvRoom3, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_BackHome, ui_event_BackHome, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_lvRoomScreen, ui_event_lvRoomScreen, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_FanLvRoom1, ui_event_FanLvRoom1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_FanLvRoom2, ui_event_FanLvRoom2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Switch2, ui_event_Switch2, LV_EVENT_ALL, NULL);
 
 }

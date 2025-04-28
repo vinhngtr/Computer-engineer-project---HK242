@@ -4,8 +4,80 @@
 // Project name: Squareline
 
 #include "ui.h"
-
-void func0055(lv_event_t * e)
+#include "../../../../src/device/TaskMobus.h"
+void func0055(lv_event_t *e)
 {
 	// Your code here
+}
+
+void LvR_light1(lv_event_t *e)
+{
+	// Your code here -- RELAY1
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(0, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
+}
+
+void LvR_light2(lv_event_t *e)
+{
+	// Your code here -- RELAY 2
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(1, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
+}
+
+void LvR_light3(lv_event_t *e)
+{
+	// Your code here -- RELAY 3
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(2, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
+}
+
+void LvR_fan1(lv_event_t *e)
+{
+	// Your code here -- RELAY 4
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(3, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
+}
+
+void LvR_fan2(lv_event_t *e)
+{
+	// Your code here -- RELAY 5
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(4, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
+}
+
+void LvR_air1(lv_event_t *e)
+{
+	// Your code here -- RELAY 6
+	lv_event_code_t code = lv_event_get_code(e);
+	lv_obj_t *obj = lv_event_get_target(e);
+	if (code == LV_EVENT_VALUE_CHANGED)
+	{
+		LV_UNUSED(obj);
+		stateRS485(5, lv_obj_has_state(obj, LV_STATE_CHECKED));
+	}
 }
