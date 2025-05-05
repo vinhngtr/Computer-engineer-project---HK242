@@ -2,7 +2,7 @@
 
 ## 🔍 PROJECT OVERVIEW
 
-This project involves developing a full-featured graphical user interface (GUI) and control system for the ESP32-S3 embedded platform. It demonstrates how to integrate hardware-level components with the **LVGL (Light and Versatile Graphics Library)** to build a touchscreen-based, real-time interactive system.
+This project involves developing a full-featured graphical user interface (GUI) and control system for the ESP32-S3-Touch-LCD-7inch embedded platform. It demonstrates how to integrate hardware-level components with the **LVGL (Light and Versatile Graphics Library)** to build a touchscreen-based, real-time interactive system.
 
 ### ✅ Key Features
 
@@ -24,9 +24,9 @@ This section guides you through building the project, from GUI design with Squar
 
 1. Open **[Squareline Studio](https://squareline.io/)**.
 2. Create a new project:
-   - Set resolution: `320x240`.
+   - Set resolution: `800x480`.
    - Select LVGL version compatible with your ESP-IDF version.
-   - Choose `Generic ESP32` as target if unsure.
+   - Choose `ESP32 S3 Box` as target if unsure.
 3. Design your UI:
    - Add widgets like labels, buttons, charts, etc.
    - Set object names (e.g., `temp_label`, `humidity_label`).
