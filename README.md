@@ -12,8 +12,7 @@ This project involves developing a full-featured graphical user interface (GUI) 
 - 🎨 **LVGL-based UI**: Designed a responsive and interactive graphical user interface using LVGL for real-time data display and device control.
 - ⚙️ **FreeRTOS-based Tasking**: Utilized FreeRTOS for parallel handling of UI updates, sensor readings, and WebSocket communication.
 - 🧠 **Direct ESP-IDF Integration**: Developed the system natively using **ESP-IDF** with **no reliance on Arduino abstraction layers**.
-- 🔌 **Relay & GPIO Control**: Added relay switching and peripheral interfacing through GPIO and PWM.
-- 📶 **Web Communication**: Implemented WebSocket data exchange for remote device monitoring.
+- 🔌 **Relay & GPIO Control**: Added relay switching and peripheral interfacing through UART & RS485 protocol.
 
 ---
 
@@ -53,3 +52,10 @@ This section guides you through building the project, from GUI design with Squar
      ```
 
 3. **Project Folder Structure**:
+esp32_s3_lvgl_gui/
+├── src/
+│ └── main.cpp
+├── include/
+├── components/
+│ └── ui/ ← Paste Squareline export here
+├── platformio.ini
