@@ -50,12 +50,3 @@ This section guides you through building the project, from GUI design with Squar
        lvgl/lvgl
        adafruit/DHT sensor library@^1.4.4
      ```
-
-3. **Project Folder Structure**:
-esp32_s3_lvgl_gui/
-├── src/
-│ └── main.cpp
-├── include/
-├── components/
-│ └── ui/ ← Paste Squareline export here
-├── platformio.ini
