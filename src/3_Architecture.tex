@@ -66,6 +66,105 @@
   \item \textbf{Bảng điều khiển ô tô điện/xe máy điện:} Hiển thị tốc độ, quãng đường, trạng thái pin. 
   \item \textbf{Các sản phẩm tiêu dùng cao cấp:} Bếp thông minh, hệ thống POS, máy bán hàng tự động. 
 \end{itemize}
+\section{Ngôn ngữ lập trình C/C++}
+
+\subsection{Vai trò cốt lõi của C/C++ trong hệ thống nhúng}
+Ngôn ngữ C từ lâu đã trở thành tiêu chuẩn vàng trong phát triển hệ thống nhúng nhờ khả năng kiểm soát phần cứng sát cấp thấp, hiệu suất thực thi cao và khả năng biên dịch đa nền tảng. Các đặc điểm nổi bật như quản lý bộ nhớ thủ công, cú pháp đơn giản và khả năng tương thích rộng với trình biên dịch giúp C trở thành lựa chọn hàng đầu trên các nền tảng MCU như ARM Cortex-M, AVR, RISC-V và ESP32.
+
+C++ bổ sung các tính năng mạnh mẽ của lập trình hướng đối tượng (OOP) như kế thừa, đa hình (polymorphism), trừu tượng hóa (abstraction) và đóng gói (encapsulation), cho phép cấu trúc mã nguồn rõ ràng, dễ mở rộng – đặc biệt hữu ích trong các dự án GUI có nhiều lớp giao diện, trạng thái và đối tượng tương tác.
+
+\textbf{Ví dụ:} Trong một ứng dụng điều khiển thông minh, ta có thể định nghĩa một lớp cơ sở \texttt{Screen} với các phương thức ảo như \texttt{onLoad()}, \texttt{onExit()} và kế thừa cho các lớp cụ thể như \texttt{MainScreen}, \texttt{SettingsScreen}, giúp tách biệt giao diện và logic điều khiển.
+
+\subsection{Lý do chọn ngôn ngữ C/C++ cho phát triển giao diện với LVGL}
+
+\subsubsection{LVGL được viết thuần bằng C}
+LVGL là một thư viện đồ họa mã nguồn mở được thiết kế cho vi điều khiển. Đặc điểm then chốt là nó được viết hoàn toàn bằng C thuần, không có bất kỳ \textit{dependency} nào vào hệ điều hành hoặc thư viện ngoài, giúp:
+\begin{itemize}
+  \item Dễ dàng \textit{port} lên bất kỳ nền tảng phần cứng nào.
+  \item Tương thích hoàn toàn với ESP-IDF (framework chính thức của ESP32).
+  \item Tránh \textit{overhead} không cần thiết, rất quan trọng trong các hệ thống thời gian thực (RTOS).
+\end{itemize}
+
+Việc phát triển ứng dụng sử dụng LVGL bằng ngôn ngữ C giúp lập trình viên có thể sử dụng trực tiếp các API như \texttt{lv\_btn\_create()}, \texttt{lv\_label\_set\_text()} mà không cần tạo lớp trừu tượng hoặc \textit{wrapper}, đảm bảo hiệu suất tối ưu và độ ổn định cao.
+
+\subsubsection{Quản lý bộ nhớ tối ưu}
+ESP32 có lượng RAM giới hạn (320KB SRAM, có thể thêm PSRAM ngoài), do đó việc kiểm soát bộ nhớ là sống còn. Ngôn ngữ C hỗ trợ ba dạng quản lý bộ nhớ:
+\begin{itemize}
+  \item \textbf{Bộ nhớ tĩnh (static memory)}: sử dụng khi kích thước bộ nhớ đã biết tại thời điểm biên dịch.
+  \item \textbf{Bộ nhớ tự động (stack memory)}: dùng cho biến cục bộ, giải phóng khi hàm thoát.
+  \item \textbf{Bộ nhớ động (heap memory)}: cấp phát tại \textit{runtime} với \texttt{malloc()} và giải phóng với \texttt{free()}.
+\end{itemize}
+
+Trong môi trường ESP-IDF, các hàm như \texttt{heap\_caps\_malloc()} cho phép chỉ định vùng bộ nhớ phù hợp: DRAM, PSRAM, DMA-capable... giúp tối ưu hóa hiệu suất và tránh \textit{fragmentation}.
+
+\subsubsection{C++ hỗ trợ tổ chức GUI theo mô hình hướng đối tượng}
+Trong dự án GUI với LVGL, việc sử dụng OOP giúp giảm độ phức tạp và nâng cao tính bảo trì:
+\begin{itemize}
+  \item \textbf{Kế thừa}: các màn hình GUI kế thừa từ một lớp cha có sẵn logic khởi tạo chung.
+  \item \textbf{Đa hình}: mỗi màn hình có thể định nghĩa cách hiển thị, xử lý sự kiện khác nhau mà vẫn dùng cùng một \textit{interface}.
+  \item \textbf{Tái sử dụng mã}: các \textit{widget} hoặc thành phần như \texttt{MessageBox}, \texttt{SliderPanel}, \texttt{LoadingOverlay} có thể được viết thành \texttt{class} và sử dụng lại ở nhiều nơi.
+\end{itemize}
+
+\subsection{Ưu điểm chi tiết}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4.5cm}|p{10cm}|}
+\hline
+\textbf{Đặc điểm} & \textbf{Mô tả chuyên sâu} \\
+\hline
+Tốc độ thực thi nhanh & C/C++ được biên dịch trực tiếp thành mã máy, không thông qua VM hay runtime, giúp giảm độ trễ xử lý – đặc biệt quan trọng trong GUI real-time (animation, touch response). \\
+\hline
+Tối ưu bộ nhớ & Lập trình viên có thể tinh chỉnh từng byte bộ nhớ sử dụng, giảm nguy cơ out-of-memory hoặc crash runtime. \\
+\hline
+Mô-đun hóa tốt với C++ & Việc chia mã nguồn thành các module (class) giúp dễ bảo trì, tách biệt giao diện với logic, giảm lỗi phát sinh khi mở rộng hệ thống. \\
+\hline
+Hỗ trợ toolchain mạnh mẽ & Các công cụ như \texttt{idf.py}, \texttt{esp\_log}, \texttt{heap\_trace}, \texttt{perftest}, \texttt{OpenOCD} giúp giám sát chi tiết RAM, thời gian xử lý và hiệu suất toàn hệ thống. \\
+\hline
+Khả năng mở rộng & Có thể kết hợp với các thư viện xử lý logic khác như \texttt{protobuf}, \texttt{tinyxml}, \texttt{json-c} hoặc dùng C++ template để viết các class generic. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Hạn chế và biện pháp khắc phục}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{6cm}|p{8.5cm}|}
+\hline
+\textbf{Hạn chế} & \textbf{Giải pháp kỹ thuật} \\
+\hline
+Quản lý bộ nhớ thủ công dễ gây \textit{leak} & Sử dụng RAII (Resource Acquisition Is Initialization) trong C++, kết hợp smart pointers nếu áp dụng được. \\
+\hline
+Runtime error khó phát hiện & Dùng \texttt{esp\_log}, kiểm tra \texttt{null-pointer}, xác thực cấp phát trước khi sử dụng; bật tính năng heap poisoning hoặc heap tracing trong \texttt{menuconfig}. \\
+\hline
+Không có bảo vệ biên tự động & Viết \textit{wrapper} kiểm tra \textit{bound array}, dùng \texttt{assert} trong quá trình phát triển. \\
+\hline
+C++ có thể làm phình mã nhị phân & Tránh dùng các thành phần STL nặng như \texttt{<vector>}, \texttt{<map>}; thay bằng \texttt{struct}/\texttt{array} thủ công hoặc các thư viện nhẹ như \texttt{etl (Embedded Template Library)}. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Ứng dụng thực tế trong hệ thống dùng LVGL trên ESP32}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{5cm}|p{3cm}|p{6.5cm}|}
+\hline
+\textbf{Tầng hệ thống} & \textbf{Ngôn ngữ đề xuất} & \textbf{Giải thích} \\
+\hline
+Driver phần cứng (LCD, touch, backlight) & C & Tận dụng ESP-IDF driver: \texttt{esp\_lcd\_panel\_io\_spi}, \texttt{esp\_lcd\_touch}, dễ tối ưu, chạy được trong \textit{interrupt context}. \\
+\hline
+Core xử lý GUI & C/C++ & C để dùng API LVGL, C++ để xây dựng các màn hình logic theo hướng object. \\
+\hline
+Giao tiếp ngoại vi (WiFi, BLE, MQTT) & C & Các \textit{stack} WiFi/Bluetooth/MQTT trong ESP-IDF đều là C thuần. \\
+\hline
+Quản lý trạng thái màn hình, hoạt cảnh & C++ & FSM, State Pattern dễ viết bằng class, hỗ trợ constructor/destructor rõ ràng. \\
+\hline
+Hệ thống sự kiện (Event Queue) & C++ & Có thể dùng template hoặc EventBus theo kiểu Observer Pattern. \\
+\hline
+\end{tabular}
+\end{table}
 \section{Cơ sở lý thuyết về module RS485}
 \subsection{Giới thiệu chung về module RS485} 
 \tab Module RS485 là một thiết bị trung gian giúp chuyển đổi tín hiệu UART (TTL) từ vi điều khiển sang chuẩn truyền thông RS485, cho phép giao tiếp trong các hệ thống truyền dữ liệu công nghiệp hoặc khoảng cách xa. Các module này thường được tích hợp sẵn mạch điện trở kéo, bảo vệ điện áp và mạch truyền nhận để đảm bảo tín hiệu ổn định và an toàn trong quá trình truyền thông.\\
@@ -175,29 +274,280 @@ MQTT được sử dụng rộng rãi trong nhiều hệ thống IoT nhờ vào 
   \caption{Ứng dụng của MQTT trong IoT}
 \end{figure}
 \subsection{Ưu và nhược điểm của MQTT}
-
 \textbf{Ưu điểm:}
 \begin{itemize}
     \item Giao thức nhẹ, phù hợp với thiết bị tài nguyên hạn chế.
     \item Giao tiếp không đồng bộ và tách biệt giữa publisher và subscriber.
     \item Hỗ trợ nhiều mức QoS và cơ chế giữ kết nối (keep-alive).
 \end{itemize}
-
 \textbf{Nhược điểm:}
 \begin{itemize}
     \item Phụ thuộc vào broker trung gian.
     \item Không mã hóa mặc định, cần kết hợp với SSL/TLS để đảm bảo an toàn.
     \item Không phù hợp với các ứng dụng yêu cầu thời gian thực chính xác tuyệt đối.
 \end{itemize}
+\section{Thư viện và Framework liên quan}
+\subsection{ESP-IDF (Espressif IoT Development Framework)}
+\subsubsection{Giới thiệu tổng quan về ESP-IDF}
+ESP-IDF là framework chính thức do Espressif Systems phát triển nhằm hỗ trợ lập trình hệ thống cho các vi điều khiển dòng ESP32. Đây là một môi trường phát triển toàn diện, bao gồm hệ thống build, driver phần cứng, thư viện giao tiếp mạng, công cụ quản lý dự án, và hỗ trợ tích hợp nhiều công cụ debug, phân tích hiệu suất.\\
+ESP-IDF được viết chủ yếu bằng ngôn ngữ C và hoạt động theo mô hình cấu trúc thấp tầng (low-level), cho phép người lập trình kiểm soát chi tiết các thành phần phần cứng, rất phù hợp trong các dự án nhúng chuyên nghiệp.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Images/ESP-IDF.png}
+  \caption{ESP-IDF}
+\end{figure}
+\subsubsection{Vai trò của ESP-IDF trong phát triển giao diện LVGL}
+Trong bối cảnh ứng dụng LVGL trên ESP32, ESP-IDF đóng vai trò ``xương sống'' giúp kết nối giữa thư viện giao diện (LVGL) với phần cứng như màn hình LCD, bộ cảm ứng chạm, hoặc các giao tiếp ngoại vi (I2C, SPI). Ngoài ra, nó còn cung cấp:
+\begin{itemize}
+    \item Hệ điều hành thời gian thực FreeRTOS tích hợp sẵn, giúp xử lý song song các tác vụ: giao diện, WiFi, Bluetooth, sensor...
+    \item ESP Timer giúp định kỳ gọi \texttt{lv\_timer\_handler()} --- hàm cốt lõi của LVGL để xử lý giao diện.
+    \item ESP LCD: tập hợp các driver hiển thị LCD (SPI, RGB, I80), có thể liên kết dễ dàng với LVGL thông qua \texttt{disp\_flush\_cb()}.
+    \item ESP LCD Touch: thư viện hỗ trợ cảm ứng điện dung hoặc điện trở (FT6x36, XPT2046, GT911, v.v.), liên kết với \texttt{indev\_read\_cb()} của LVGL.
+\end{itemize}
+\subsubsection{Các module và thành phần quan trọng trong ESP-IDF}
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|l|X|}
+  \hline
+  \textbf{Thành phần} & \textbf{Vai trò chính} & \textbf{Liên quan đến LVGL} \\
+  \hline
+  esp\_lcd\_panel\_io\_spi & Giao tiếp SPI với LCD & Cần cấu hình chuẩn DMA, SPI tốc độ cao \\
+  esp\_lcd\_touch & Giao tiếp với cảm ứng & Trả về tọa độ nhấn chạm cho LVGL \\
+  esp\_timer & Hẹn giờ định kỳ & Gọi \texttt{lv\_timer\_handler()} với độ trễ cấu hình \\
+  heap\_caps & Phân tích sử dụng RAM & Dùng để theo dõi leak RAM do \texttt{lv\_obj} gây ra \\
+  esp\_log & Ghi log debug & Log lỗi, sự kiện UI, quản lý bộ nhớ \\
+  freertos/task & Quản lý task, priority & Tạo task riêng cho GUI, ưu tiên cao hơn các tác vụ nền \\
+  \hline
+  \end{tabularx}
+  \caption{Các thành phần ESP-IDF quan trọng liên quan đến LVGL}
+  \end{table}
+  
+\subsubsection{Cách tích hợp LVGL vào ESP-IDF}
+Tích hợp LVGL vào ESP-IDF yêu cầu thực hiện các bước cơ bản sau:
+\begin{enumerate}
+    \item Thêm thư viện LVGL vào project:
+\begin{verbatim}
+git submodule add https://github.com/lvgl/lvgl components/lvgl
+\end{verbatim}
+    \item Khai báo trong \texttt{CMakeLists.txt} hoặc \texttt{idf\_component.yml}.
+    \item Cấu hình Timer và Display:
+    \begin{itemize}
+        \item Sử dụng \texttt{esp\_timer\_create()} để tạo timer định kỳ 5--10ms gọi \texttt{lv\_timer\_handler()}.
+        \item Tạo driver LCD qua \texttt{esp\_lcd\_panel\_io\_spi\_new()} và \texttt{esp\_lcd\_panel\_new\_st7789()}.
+    \end{itemize}
+    \item Cấu hình Touch:
+    \begin{itemize}
+        \item Dùng \texttt{esp\_lcd\_touch\_new\_i2c()} để kết nối với driver cảm ứng.
+        \item Tạo callback \texttt{indev\_read\_cb()} để LVGL nhận dữ liệu từ cảm ứng.
+    \end{itemize}
+\end{enumerate}
 
-\section{Thư viện đồ họa LVGL}
+\subsubsection{Ưu điểm của ESP-IDF khi dùng với LVGL}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Ưu điểm} & \textbf{Mô tả chi tiết} \\
+\hline
+Tối ưu cho phần cứng ESP32 & Tương thích hoàn toàn với các peripheral của ESP32: SPI, DMA, RGB, Touch \\
+Quản lý bộ nhớ tốt & Cung cấp heap tracker, log phân tích fragment \\
+Hệ thống log mạnh & Phân luồng log theo TAG, độ ưu tiên \\
+Cấu hình linh hoạt & Qua \texttt{menuconfig}, dễ cấu hình SPI clock, DMA, PSRAM \\
+Tích hợp OTA, WiFi, BLE & Có thể phát triển GUI cho hệ thống kết nối IoT \\
+\hline
+\end{tabular}
+\caption{Ưu điểm ESP-IDF khi tích hợp với LVGL}
+\end{table}
+
+\subsubsection{Nhược điểm và lưu ý khi sử dụng ESP-IDF}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{6cm}|p{6cm}|}
+\hline
+\textbf{Nhược điểm} & \textbf{Biện pháp khắc phục} \\
+\hline
+Cấu hình phức tạp cho người mới & Sử dụng template project, PlatformIO hỗ trợ \\
+Dung lượng flash chiếm nhiều & Tối ưu \texttt{menuconfig}, tắt debug, loại bỏ unused component \\
+Đòi hỏi hiểu rõ cấu trúc ESP-IDF & Tham khảo tài liệu chính thức, examples từ Espressif \\
+Yêu cầu dùng CMake & Học cú pháp \texttt{CMakeLists.txt}, PlatformIO đã tự động hóa \\
+\hline
+\end{tabular}
+\caption{Một số lưu ý khi dùng ESP-IDF}
+\end{table}
+
+% Arduino Framework
+\subsection{Arduino Framework}
+
+\subsubsection{Giới thiệu tổng quan về Arduino Framework}
+
+Arduino là một nền tảng mã nguồn mở nổi tiếng, cung cấp một lớp trừu tượng cao hơn để lập trình vi điều khiển. Arduino framework đơn giản hóa việc phát triển nhúng bằng cách ẩn đi phần lớn cấu hình phần cứng phức tạp và cung cấp một tập hợp API thân thiện.\\
+Trên ESP32, Arduino hoạt động như một lớp wrapper bên trên ESP-IDF, nghĩa là người dùng vẫn có thể truy cập các API ESP-IDF nếu cần, nhưng trong đa số trường hợp, họ chỉ cần dùng các hàm Arduino như \texttt{digitalWrite()}, \texttt{analogRead()}, \texttt{WiFi.begin()}, v.v.
+
+\subsubsection{Lý do Arduino vẫn được lựa chọn khi phát triển giao diện với LVGL}
+Dù không mạnh bằng ESP-IDF về khả năng kiểm soát thấp tầng, Arduino framework vẫn được nhiều nhà phát triển lựa chọn trong các trường hợp sau:
+\begin{itemize}
+    \item Phát triển nhanh prototype GUI nhờ cú pháp đơn giản và tài liệu dễ tra cứu.
+    \item Đã có thư viện LVGL tích hợp sẵn: \texttt{lvgl\_Arduino}, \texttt{TFT\_eSPI + LVGL binding}.
+    \item Thư viện cộng đồng mạnh: sensor, MQTT, Firebase...
+\end{itemize}
+
+\subsubsection{Kiến trúc Arduino trên ESP32}
+
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|X|X|X|}
+  \hline
+  \textbf{Thành phần} & \textbf{Vai trò} & \textbf{Ghi chú} \\
+  \hline
+  setup() và loop() & Hàm chính người dùng & Thay cho \texttt{main()} trong C truyền thống \\
+  Arduino Core for ESP32 & Giao tiếp giữa API Arduino và ESP-IDF & Do Espressif phát triển \\
+  SPI.h, Wire.h & Giao tiếp SPI/I2C đơn giản & Wrapper của ESP-IDF \\
+  lvgl.h & API chính của GUI & Phải khởi tạo LVGL, buffer, flush... \\
+  \hline
+  \end{tabularx}
+  \caption{Kiến trúc Arduino trên ESP32}
+  \end{table}  
+
+\subsubsection{Ưu điểm của Arduino Framework}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Ưu điểm} & \textbf{Giải thích chi tiết} \\
+  \hline
+  Cú pháp đơn giản & Dễ học, dễ dùng, phù hợp sinh viên và người mới tiếp cận nhúng \\
+  Nhiều thư viện hỗ trợ & LVGL, TFT\_eSPI, Touch, WiFi, MQTT, WebServer có sẵn và hoạt động ổn định \\
+  Tích hợp tốt với PlatformIO & Có thể dùng trên VS Code, dễ debug, tự động build/upload \\
+  Giao diện lập trình cao cấp & Viết nhanh hơn, dễ tổ chức code nhờ class đơn giản và lambda callback \\
+  Cộng đồng lớn & Dễ tìm ví dụ, diễn đàn hỗ trợ nhanh chóng \\
+  \hline
+  \end{tabular}
+  \caption{Ưu điểm của Arduino framework}
+\end{table}
+
+\subsubsection{Hạn chế của Arduino khi dùng với LVGL}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Hạn chế} & \textbf{Mô tả} & \textbf{Hướng khắc phục} \\
+\hline
+Thiếu kiểm soát sâu & Không can thiệp DMA, SPI nâng cao & Dùng API ESP-IDF trực tiếp \\
+Không hỗ trợ menuconfig & Không tùy biến thông số hệ thống & Dùng build flags với PlatformIO \\
+Hạn chế đa task & \texttt{loop()} là một task duy nhất & Dùng \texttt{xTaskCreate()} \\
+Không tối ưu RAM & Không giám sát fragmentation & Dùng \texttt{heap\_caps\_get\_free\_size()} nếu có kinh nghiệm \\
+\hline
+\end{tabular}
+\caption{Hạn chế của Arduino khi tích hợp với LVGL}
+\end{table}
+
+\subsubsection{Kịch bản sử dụng Arduino phù hợp}
+
+\begin{itemize}
+    \item Sinh viên, người mới bắt đầu học nhúng.
+    \item Dự án nhỏ, thời gian gấp rút.
+    \item Không cần tối ưu sâu về hiệu suất.
+    \item Dự án tận dụng thư viện cộng đồng.
+\end{itemize}
+
+% FreeRTOS
+\subsection{FreeRTOS}
+
+\subsubsection{Giới thiệu tổng quan về FreeRTOS}
+FreeRTOS (Free Real-Time Operating System) là một hệ điều hành thời gian thực nhẹ, mã nguồn mở, được thiết kế đặc biệt cho hệ thống nhúng. ESP-IDF tích hợp sẵn FreeRTOS như một phần lõi, và tất cả các ứng dụng chạy trên ESP32 đều hoạt động theo mô hình đa nhiệm của FreeRTOS.\\
+FreeRTOS cung cấp khả năng chạy đồng thời nhiều tác vụ (task), hỗ trợ ưu tiên, đồng bộ hóa bằng semaphore, mutex và queue, rất cần thiết trong ứng dụng giao diện người dùng, nơi cần xử lý song song cảm ứng, WiFi, và logic nền.
+
+\subsubsection{Vai trò của FreeRTOS trong hệ thống giao diện sử dụng LVGL}
+LVGL là thư viện GUI cần được cập nhật định kỳ bằng cách gọi hàm \texttt{lv\_timer\_handler()} (trước đây là \texttt{lv\_task\_handler()}). Do đó, việc sử dụng FreeRTOS giúp:
+\begin{itemize}
+    \item Chạy \texttt{lv\_timer\_handler()} trong task riêng biệt, tránh ảnh hưởng đến các logic khác như WiFi, MQTT.
+    \item Quản lý đa màn hình phức tạp, mỗi màn hình hoặc nhóm widget có thể liên kết với một task riêng để xử lý logic nội bộ.
+    \item Đồng bộ hóa dữ liệu đa nguồn, ví dụ cập nhật nhiệt độ từ sensor và hiển thị lên giao diện thông qua queue hoặc message buffer.
+    \item Ưu tiên xử lý GUI để đảm bảo trải nghiệm người dùng mượt mà, không bị lag hay giật.
+    \item Tối ưu hóa tài nguyên hệ thống, tránh tình trạng tràn stack hoặc memory leak.
+\end{itemize}
+
+\subsubsection{Cách tích hợp FreeRTOS với LVGL}
+
+\begin{itemize}
+    \item \texttt{lv\_timer\_handler()}: xử lý redraw GUI.
+    \item \texttt{vTaskDelay()}: delay trong vòng lặp GUI.
+    \item \texttt{xSemaphoreTake()}: đồng bộ touch ISR và GUI task.
+    \item \texttt{xQueueSend()}, \texttt{xQueueReceive()}: truyền dữ liệu giữa các task.
+\end{itemize}
+
+Ví dụ:
+
+\begin{verbatim}
+void lvgl_task(void* param) {
+    while (1) {
+        lv_timer_handler(); // Xử lý GUI
+        vTaskDelay(pdMS_TO_TICKS(5)); // Delay 5ms
+    }
+}
+\end{verbatim}
+
+\subsubsection{Ưu điểm của FreeRTOS}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Ưu điểm} & \textbf{Mô tả chi tiết} \\
+  \hline
+  Đa nhiệm thực thụ & Cho phép xử lý song song WiFi, cảm biến, touch, GUI... mà không block nhau \\
+  Quản lý ưu tiên & Có thể đặt task GUI với mức ưu tiên cao hơn để luôn đảm bảo trải nghiệm mượt \\
+  Tối ưu tài nguyên & Có thể cấu hình kích thước stack phù hợp cho từng task, tránh lãng phí RAM \\
+  Công cụ debug tốt & ESP-IDF có task monitor, log theo từng core, theo dõi task alive \\
+  Cấu trúc phần mềm rõ ràng & Phân chia task theo chức năng giúp code dễ bảo trì, mở rộng \\
+  \hline
+  \end{tabular}
+  \caption{Ưu điểm của FreeRTOS}
+\end{table}
+
+\subsubsection{Hạn chế và cách khắc phục}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Hạn chế} & \textbf{Giải pháp} \\
+  \hline
+  Cần hiểu rõ lập trình đa nhiệm & Học kỹ về race condition, deadlock, semaphore, mutex \\
+  Dễ bị tràn stack task & Dùng \texttt{uxTaskGetStackHighWaterMark()} để kiểm tra stack thực tế \\
+  Có thể phức tạp với người mới & Bắt đầu từ 1-2 task, dần mở rộng; sử dụng wrapper hoặc layer trung gian để đơn giản hóa \\
+  \hline
+  \end{tabular}
+  \caption{Hạn chế và cách khắc phục trong FreeRTOS}
+\end{table}
+
+\subsubsection{Tình huống sử dụng điển hình}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+  \hline
+  \textbf{Kịch bản} & \textbf{Vai trò FreeRTOS} \\
+  \hline
+  Cập nhật GUI liên tục theo sensor & Dùng task riêng đọc sensor → gửi queue → GUI task hiển thị \\
+  Giao tiếp song song WiFi và touch & WiFi chạy trong task riêng, GUI có thể phản hồi ngay cả khi WiFi mất kết nối \\
+  Nhiều màn hình có hiệu ứng animation & GUI task xử lý hiệu ứng, logic chuyển trạng thái đặt trong các task phụ trợ \\
+  \hline
+  \end{tabular}
+  \caption{Tình huống sử dụng điển hình của FreeRTOS}
+\end{table}
+
+\subsection{Thư viện đồ họa LVGL}
 \tab LVGL (Light and Versatile Graphics Library) là một thư viện đồ họa mã nguồn mở, nhẹ nhàng và linh hoạt, được thiết kế đặc biệt cho các hệ thống nhúng với tài nguyên hạn chế. Thư viện này cung cấp tất cả các công cụ cần thiết để tạo ra giao diện người dùng đồ họa (GUI) hấp dẫn và chuyên nghiệp trên các vi điều khiển như ESP32, với hiệu suất tối ưu và yêu cầu bộ nhớ thấp.
-\subsection{Tổng quan về LVGL}
+\subsubsection{Tổng quan về LVGL}
 \tab LVGL được phát triển từ năm 2016 bởi Gábor Kiss-Vámosi, ban đầu với tên gọi LittlevGL. Qua nhiều năm phát triển, LVGL đã trở thành một trong những thư viện GUI phổ biến nhất cho các hệ thống nhúng, với các phiên bản chính từ v5 đến v9 hiện nay. Mỗi phiên bản đều mang đến những cải tiến đáng kể về hiệu suất, tính năng và khả năng tương thích.\\
 \tab LVGL có nhiều đặc điểm và ưu điểm nổi bật so với các thư viện đồ họa khác cho hệ thống nhúng. Thư viện này được thiết kế với kiến trúc module hóa, cho phép chỉ biên dịch các thành phần cần thiết, giảm thiểu kích thước mã nguồn. LVGL hỗ trợ đa nền tảng, có thể chạy trên hầu hết các vi điều khiển 16, 32 hoặc 64 bit, từ các chip đơn giản như STM32 đến các nền tảng mạnh mẽ hơn như ESP32 hoặc Raspberry Pi.\\
 \tab Một trong những ưu điểm lớn nhất của LVGL là khả năng tạo ra giao diện người dùng hiện đại và hấp dẫn với yêu cầu tài nguyên tối thiểu. Thư viện có thể hoạt động với chỉ 64 KB flash và 16 KB RAM, mặc dù cấu hình được khuyến nghị là khoảng 180 KB flash và 48 KB RAM để sử dụng đầy đủ tính năng. LVGL cũng hỗ trợ hoạt động với chỉ một frame buffer, giảm thiểu yêu cầu bộ nhớ đồng thời vẫn duy trì hiệu ứng đồ họa mượt mà.\\
 \tab Về yêu cầu hệ thống và tương thích, LVGL có thể hoạt động trên hầu hết các vi điều khiển với tốc độ xung nhịp từ 16 MHz trở lên, mặc dù khuyến nghị tối thiểu 32 MHz cho hiệu suất tốt. Thư viện hỗ trợ nhiều loại màn hình với độ sâu màu khác nhau, từ màn hình đơn sắc đến màn hình TFT màu 16 hoặc 24 bit. LVGL cũng tương thích với nhiều loại thiết bị đầu vào như màn hình cảm ứng, nút bấm, encoder, và bàn phím.
-\subsection{Kiến trúc LVGL}
+\subsubsection{Kiến trúc LVGL}
 \tab LVGL được xây dựng với kiến trúc module hóa, bao gồm các thành phần cốt lõi và các module chức năng. Cấu trúc này cho phép tùy chỉnh và mở rộng linh hoạt, đồng thời duy trì hiệu suất tối ưu cho các hệ thống nhúng.\\
 \tab Cấu trúc lõi của LVGL bao gồm các module cơ bản như hệ thống đối tượng, quản lý bộ nhớ, hệ thống sự kiện, và engine vẽ. Các module này tạo nền tảng cho toàn bộ thư viện và cung cấp các chức năng cơ bản như quản lý đối tượng, xử lý sự kiện, và render đồ họa. LVGL sử dụng kiến trúc hướng đối tượng mặc dù được viết bằng C, với các cấu trúc dữ liệu và hàm được tổ chức theo cách mô phỏng lập trình hướng đối tượng.\\
 \tab Hệ thống đối tượng và thừa kế trong LVGL cho phép tạo ra các widget phức tạp từ các thành phần cơ bản. Mỗi đối tượng trong LVGL đều kế thừa từ lớp cơ sở \texttt{lv\_obj}, thừa hưởng các thuộc tính và phương thức của lớp cha, đồng thời có thể mở rộng với các chức năng riêng. Cơ chế thừa kế này giúp giảm thiểu mã lặp lại và tạo ra hệ thống widget nhất quán và dễ mở rộng.\\
@@ -208,7 +558,7 @@ MQTT được sử dụng rộng rãi trong nhiều hệ thống IoT nhờ vào 
   \includegraphics[width=0.6\textwidth]{Images/LGVL_intro_data_flow.png}
   \caption{Tổng quan về luồng dữ liệu của LVGL}
 \end{figure}
-\subsection{Các thành phần chính giao diện}
+\subsubsection{Các thành phần chính giao diện}
 \tab LVGL cung cấp một bộ widget phong phú để xây dựng giao diện người dùng, từ các thành phần cơ bản đến các container phức tạp và hệ thống bố cục linh hoạt.\\
 Hệ thống widget cơ bản của LVGL bao gồm các thành phần như Button (nút bấm), Label (nhãn), và Image (hình ảnh). Button cung cấp chức năng tương tác cơ bản, với hỗ trợ cho các trạng thái khác nhau như nhấn, thả, và vô hiệu hóa. Label cho phép hiển thị văn bản với nhiều tùy chọn về font, căn chỉnh, và cuộn. Image hỗ trợ nhiều định dạng hình ảnh, bao gồm cả hình ảnh nén và hình ảnh với kênh alpha.\\
 \tab Ngoài các widget cơ bản, LVGL còn cung cấp các thành phần phức tạp hơn như Chart (biểu đồ), Table (bảng), Dropdown (danh sách thả xuống), và Keyboard (bàn phím ảo). Các widget này cho phép xây dựng giao diện người dùng phức tạp với ít mã nguồn hơn, đồng thời duy trì hiệu suất tốt trên các hệ thống nhúng.\\
@@ -314,3 +664,195 @@ Sau khi phân tích các giải pháp GUI hiện có, LVGL nổi bật như mộ
     \item \textbf{Hỗ trợ cộng đồng và tài liệu}: LVGL có cộng đồng người dùng lớn, tài liệu toàn diện, và được cập nhật thường xuyên. Điều này đảm bảo rằng thư viện giao diện được phát triển sẽ có nền tảng vững chắc và hỗ trợ lâu dài.
 \end{itemize}
 \tab Với những ưu điểm trên, LVGL là nền tảng lý tưởng để phát triển thư viện giao diện cho ESP32, cung cấp sự cân bằng tối ưu giữa tính năng, hiệu suất, và khả năng mở rộng.
+\section{Công cụ hỗ trợ phát triển}
+\subsection{PlatformIO}
+\subsubsection{Giới thiệu tổng quan}
+PlatformIO là một môi trường phát triển tích hợp (IDE) hiện đại và mở rộng cho các hệ thống nhúng, đặc biệt phù hợp với các vi điều khiển như ESP32. Được phát triển như một plugin cho Visual Studio Code (VSCode), PlatformIO cho phép quản lý dự án, thư viện, board, và build system một cách dễ dàng, hỗ trợ cả framework ESP-IDF lẫn Arduino.\\
+Nó là công cụ lý tưởng cho những ai muốn phát triển giao diện với LVGL vì có thể:
+\begin{itemize}
+    \item Quản lý thư viện trực tiếp từ CLI hoặc GUI.
+    \item Tự động cấu hình các flag build, include path, và linker script.
+    \item Hỗ trợ debug, monitor serial, và upload chỉ với một cú click.
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Images/PlatformIO.png}
+  \caption{PlatformIO trong workflow phát triển LVGL}
+\end{figure}
+\subsubsection{Tính năng nổi bật}
+\tab PlatformIO cung cấp nhiều tính năng nổi bật giúp tăng tốc quá trình phát triển và quản lý dự án. Dưới đây là một số tính năng chính:
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Tính năng} & \textbf{Mô tả} \\
+\hline
+Đa framework & Hỗ trợ ESP-IDF, Arduino, Zephyr, mbed, RT-Thread... \\
+\hline
+Hỗ trợ đa board & PlatformIO hỗ trợ sẵn hơn 900 board, trong đó có toàn bộ dòng ESP32 (ESP32-WROOM, S2, S3...) \\
+\hline
+Tự động build \& flash & Không cần viết Makefile hay config phức tạp – chỉ cần \texttt{platformio run} và \texttt{upload} \\
+\hline
+Monitor serial tích hợp & Dễ dàng in log từ ESP32 để debug \\
+\hline
+Quản lý thư viện & Cài LVGL, touch driver, font renderer, JPEG decoder... từ CLI hoặc GUI \\
+\hline
+Tích hợp VSCode & Có intellisense, gợi ý mã, refactor code, phân tích lỗi cú pháp realtime \\
+\hline
+\end{tabularx}
+\caption{Các tính năng nổi bật của PlatformIO}
+\end{table}
+
+
+\subsubsection{Lý do nên sử dụng PlatformIO cho phát triển giao diện LVGL}
+\begin{itemize}
+    \item Tăng tốc khởi tạo dự án: Có thể tạo dự án ESP32 chỉ với 1 dòng lệnh \texttt{pio project init}, giúp nhanh chóng bắt đầu coding mà không cần cấu hình thủ công.
+    \item Dễ dàng tích hợp LVGL: PlatformIO cho phép thêm thư viện LVGL từ PlatformIO Registry, đảm bảo luôn có phiên bản mới nhất, dễ update.
+    \item Tự động xử lý dependency: Không cần tải thư viện thủ công hoặc sửa include path trong \texttt{CMakeLists.txt} – PlatformIO tự động thực hiện việc đó.
+    \item Hỗ trợ nhiều profile build: Dễ dàng build ở các mode như debug, release, hoặc custom.
+    \item Cộng đồng đông đảo, tài liệu phong phú: Nhiều template và ví dụ ESP32 + LVGL sẵn có.
+\end{itemize}
+
+\subsubsection{Hạn chế và cách khắc phục}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Hạn chế} & \textbf{Cách giải quyết} \\
+\hline
+Tốc độ build chậm hơn ESP-IDF gốc & Bật chế độ build incremental, tăng RAM cache, và tắt phần mềm diệt virus quét thư mục \texttt{.pio} \\
+\hline
+Debug bị hạn chế nếu không dùng board chính thức & Kết hợp OpenOCD để debug hoặc chuyển sang ESP-IDF nếu cần debug chuyên sâu \\
+\hline
+Không tối ưu mạnh về kích thước chương trình như ESP-IDF & Sử dụng \texttt{build\_flags} để tinh chỉnh cờ biên dịch hoặc tối ưu file linker script \\
+\hline
+\end{tabularx}
+\caption{Một số hạn chế của PlatformIO và cách khắc phục}
+\end{table}
+
+\subsubsection{Vai trò PlatformIO trong workflow tổng thể}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Giai đoạn} & \textbf{Vai trò PlatformIO} \\
+\hline
+Khởi tạo dự án & Tạo nhanh template ESP32, tự động cấu trúc thư mục \\
+\hline
+Tích hợp thư viện & Quản lý dễ dàng thư viện GUI như LVGL, driver touch \\
+\hline
+Build \& Flash & Tự động build, upload, và theo dõi log serial \\
+\hline
+Phát triển UI & Soạn mã GUI trong VSCode, tận dụng intellisense \& lỗi runtime \\
+\hline
+Tinh chỉnh hiệu suất & Sử dụng monitor heap/log, custom flag để tối ưu kích thước và tốc độ \\
+\hline
+\end{tabular}
+\subsection{SquareLine Studio}
+
+\subsubsection{Giới thiệu tổng quan}
+SquareLine Studio là một công cụ phát triển giao diện người dùng (UI) dành cho các nền tảng nhúng như ESP32, ESP8266, và STM32. Được xây dựng với mục tiêu đơn giản hóa việc thiết kế giao diện, SquareLine Studio cung cấp một môi trường trực quan với tính năng kéo và thả (drag-and-drop), giúp người dùng dễ dàng tạo và tùy chỉnh giao diện mà không cần phải viết mã thủ công cho từng widget hay thành phần giao diện.\\
+
+SquareLine Studio đặc biệt hữu ích khi kết hợp với LVGL, giúp tối ưu hóa quá trình phát triển và cải thiện hiệu quả công việc, đặc biệt khi phát triển giao diện cho các hệ thống nhúng như ESP32, nơi tài nguyên phần cứng bị hạn chế.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Images/Squaline Studio.png}
+  \caption{Squaline Studio giao diện thiết kế}
+\end{figure}
+\subsubsection{Các tính năng chính của SquareLine Studio}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Tính năng} & \textbf{Mô tả} \\
+\hline
+Kéo thả widget & Cho phép người dùng dễ dàng kéo và thả các widget (như buttons, labels, sliders...) vào giao diện mà không cần phải viết mã. \\
+\hline
+Chỉnh sửa style theo theme & Tùy chỉnh giao diện của các widget thông qua các theme và style có sẵn. \\
+\hline
+Tạo mã nguồn C/C++ đầy đủ & Tự động sinh mã nguồn C/C++ hoàn chỉnh từ thiết kế giao diện, dễ tích hợp vào ESP32 hoặc STM32. \\
+\hline
+Hỗ trợ cấu hình phần cứng & Cung cấp các lựa chọn cấu hình phần cứng (LCD, touch, SPI...). \\
+\hline
+Hỗ trợ LVGL & Làm việc trực tiếp với thư viện LVGL. \\
+\hline
+Preview trực tiếp & Xem trước giao diện trong quá trình thiết kế. \\
+\hline
+\end{tabular}
+\caption{Các tính năng chính của SquareLine Studio}
+\end{table}
+
+\subsubsection{Quy trình phát triển giao diện với SquareLine Studio}
+\begin{enumerate}
+  \item \textbf{Tạo dự án mới:} Mở SquareLine Studio và chọn nền tảng phần cứng và màn hình sử dụng.\\
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/new-project.png}
+    \caption{Tạo dự án mới trong SquareLine Studio}
+  \end{figure}
+  \item \textbf{Thiết kế giao diện:} Kéo thả các widget và tùy chỉnh thuộc tính giao diện.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/thiet-ke-giao-dien.png}
+    \caption{Thiết kế giao diện trong SquareLine Studio}
+  \end{figure}
+  \item \textbf{Tùy chỉnh style:} Áp dụng các theme có sẵn hoặc tùy chỉnh theo yêu cầu.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/custom-style.png}
+    \caption{Tùy chỉnh style trong SquareLine Studio}
+  \end{figure}
+  \item \textbf{Sinh mã nguồn:} Tự động sinh mã C/C++ cho toàn bộ giao diện và xử lý sự kiện.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/export-UI.png}
+    \caption{Sinh mã nguồn trong SquareLine Studio}
+  \end{figure}
+  \item \textbf{Tích hợp với ESP32:} Chèn mã vào dự án ESP32, cấu hình qua \texttt{menuconfig}, biên dịch bằng \texttt{idf.py}.
+  \item \textbf{Test và tối ưu hóa:} Kiểm thử trực tiếp hoặc trên phần cứng, điều chỉnh hiệu ứng và hiển thị.
+\end{enumerate}
+
+\subsubsection{Ưu điểm khi sử dụng SquareLine Studio}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Ưu điểm} & \textbf{Mô tả} \\
+\hline
+Tiết kiệm thời gian & Thiết kế kéo thả giúp tiết kiệm thời gian và công sức. \\
+\hline
+Chắc chắn và chính xác & Mã nguồn sinh ra tối ưu và hoàn chỉnh. \\
+\hline
+Dễ dàng tái sử dụng & Thiết kế và mã có thể dùng lại cho các dự án khác. \\
+\hline
+Tích hợp tốt với LVGL & Hỗ trợ đầy đủ tính năng đồ họa của LVGL. \\
+\hline
+Hỗ trợ đa nền tảng & Chạy được trên Windows, macOS, và Linux. \\
+\hline
+\end{tabular}
+\caption{Ưu điểm của SquareLine Studio}
+\end{table}
+
+\subsubsection{Hạn chế và biện pháp khắc phục}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{5.5cm}|p{8.5cm}|}
+\hline
+\textbf{Hạn chế} & \textbf{Giải pháp} \\
+\hline
+Không hỗ trợ toàn bộ tính năng LVGL & Có thể cần chỉnh sửa mã thủ công cho tính năng nâng cao. \\
+\hline
+Giới hạn trong thiết kế phức tạp & Phải can thiệp mã để xử lý logic phức tạp hoặc tuỳ chỉnh sâu. \\
+\hline
+Khả năng tùy biến giao diện hạn chế & Viết mã tùy chỉnh cho các hiệu ứng và hành vi đặc biệt. \\
+\hline
+\end{tabular}
+\caption{Hạn chế và cách khắc phục khi dùng SquareLine Studio}
+\end{table}
+
+\subsubsection{Ứng dụng thực tế với SquareLine Studio}
+SquareLine Studio hữu ích trong các dự án giao diện người dùng cho ESP32 với LVGL. Các ứng dụng phổ biến bao gồm:
+\begin{itemize}
+  \item Thiết kế giao diện cho thiết bị điều khiển từ xa: điều khiển, giám sát trạng thái, hiển thị cảm biến.
+  \item Giao diện người dùng cho hệ thống IoT: đồng hồ thông minh, nhà thông minh.
+  \item Giao diện cảm ứng: hỗ trợ tương tác như chạm, vuốt, thay đổi cảnh.
+\end{itemize}
