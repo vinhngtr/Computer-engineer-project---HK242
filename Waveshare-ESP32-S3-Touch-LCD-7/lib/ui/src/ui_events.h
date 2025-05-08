@@ -10,7 +10,6 @@
 extern "C" {
 #endif
 
-void func0055(lv_event_t * e);
 void lvrLight1Check(lv_event_t * e);
 void lvrLight1UnCheck(lv_event_t * e);
 void lvrLight2Check(lv_event_t * e);

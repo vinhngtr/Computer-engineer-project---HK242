@@ -198,6 +198,5 @@ void ui_LVRoomScreen_screen_init(void)
     lv_obj_add_event_cb(ui_FanLvRoom2, ui_event_FanLvRoom2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ACLvRoom1, ui_event_ACLvRoom1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_ACLvRoom2, ui_event_ACLvRoom2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_LVRoomScreen, ui_event_LVRoomScreen, LV_EVENT_ALL, NULL);
 
 }

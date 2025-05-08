@@ -16,6 +16,7 @@ const uint32_t SERIAL_DEBUG_BAUD = 115200U;
 const char BLINKING_INTERVAL_ATTR[] = "blinkingInterval";
 const char LED_MODE_ATTR[] = "ledMode";
 const char LED_STATE_ATTR[] = "ledState";
+
 const uint16_t BLINKING_INTERVAL_MS_MIN = 10U;
 const uint16_t BLINKING_INTERVAL_MS_MAX = 60000U;
 

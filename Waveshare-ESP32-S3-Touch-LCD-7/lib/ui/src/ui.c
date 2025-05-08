@@ -74,11 +74,12 @@ lv_obj_t * ui_TitleHumi;
 lv_obj_t * ui_ValueHumi;
 lv_obj_t * ui_HeaedMain;
 lv_obj_t * ui_TitleVIEW;
+lv_obj_t * ui_WifiState;
+lv_obj_t * ui_TBState;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_LVRoomScreen
 void ui_LVRoomScreen_screen_init(void);
-void ui_event_LVRoomScreen(lv_event_t * e);
 lv_obj_t * ui_LVRoomScreen;
 lv_obj_t * ui_Panel2;
 lv_obj_t * ui_dvName1;
@@ -254,16 +255,6 @@ void ui_event_HumidityChart(lv_event_t * e)
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
         _ui_arc_set_text_value(ui_ValueHumi, target, "", "%");
-    }
-}
-
-void ui_event_LVRoomScreen(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-
-    if(event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target, LV_STATE_CHECKED)) {
-        func0055(e);
     }
 }
 

@@ -519,6 +519,34 @@ void ui_mainScreen_screen_init(void)
     lv_obj_set_style_text_opa(ui_TitleVIEW, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_TitleVIEW, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_WifiState = lv_label_create(ui_mainScreen);
+    lv_obj_set_width(ui_WifiState, 40);
+    lv_obj_set_height(ui_WifiState, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_WifiState, 5);
+    lv_obj_set_y(ui_WifiState, -13);
+    lv_obj_set_align(ui_WifiState, LV_ALIGN_BOTTOM_RIGHT);
+    lv_label_set_text(ui_WifiState, " Wifi ");
+    lv_obj_set_style_radius(ui_WifiState, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_WifiState, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_WifiState, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui_WifiState, 20, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_WifiState, lv_color_hex(0x09FF00), LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_WifiState, 255, LV_PART_MAIN | LV_STATE_CHECKED);
+
+    ui_TBState = lv_label_create(ui_mainScreen);
+    lv_obj_set_width(ui_TBState, 40);
+    lv_obj_set_height(ui_TBState, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_TBState, -37);
+    lv_obj_set_y(ui_TBState, -13);
+    lv_obj_set_align(ui_TBState, LV_ALIGN_BOTTOM_RIGHT);
+    lv_label_set_text(ui_TBState, "   TB ");
+    lv_obj_set_style_radius(ui_TBState, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_TBState, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_TBState, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui_TBState, 20, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(ui_TBState, lv_color_hex(0x09FF00), LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_TBState, 255, LV_PART_MAIN | LV_STATE_CHECKED);
+
     lv_obj_add_event_cb(ui_KitchenRoom, ui_event_KitchenRoom, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_BedRoom, ui_event_BedRoom, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LivActiveLight, ui_event_LivActiveLight, LV_EVENT_ALL, NULL);

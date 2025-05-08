@@ -2,6 +2,15 @@
 
 // Task handle for WiFi task
 TaskHandle_t wifiTaskHandle = NULL;
+void set_wifi_state(bool connected) {
+  if (connected) {
+      lv_obj_add_state(ui_WifiState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_WifiState, "Wifi");
+  } else {
+      lv_obj_clear_state(ui_WifiState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_WifiState, "Wifi");
+  }
+}
 
 // WiFi task function implementation
 void wifiTask(void *pvParameters) {
@@ -37,7 +46,10 @@ void wifiTask(void *pvParameters) {
         Serial.println("Failed to reconnect to WiFi");
       }
     }
-    
+    else{
+      ui_WifiState ;
+    }
+    set_wifi_state(isConnected);
     // Check WiFi every 5 seconds
     vTaskDelay(pdMS_TO_TICKS(5000));
   }

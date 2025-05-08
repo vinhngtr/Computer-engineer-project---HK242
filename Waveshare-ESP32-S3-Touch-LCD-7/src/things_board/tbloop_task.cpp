@@ -3,6 +3,16 @@
 // Task handle for ThingsBoard loop task
 TaskHandle_t tbLoopTaskHandle = NULL;
 
+void set_tb_stat(bool connected) {
+  if (connected) {
+      lv_obj_add_state(ui_TBState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_TBState, "  TB  ");
+  } else {
+      lv_obj_clear_state(ui_TBState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_TBState, "  TB  ");
+  }
+}
+
 // ThingsBoard loop task function implementation
 void tbLoopTask(void *pvParameters) {
   Serial.println("ThingsBoard loop task started");
@@ -22,6 +32,8 @@ void tbLoopTask(void *pvParameters) {
     if (isWifiConnected && isTbConnected) {
       // Process ThingsBoard messages
       tb.loop();
+      //set_tb_stat(isTbConnected);
+      Serial.println("Connected to CoreIOT");
     }
     
     // Run the loop frequently for better responsiveness

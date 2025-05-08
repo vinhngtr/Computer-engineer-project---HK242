@@ -4,69 +4,102 @@
 // Project name: Squareline
 
 #include "ui.h"
-
-void func0055(lv_event_t * e){
-	
-}
-
+#include <array>
+// #include "UI2tb.h"
+#define RELAY_COUNT 6
+extern std::array<bool, RELAY_COUNT> relayStates;
+void setTrue(int id){
+	relayStates[id] = true;
+};
+void setFalse(int id){
+	relayStates[id] = false;
+};
 void lvrLight1Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw1",true);
+	setTrue(0);
 }
 
 void lvrLight1UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw1",false);
+	setFalse(0);
 }
 
 void lvrLight2Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw2",true);
+	setTrue(1);
+
 }
 
 void lvrLight2UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw2",false);
+	setFalse(1);
 }
 
 void lvrLight3Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw3",true);
+	setTrue(2);
+
 }
 
 void lvrLight3UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw3",false);
+	setFalse(2);
 }
 
 void lvrAC1Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw4",true);
+	setTrue(3);
+
 }
 
 void lvrAC1UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handlewitchControl("sw4",false);
+	setFalse(3);
 }
 
 void lvrAC2Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw5",true);
+	setTrue(4);
+
 }
 
 void lvrAC2UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw5",false);
+	setFalse(4);
 }
 
 void lvrFan1Check(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw6",true);
+	setTrue(5);
 }
 
 void lvrFan1UnCheck(lv_event_t * e)
 {
 	// Your code here
+	// handleSwitchControl("sw6",false);
+	setFalse(5);
 }
 
 void lvrFan2Check(lv_event_t * e)

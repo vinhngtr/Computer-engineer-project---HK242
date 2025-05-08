@@ -3,11 +3,11 @@
 // Task handle for CoreIOT task
 TaskHandle_t coreiotTaskHandle = NULL;
 
-// Shared attributes list
-constexpr std::array<const char *, 2U> SHARED_ATTRIBUTES_LIST = {
-  LED_STATE_ATTR,
-  BLINKING_INTERVAL_ATTR
-};
+// // Shared attributes list
+// constexpr std::array<const char *, 2U> SHARED_ATTRIBUTES_LIST = {
+//   LED_STATE_ATTR,
+//   BLINKING_INTERVAL_ATTR
+// };
 
 // // RPC callbacks array
 // const std::array<RPC_Callback, 1U> callbacks = {
@@ -17,6 +17,17 @@ constexpr std::array<const char *, 2U> SHARED_ATTRIBUTES_LIST = {
 // // Attribute callbacks
 // const Shared_Attribute_Callback attributes_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
 // const Attribute_Request_Callback attribute_shared_request_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
+
+void set_tb_state(bool connected) {
+  if (connected) {
+      lv_obj_add_state(ui_TBState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_TBState, "  TB  ");
+  } else {
+      lv_obj_clear_state(ui_TBState, LV_STATE_CHECKED);
+      lv_label_set_text(ui_TBState, "  TB  ");
+  }
+}
+
 
 // CoreIOT task function implementation
 void coreiotTask(void *pvParameters) {
@@ -48,20 +59,20 @@ void coreiotTask(void *pvParameters) {
         Serial.print(" and password ");
         Serial.println(THINGSBOARD_PASSWORD);
 
-        
-        // if (tb.connect(THINGSBOARD_SERVER, TOKEN, THINGSBOARD_PORT)) {
-        if (tb.connect(THINGSBOARD_SERVER, TOKEN, THINGSBOARD_PORT,CLIENT_ID,THINGSBOARD_PASSWORD)) {
+        if (tb.connect(THINGSBOARD_SERVER, TOKEN, THINGSBOARD_PORT)) {
+        //if (tb.connect(THINGSBOARD_SERVER, TOKEN, THINGSBOARD_PORT,CLIENT_ID,THINGSBOARD_PASSWORD)) {
 
           Serial.println("Connected to CoreIOT");
           
           portENTER_CRITICAL(&tbMux);
           coreiotConnected = true;
-          subscribed = false;  // Need to resubscribe
+          //subscribed = false;  // Need to resubscribe
           portEXIT_CRITICAL(&tbMux);
         } else {
           Serial.println("Failed to connect to CoreIOT");
         }
       }
+      
       
       // Check subscription status
       bool isSubscribed = false;
@@ -69,7 +80,8 @@ void coreiotTask(void *pvParameters) {
       isSubscribed = subscribed;
       portEXIT_CRITICAL(&tbMux);
     }
-    
+    bool isTbConnected = tb.connected();
+    //set_tb_state(isTbConnected);
     // Check CoreIOT connection every 3 seconds
     vTaskDelay(pdMS_TO_TICKS(3000));
   }

@@ -2,11 +2,14 @@
 #define TB2UI_H
 
 #include "main.h"
-
+#include "tb.h"
 // Số lượng relay sử dụng (nên được định nghĩa trong config.h hoặc main.h)
 #ifndef RELAY_COUNT
 #define RELAY_COUNT 6
 #endif
+
+extern volatile float temperature;
+extern volatile float humidity;
 
 // Đối tượng giao diện (biểu đồ, công tắc)
 extern lv_obj_t *ui_TempChart;
@@ -27,9 +30,6 @@ void readSensorTask(void *parameter);
 
 // Hàm task đồng bộ trạng thái switch trên UI từ server
 void readSwitchTask(void *parameter);
-
-// Hàm xử lý khi UI thay đổi switch (gửi lệnh điều khiển relay)
-void handleSwitchControl(const char* swName, bool state);
 
 // Hàm nội bộ cập nhật giá trị cho Arc UI (biểu đồ vòng)
 void _ui_arc_set(lv_obj_t *target, int val);

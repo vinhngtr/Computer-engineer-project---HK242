@@ -91,11 +91,12 @@ extern lv_obj_t * ui_TitleHumi;
 extern lv_obj_t * ui_ValueHumi;
 extern lv_obj_t * ui_HeaedMain;
 extern lv_obj_t * ui_TitleVIEW;
+extern lv_obj_t * ui_WifiState;
+extern lv_obj_t * ui_TBState;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_LVRoomScreen
 void ui_LVRoomScreen_screen_init(void);
-void ui_event_LVRoomScreen(lv_event_t * e);
 extern lv_obj_t * ui_LVRoomScreen;
 extern lv_obj_t * ui_Panel2;
 extern lv_obj_t * ui_dvName1;

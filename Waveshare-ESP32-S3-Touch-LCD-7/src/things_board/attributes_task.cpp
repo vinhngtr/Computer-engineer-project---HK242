@@ -8,8 +8,9 @@ TaskHandle_t attributesTaskHandle = NULL;
 std::array<bool, RELAY_COUNT> relayStates = {false, false, false, false, false, false};
 
 // Biến lưu dữ liệu cảm biến đọc từ ThingsBoard về
-float temperature = NAN;
-float humidity = NAN;
+volatile float temperature = NAN;
+volatile float humidity = NAN;
+
 
 // Điều khiển relay
 void setRelay(uint8_t index, bool state) {
@@ -36,60 +37,82 @@ RPC_Response processRelayRPC(const RPC_Data &data) {
   return RPC_Response("error", "Invalid method");
 }
 
-// Callback nhận dữ liệu từ ThingsBoard (telemetry or shared attribute)
-void handleSharedAttributeData(const Shared_Attribute_Data &data) {
-  if (data.containsKey("temperature")) {
-    temperature = data["temperature"].as<float>();
-    Serial.print("Received temperature from server: ");
-    Serial.println(temperature);
-  }
+// Xử lý client attributes từ server
+void processAttributeRequest(const JsonObjectConst& data) {
+  Serial.println("Received client attributes:");
+  for (auto it = data.begin(); it != data.end(); ++it) {
+    const char* key = it->key().c_str();
+    Serial.print("Key: ");
+    Serial.print(key);
+    Serial.print(", Value: ");
+    Serial.println(it->value().as<String>());
 
-  if (data.containsKey("humidity")) {
-    humidity = data["humidity"].as<float>();
-    Serial.print("Received humidity from server: ");
-    Serial.println(humidity);
+    if (strcmp(key, "temperature") == 0) {
+      temperature = it->value().as<float>();
+      Serial.print("Received temperature from client attribute: ");
+      Serial.println(temperature);
+    }
+    else if (strcmp(key, "humidity") == 0) {
+      humidity = it->value().as<float>();
+      Serial.print("Received humidity from client attribute: ");
+      Serial.println(humidity);
+    }
   }
+  // Đánh dấu là attributes đã thay đổi
+  portENTER_CRITICAL(&ledMux);
+  attributesChanged = true;
+  portEXIT_CRITICAL(&ledMux);
 }
 
-// Gửi trạng thái các relay
+// Gửi trạng thái các relay lên client attributes
 void sendRelayStates() {
   for (int i = 0; i < RELAY_COUNT; i++) {
     String key = "sw" + String(i + 1);
     tb.sendAttributeData(key.c_str(), relayStates[i]);
   }
+  Serial.println("Relay states sent as client attributes");
+}
+
+// Yêu cầu client attributes từ server
+void requestClientAttributes() {
+  Serial.println("Requesting client attributes...");
+  // Chỉ cần gọi Client_Attributes_Request với callback
+  tb.Client_Attributes_Request(Attribute_Request_Callback(processAttributeRequest));
 }
 
 // Task thực thi
 void attributesTask(void *pvParameters) {
   Serial.println("Attributes task started");
 
-  for (int i = 0; i < RELAY_COUNT; i++) {
-    pinMode(RELAY_PINS[i], OUTPUT);
-    setRelay(i, false);
-  }
-
   // Đăng ký RPC cho relay
-  for (int i = 0; i < RELAY_COUNT; i++) {
-    String rpcName = "sw" + String(i + 1);
-    tb.RPC_Subscribe(RPC_Callback(rpcName.c_str(), processRelayRPC));
+  subscribed = false;
+  if(tb.connected()) {
+    for (int i = 0; i < RELAY_COUNT; i++) {
+      String rpcName = "sw" + String(i + 1);
+      tb.RPC_Subscribe(RPC_Callback(rpcName.c_str(), processRelayRPC));
+    }
+    // Đã đăng ký thành công
+    subscribed = true;
+    Serial.println("RPC subscribed successfully");
+    
+    // Yêu cầu client attributes ngay khi kết nối
+    //requestClientAttributes();
   }
-
-  // Đăng ký nhận shared attributes
-  tb.Shared_Attributes_Subscribe(Shared_Attribute_Callback(handleSharedAttributeData));
-
 
   const unsigned long updateInterval = attributesSendInterval;
   unsigned long lastUpdate = 0;
+  unsigned long lastAttributeRequest = 0;
+  const unsigned long attributeRequestInterval = 10000; // 10 giây
 
   for (;;) {
     unsigned long currentTime = millis();
 
+    // Kiểm tra và cập nhật trạng thái theo chu kỳ
     if (currentTime - lastUpdate >= updateInterval) {
       lastUpdate = currentTime;
 
       bool isWifiConnected = false;
       bool isTbConnected = false;
-      bool isAttributesChanged = false;
 
       portENTER_CRITICAL(&wifiMux);
       isWifiConnected = wifiConnected;
@@ -99,36 +122,49 @@ void attributesTask(void *pvParameters) {
       isTbConnected = coreiotConnected;
       portEXIT_CRITICAL(&tbMux);
 
-      portENTER_CRITICAL(&ledMux);
-      isAttributesChanged = attributesChanged;
-      portEXIT_CRITICAL(&ledMux);
-
-      if (isWifiConnected && isTbConnected && tb.connected()) {
-        // Gửi thông tin WiFi
-        tb.sendAttributeData("rssi", WiFi.RSSI());
-        tb.sendAttributeData("channel", WiFi.channel());
-        tb.sendAttributeData("bssid", WiFi.BSSIDstr().c_str());
-        tb.sendAttributeData("localIp", WiFi.localIP().toString().c_str());
-        tb.sendAttributeData("ssid", WiFi.SSID().c_str());
-
-        // Gửi trạng thái LED nếu thay đổi
-        if (isAttributesChanged) {
-          bool currentLedState;
-          portENTER_CRITICAL(&ledMux);
-          currentLedState = ledState;
-          attributesChanged = false;
-          portEXIT_CRITICAL(&ledMux);
-
-          tb.sendAttributeData(LED_STATE_ATTR, currentLedState);
-          Serial.print("Sent updated LED state attribute: ");
-          Serial.println(currentLedState);
-        }
-
-        // Gửi trạng thái các relay
+      if (isWifiConnected && isTbConnected) {
+        // Gửi trạng thái các relay lên client attributes
         sendRelayStates();
+        requestClientAttributes();
       }
     }
 
+    // Yêu cầu client attributes định kỳ
+    // if (currentTime - lastAttributeRequest >= attributeRequestInterval) {
+    //   lastAttributeRequest = currentTime;
+      
+    //   bool isWifiConnected = false;
+    //   bool isTbConnected = false;
+
+    //   portENTER_CRITICAL(&wifiMux);
+    //   isWifiConnected = wifiConnected;
+    //   portEXIT_CRITICAL(&wifiMux);
+
+    //   portENTER_CRITICAL(&tbMux);
+    //   isTbConnected = coreiotConnected;
+    //   portEXIT_CRITICAL(&tbMux);
+
+    //   if (isWifiConnected && isTbConnected && tb.connected()) {
+    //     // Yêu cầu client attributes từ server
+    //     requestClientAttributes();
+    //   }
+    // }
+
+    // Kiểm tra và đăng ký RPC nếu chưa đăng ký
+    if (!subscribed) {
+      if (tb.connected()) {
+        for (int i = 0; i < RELAY_COUNT; i++) {
+          String rpcName = "sw" + String(i + 1);
+          tb.RPC_Subscribe(RPC_Callback(rpcName.c_str(), processRelayRPC));
+        }
+        subscribed = true;
+        Serial.println("RPC subscribed successfully");
+        
+        // Yêu cầu client attributes khi đăng ký lại
+        //requestClientAttributes();
+      }
+    }
+    
     vTaskDelay(pdMS_TO_TICKS(500));
   }
 }
