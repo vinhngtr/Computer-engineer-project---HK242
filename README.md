@@ -1,65 +1,52 @@
-<<<<<<< HEAD
-# Waveshare ESP32-S3-Touch-LCD-4.3 with Squareline Studio and PlatformIO
+# 🎓 PROJECT COMPUTER ENGINEERING: "DEVELOPING GRAPHIC USER INTERFACE LIBRARY FOR ESP32 EMBEDDED PLATFORM USING LVGL"
 
-This is a first test with getting a Waveshare ESP32-S3-LCD-4.3 Touch running with an exported template project from SquareLine Studio.
+## 🔍 PROJECT OVERVIEW
 
-It is a very simple two-screen UI with buttons going back and forth.
+This project involves developing a full-featured graphical user interface (GUI) and control system for the ESP32-S3-Touch-LCD-7inch embedded platform. It demonstrates how to integrate hardware-level components with the **LVGL (Light and Versatile Graphics Library)** to build a touchscreen-based, real-time interactive system.
 
-## Get Started
+### ✅ Key Features
 
-1. Open the project in PlatformIO
-2. Connect your board to USB
-3. Make sure to press and hold the Boot button on your board, then press the Reset button, and release the Boot button
-4. Click Upload
-5. Enjoy clicking back and forth on your touch panel :)
+- 🔧 **Platform**: ESP32-S3 with a 7-inch capacitive touchscreen LCD.
+- 🌡️ **Sensor Integration**: Connected a **DHT20 temperature and humidity sensor** using a **dedicated I2C_NUM_1** channel, to avoid conflicts with the touchscreen controller (I2C_NUM_0).
+- 🧩 **Multi-Bus Architecture**: Independently managed multiple I2C buses for seamless peripheral communication.
+- 🎨 **LVGL-based UI**: Designed a responsive and interactive graphical user interface using LVGL for real-time data display and device control.
+- ⚙️ **FreeRTOS-based Tasking**: Utilized FreeRTOS for parallel handling of UI updates, sensor readings, and WebSocket communication.
+- 🧠 **Direct ESP-IDF Integration**: Developed the system natively using **ESP-IDF** with **no reliance on Arduino abstraction layers**.
+- 🔌 **Relay & GPIO Control**: Added relay switching and peripheral interfacing through UART & RS485 protocol.
 
-## Libraries
+---
 
-The libraries are the ones provided on the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3): [S3-4.3-libraries.zip](https://files.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3/S3-4.3-libraries.zip), except for lvgl, which is added as library dependency in `platformio.ini`.
+## 🛠️ BUILD INSTRUCTIONS & GUI INTEGRATION WITH SQUARELINE
 
-I tried to add the other two libraries as dependencies as well, but Waveshare made some changes:
+This section guides you through building the project, from GUI design with Squareline Studio to deploying your code using PlatformIO.
 
-- ESP32_IO_Expander: The CH422G chip was added. There are [forks](https://github.com/esp-arduino-libs/ESP32_IO_Expander/network) from the original ESP32 repo including the new files, but nothing official yet.
-- ESP32_Display_Panel: There are also some changes in the repo, that I did not yet investigate.
+### 1. 📐 **Designing GUI with Squareline Studio**
 
-## SquareLine Studio
+1. Open **[Squareline Studio](https://squareline.io/)**.
+2. Create a new project:
+   - Set resolution: `800x480`.
+   - Select LVGL version compatible with your ESP-IDF version.
+   - Choose `ESP32 S3 Box` as target if unsure.
+3. Design your UI:
+   - Add widgets like labels, buttons, charts, etc.
+   - Set object names (e.g., `temp_label`, `humidity_label`).
+4. Export project:
+   - Go to `File > Export > Export C Code`.
+   - Set output folder (e.g., `./components/ui`).
+   - Copy or move the exported code to your PlatformIO project.
 
-The setting that worked the best for me in SquareLine Studio was Arduino with TFT_eSPI. I used Export > Create Template Project, but only copied the `lib/ui` folder into this project.
+### 2. 💻 **Setting Up PlatformIO Project**
 
-## PlatformIO
+1. **Create Project**:
+   - Open VS Code → PlatformIO → `New Project`.
+   - Board: `Espressif ESP32-S3 Dev Module`.
+   - Framework: `ESP-IDF`.
+   - Project name: `esp32_s3_lvgl_gui`.
 
-Check the profile in platformio.ini:
-
-```
-[env:esp32s3box]
-platform = espressif32
-board = esp32s3box
-framework = arduino
-monitor_speed = 115200
-board_upload.flash_size = 8MB
-build_flags = 
-	-D BOARD_HAS_PSRAM
-	-D LV_CONF_INCLUDE_SIMPLE
-	-I lib
-board_build.arduino.memory_type = qio_opi
-board_build.f_flash = 80000000L
-board_build.flash_mode = qio
-lib_deps = 
-	lvgl/lvgl@8.3.8
-```
-
-These are the equivalents for settings the [Waveshare Wiki](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3) recommends for the Arduino IDE.
-
-## Source
-
-The `src/main.cpp` is basically a combination of the `ESP32-S3-Touch-LCD-4.3_Code/Arduino/lvgl_Porting` example from the Waveshare wiki, with removed demo and `#include <ui.h>` from the exported SquareLine Studio project.
-
-## Caveats
-
-There are some yellow artifacts when doing animations. Also, I have not yet figured out how to rotate the screen.
-
-Feedback welcome!
-=======
-# Computer-engineer-project---HK242
-DACN GD1 
->>>>>>> ec618aec913a22560a838ca34282b8e6c88be840
+2. **Install Required Libraries**:
+   - Install the following libraries via `platformio.ini`:
+     ```ini
+     lib_deps =
+       lvgl/lvgl
+       adafruit/DHT sensor library@^1.4.4
+     ```
