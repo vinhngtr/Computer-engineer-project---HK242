@@ -30,16 +30,7 @@ void ui_BedoomSceen_screen_init(void)
     lv_label_set_text(ui_dvName3, "BED ROOM ");
     lv_obj_set_style_text_color(ui_dvName3, lv_color_hex(0xD1F100), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_dvName3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_dvName3, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_lightName2 = lv_label_create(ui_Panel5);
-    lv_obj_set_width(ui_lightName2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_lightName2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_lightName2, 3);
-    lv_obj_set_y(ui_lightName2, 18);
-    lv_obj_set_align(ui_lightName2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_lightName2, "LIGHT Bulb 1             LIGHT Bulb 2               LIGHT Bulb 3\n\n\n");
-    lv_obj_set_style_text_font(ui_lightName2, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_dvName3, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LightBedRoom1 = lv_switch_create(ui_Panel5);
     lv_obj_set_width(ui_LightBedRoom1, 100);
@@ -97,18 +88,13 @@ void ui_BedoomSceen_screen_init(void)
     lv_obj_set_y(ui_dvName4, -9);
     lv_obj_set_align(ui_dvName4, LV_ALIGN_TOP_MID);
     lv_label_set_text(ui_dvName4, "FAN");
-    lv_obj_set_style_text_font(ui_dvName4, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_fanName2 = lv_label_create(ui_Panel6);
-    lv_obj_set_width(ui_fanName2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_fanName2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_fanName2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_fanName2, "FAN 1\n\n\n\nFAN 2");
-    lv_obj_set_style_text_font(ui_fanName2, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_dvName4, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_FanBedRoom1 = lv_switch_create(ui_Panel6);
     lv_obj_set_width(ui_FanBedRoom1, 100);
     lv_obj_set_height(ui_FanBedRoom1, 50);
+    lv_obj_set_x(ui_FanBedRoom1, 0);
+    lv_obj_set_y(ui_FanBedRoom1, -9);
     lv_obj_set_align(ui_FanBedRoom1, LV_ALIGN_CENTER);
 
     ui_FanBedRoom2 = lv_switch_create(ui_Panel6);
@@ -119,8 +105,8 @@ void ui_BedoomSceen_screen_init(void)
     lv_obj_set_align(ui_FanBedRoom2, LV_ALIGN_CENTER);
 
     ui_Panel7 = lv_obj_create(ui_BedoomSceen);
-    lv_obj_set_width(ui_Panel7, lv_pct(50));
-    lv_obj_set_height(ui_Panel7, lv_pct(23));
+    lv_obj_set_width(ui_Panel7, lv_pct(34));
+    lv_obj_set_height(ui_Panel7, lv_pct(18));
     lv_obj_set_x(ui_Panel7, lv_pct(0));
     lv_obj_set_y(ui_Panel7, lv_pct(48));
     lv_obj_clear_flag(ui_Panel7, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -132,46 +118,63 @@ void ui_BedoomSceen_screen_init(void)
     ui_ACName3 = lv_label_create(ui_Panel7);
     lv_obj_set_width(ui_ACName3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ACName3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACName3, -1);
-    lv_obj_set_y(ui_ACName3, 3);
-    lv_obj_set_align(ui_ACName3, LV_ALIGN_BOTTOM_LEFT);
+    lv_obj_set_x(ui_ACName3, -84);
+    lv_obj_set_y(ui_ACName3, 2);
+    lv_obj_set_align(ui_ACName3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_ACName3, "Air 1");
-    lv_obj_set_style_text_font(ui_ACName3, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_ACName3, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_ACBedRoom1 = lv_switch_create(ui_Panel7);
     lv_obj_set_width(ui_ACBedRoom1, 70);
     lv_obj_set_height(ui_ACBedRoom1, 35);
-    lv_obj_set_x(ui_ACBedRoom1, 8);
-    lv_obj_set_y(ui_ACBedRoom1, -11);
+    lv_obj_set_x(ui_ACBedRoom1, 0);
+    lv_obj_set_y(ui_ACBedRoom1, 3);
     lv_obj_set_align(ui_ACBedRoom1, LV_ALIGN_BOTTOM_RIGHT);
 
-    ui_Panel9 = lv_obj_create(ui_BedoomSceen);
-    lv_obj_set_width(ui_Panel9, lv_pct(50));
-    lv_obj_set_height(ui_Panel9, lv_pct(23));
-    lv_obj_set_x(ui_Panel9, lv_pct(-50));
-    lv_obj_set_y(ui_Panel9, lv_pct(-4));
-    lv_obj_set_align(ui_Panel9, LV_ALIGN_BOTTOM_RIGHT);
-    lv_obj_clear_flag(ui_Panel9, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Panel9, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Panel9, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_Panel9, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Panel9, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Lightbed1 = lv_label_create(ui_BedoomSceen);
+    lv_obj_set_width(ui_Lightbed1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Lightbed1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Lightbed1, -296);
+    lv_obj_set_y(ui_Lightbed1, -123);
+    lv_obj_set_align(ui_Lightbed1, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Lightbed1, "LIGHT Bulb 1");
+    lv_obj_set_style_text_font(ui_Lightbed1, &ui_font_Font20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_ACName4 = lv_label_create(ui_Panel9);
-    lv_obj_set_width(ui_ACName4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ACName4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ACName4, -4);
-    lv_obj_set_y(ui_ACName4, -1);
-    lv_obj_set_align(ui_ACName4, LV_ALIGN_BOTTOM_LEFT);
-    lv_label_set_text(ui_ACName4, "Air 2");
-    lv_obj_set_style_text_font(ui_ACName4, &ui_font_font48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Lightbed2 = lv_label_create(ui_BedoomSceen);
+    lv_obj_set_width(ui_Lightbed2, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Lightbed2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Lightbed2, -98);
+    lv_obj_set_y(ui_Lightbed2, -123);
+    lv_obj_set_align(ui_Lightbed2, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Lightbed2, "LIGHT Bulb 2");
+    lv_obj_set_style_text_font(ui_Lightbed2, &ui_font_Font20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_ACBedRoom2 = lv_switch_create(ui_Panel9);
-    lv_obj_set_width(ui_ACBedRoom2, 70);
-    lv_obj_set_height(ui_ACBedRoom2, 35);
-    lv_obj_set_x(ui_ACBedRoom2, 7);
-    lv_obj_set_y(ui_ACBedRoom2, -12);
-    lv_obj_set_align(ui_ACBedRoom2, LV_ALIGN_BOTTOM_RIGHT);
+    ui_Lightbed3 = lv_label_create(ui_BedoomSceen);
+    lv_obj_set_width(ui_Lightbed3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Lightbed3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Lightbed3, 110);
+    lv_obj_set_y(ui_Lightbed3, -123);
+    lv_obj_set_align(ui_Lightbed3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Lightbed3, "LIGHT Bulb 3");
+    lv_obj_set_style_text_font(ui_Lightbed3, &ui_font_Font20, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Label14 = lv_label_create(ui_BedoomSceen);
+    lv_obj_set_width(ui_Label14, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label14, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label14, 285);
+    lv_obj_set_y(ui_Label14, -118);
+    lv_obj_set_align(ui_Label14, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label14, "FAN 1");
+    lv_obj_set_style_text_font(ui_Label14, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Label15 = lv_label_create(ui_BedoomSceen);
+    lv_obj_set_width(ui_Label15, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label15, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label15, 289);
+    lv_obj_set_y(ui_Label15, -19);
+    lv_obj_set_align(ui_Label15, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label15, "FAN 2");
+    lv_obj_set_style_text_font(ui_Label15, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_BackHome2, ui_event_BackHome2, LV_EVENT_ALL, NULL);
 

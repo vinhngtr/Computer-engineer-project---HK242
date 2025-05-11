@@ -8,14 +8,19 @@
 
 ///////////////////// VARIABLES ////////////////////
 
-// SCREEN: ui_FirstScreen
-void ui_FirstScreen_screen_init(void);
-lv_obj_t * ui_FirstScreen;
-lv_obj_t * ui_Panel1;
-lv_obj_t * ui_Label3;
-void ui_event_btnHome(lv_event_t * e);
-lv_obj_t * ui_btnHome;
-lv_obj_t * ui_Image3;
+// SCREEN: ui_SetingWifi
+void ui_SetingWifi_screen_init(void);
+lv_obj_t * ui_SetingWifi;
+lv_obj_t * ui_Header;
+void ui_event_ImportName(lv_event_t * e);
+lv_obj_t * ui_ImportName;
+void ui_event_ImportPass(lv_event_t * e);
+lv_obj_t * ui_ImportPass;
+void ui_event_ConnectWF(lv_event_t * e);
+lv_obj_t * ui_ConnectWF;
+lv_obj_t * ui_Label2;
+void ui_event_Keyboard1(lv_event_t * e);
+lv_obj_t * ui_Keyboard1;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_mainScreen
@@ -23,19 +28,6 @@ void ui_mainScreen_screen_init(void);
 lv_obj_t * ui_mainScreen;
 lv_obj_t * ui_TabView1;
 lv_obj_t * ui_TabView2;
-void ui_event_KitchenRoom(lv_event_t * e);
-lv_obj_t * ui_KitchenRoom;
-lv_obj_t * ui_roomName3;
-lv_obj_t * ui_LightKitRoom;
-lv_obj_t * ui_FanKitRoom;
-lv_obj_t * ui_AirKitRoom;
-lv_obj_t * ui_titleComp2;
-lv_obj_t * ui_CountFanK;
-lv_obj_t * ui_CountACK;
-lv_obj_t * ui_CountLightK;
-lv_obj_t * ui_KitActiveLight;
-lv_obj_t * ui_KitActiveFan;
-lv_obj_t * ui_KitActiveAC;
 void ui_event_BedRoom(lv_event_t * e);
 lv_obj_t * ui_BedRoom;
 lv_obj_t * ui_roomName4;
@@ -79,7 +71,6 @@ void ui_LVRoomScreen_screen_init(void);
 lv_obj_t * ui_LVRoomScreen;
 lv_obj_t * ui_Panel2;
 lv_obj_t * ui_dvName1;
-lv_obj_t * ui_lightName1;
 void ui_event_LightLvRoom1(lv_event_t * e);
 lv_obj_t * ui_LightLvRoom1;
 void ui_event_LightLvRoom2(lv_event_t * e);
@@ -91,18 +82,19 @@ lv_obj_t * ui_BackHome;
 lv_obj_t * ui_Image4;
 lv_obj_t * ui_Panel3;
 lv_obj_t * ui_dvName2;
-lv_obj_t * ui_fanName1;
 void ui_event_FanLvRoom1(lv_event_t * e);
 lv_obj_t * ui_FanLvRoom1;
 void ui_event_FanLvRoom2(lv_event_t * e);
 lv_obj_t * ui_FanLvRoom2;
+lv_obj_t * ui_Fan1;
 lv_obj_t * ui_Panel4;
 lv_obj_t * ui_ACName1;
 void ui_event_Switch2(lv_event_t * e);
 lv_obj_t * ui_Switch2;
-lv_obj_t * ui_Panel8;
-lv_obj_t * ui_ACName2;
-lv_obj_t * ui_Switch1;
+lv_obj_t * ui_LIGHT_Bulb_1_;
+lv_obj_t * ui_LIGHT_Bulb_2;
+lv_obj_t * ui_LIGHT_Bulb_3;
+lv_obj_t * ui_Fan2;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_BedoomSceen
@@ -110,7 +102,6 @@ void ui_BedoomSceen_screen_init(void);
 lv_obj_t * ui_BedoomSceen;
 lv_obj_t * ui_Panel5;
 lv_obj_t * ui_dvName3;
-lv_obj_t * ui_lightName2;
 lv_obj_t * ui_LightBedRoom1;
 lv_obj_t * ui_LightBedRoom2;
 lv_obj_t * ui_LightBedRoom3;
@@ -119,40 +110,16 @@ lv_obj_t * ui_BackHome2;
 lv_obj_t * ui_Image2;
 lv_obj_t * ui_Panel6;
 lv_obj_t * ui_dvName4;
-lv_obj_t * ui_fanName2;
 lv_obj_t * ui_FanBedRoom1;
 lv_obj_t * ui_FanBedRoom2;
 lv_obj_t * ui_Panel7;
 lv_obj_t * ui_ACName3;
 lv_obj_t * ui_ACBedRoom1;
-lv_obj_t * ui_Panel9;
-lv_obj_t * ui_ACName4;
-lv_obj_t * ui_ACBedRoom2;
-// CUSTOM VARIABLES
-
-// SCREEN: ui_KitchenSceen
-void ui_KitchenSceen_screen_init(void);
-lv_obj_t * ui_KitchenSceen;
-lv_obj_t * ui_Panel10;
-lv_obj_t * ui_dvName5;
-lv_obj_t * ui_lightName3;
-lv_obj_t * ui_LightKit1;
-lv_obj_t * ui_LightKit2;
-lv_obj_t * ui_LightKit3;
-void ui_event_BackHome3(lv_event_t * e);
-lv_obj_t * ui_BackHome3;
-lv_obj_t * ui_Image5;
-lv_obj_t * ui_Panel11;
-lv_obj_t * ui_dvName6;
-lv_obj_t * ui_fanName3;
-lv_obj_t * ui_FanKit1;
-lv_obj_t * ui_FanKit2;
-lv_obj_t * ui_Panel12;
-lv_obj_t * ui_AirKIT1;
-lv_obj_t * ui_SWAirKIT1;
-lv_obj_t * ui_Panel13;
-lv_obj_t * ui_ACName6;
-lv_obj_t * ui_SWAirKIT2;
+lv_obj_t * ui_Lightbed1;
+lv_obj_t * ui_Lightbed2;
+lv_obj_t * ui_Lightbed3;
+lv_obj_t * ui_Label14;
+lv_obj_t * ui_Label15;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -171,21 +138,48 @@ lv_obj_t * ui____initial_actions0;
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_btnHome(lv_event_t * e)
+void ui_event_ImportName(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_mainScreen_screen_init);
+    if(event_code == LV_EVENT_FOCUSED) {
+        _ui_keyboard_set_target(ui_Keyboard1,  ui_ImportName);
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
+    if(event_code == LV_EVENT_DEFOCUSED) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
     }
 }
 
-void ui_event_KitchenRoom(lv_event_t * e)
+void ui_event_ImportPass(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_FOCUSED) {
+        _ui_keyboard_set_target(ui_Keyboard1,  ui_ImportPass);
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
+    if(event_code == LV_EVENT_DEFOCUSED) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
+
+void ui_event_ConnectWF(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_KitchenSceen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0, &ui_KitchenSceen_screen_init);
+        connectToWiFi(e);
+        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
+    }
+}
+
+void ui_event_Keyboard1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_READY) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
     }
 }
 
@@ -299,15 +293,6 @@ void ui_event_BackHome2(lv_event_t * e)
     }
 }
 
-void ui_event_BackHome3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
-    }
-}
-
 ///////////////////// SCREENS ////////////////////
 
 void ui_init(void)
@@ -316,11 +301,10 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_FirstScreen_screen_init();
+    ui_SetingWifi_screen_init();
     ui_mainScreen_screen_init();
     ui_LVRoomScreen_screen_init();
     ui_BedoomSceen_screen_init();
-    ui_KitchenSceen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_FirstScreen);
+    lv_disp_load_scr(ui_SetingWifi);
 }

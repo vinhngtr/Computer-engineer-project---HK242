@@ -2,17 +2,56 @@
 // SquareLine Studio version: SquareLine Studio 1.5.1
 // LVGL version: 8.3.6
 // Project name: Squareline
-
+#include <Arduino.h>
 #include "ui.h"
-#include "../../../../src/device/TaskMobus.h"
-void func0055(lv_event_t *e)
+#include "../../../src/TaskMobus.h"
+#include <WiFi.h>
+
+void setUPWF(const char *ssid, const char *password)
 {
-	// Your code here
+
+	WiFi.begin(ssid, password);
+	int retry = 0;
+
+
+	while (WiFi.status() != WL_CONNECTED && retry < 20)
+	{
+		delay(500);
+		retry++;
+	}
+
+	if (WiFi.status() == WL_CONNECTED)
+	{
+		Serial.println("Kết nối thành công");
+		Serial.print("Địa chỉ IP: ");
+		Serial.println(WiFi.localIP());
+		delay(1500); // Đợi 1.5s trước khi chuyển màn hình
+		_ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
+	}
+	else
+	{
+		Serial.println("Kết nối thất bại");
+		delay(1500); // Đợi 1.5s trước khi
+					 // ẩn thông báo này
+		_ui_screen_change(&ui_mainScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0, &ui_mainScreen_screen_init);
+	}
+}
+void connectToWiFi(lv_event_t *e)
+{
+	char ssid[64];
+	char password[64];
+
+	strncpy(ssid, lv_textarea_get_text(ui_ImportName), sizeof(ssid));
+	strncpy(password, lv_textarea_get_text(ui_ImportPass), sizeof(password));
+	ssid[sizeof(ssid) - 1] = '\0';
+	password[sizeof(password) - 1] = '\0';
+
+	setUPWF(ssid, password);
 }
 
 void LvR_light1(lv_event_t *e)
 {
-	// Your code here -- RELAY1
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -24,7 +63,7 @@ void LvR_light1(lv_event_t *e)
 
 void LvR_light2(lv_event_t *e)
 {
-	// Your code here -- RELAY 2
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -36,7 +75,7 @@ void LvR_light2(lv_event_t *e)
 
 void LvR_light3(lv_event_t *e)
 {
-	// Your code here -- RELAY 3
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -48,7 +87,8 @@ void LvR_light3(lv_event_t *e)
 
 void LvR_fan1(lv_event_t *e)
 {
-	// Your code here -- RELAY 4
+	// Your code here
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -60,7 +100,8 @@ void LvR_fan1(lv_event_t *e)
 
 void LvR_fan2(lv_event_t *e)
 {
-	// Your code here -- RELAY 5
+	// Your code here
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -72,7 +113,7 @@ void LvR_fan2(lv_event_t *e)
 
 void LvR_air1(lv_event_t *e)
 {
-	// Your code here -- RELAY 6
+	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -80,4 +121,9 @@ void LvR_air1(lv_event_t *e)
 		LV_UNUSED(obj);
 		stateRS485(5, lv_obj_has_state(obj, LV_STATE_CHECKED));
 	}
+}
+
+void connect_btn_event_handler(lv_event_t *e)
+{
+	// Your code here
 }

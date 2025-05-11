@@ -10,6 +10,7 @@
 extern "C" {
 #endif
 
+void connectToWiFi(lv_event_t * e);
 void LvR_light1(lv_event_t * e);
 void LvR_light2(lv_event_t * e);
 void LvR_light3(lv_event_t * e);

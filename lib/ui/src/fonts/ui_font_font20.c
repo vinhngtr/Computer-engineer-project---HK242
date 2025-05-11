@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 20 px
  * Bpp: 1
- * Opts: --bpp 1 --size 20 --font C:/DAMH-GD1/Computer-engineer-project---HK242/squareline/assets/SoulDaisy.otf -o C:/DAMH-GD1/Computer-engineer-project---HK242/squareline/assets\ui_font_font20.c --format lvgl -r 0x20-0x7f --no-compress --no-prefilter
+ * Opts: --bpp 1 --size 20 --font D:/DACN/Computer_engineer_project/squareline/assets/SoulDaisy.otf -o D:/DACN/Computer_engineer_project/squareline/assets\ui_font_Font20.c --format lvgl -r 0x20-0x7f --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
@@ -994,9 +994,9 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
 
 /*Initialize a public general font descriptor*/
 #if LVGL_VERSION_MAJOR >= 8
-const lv_font_t ui_font_font20 = {
+const lv_font_t ui_font_Font20 = {
 #else
-lv_font_t ui_font_font20 = {
+lv_font_t ui_font_Font20 = {
 #endif
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/

@@ -1,34 +1,14 @@
-#include <Arduino.h>
-#include <lvgl.h>
-#include <ESP_Panel_Library.h>
-#include <ESP_IOExpander_Library.h>
-#include <ui.h>
-#include <Adafruit_Sensor.h>
-#include <DHT20.h>
-#include <Wire.h>
-DHT20 dht20(&Wire1);
+#include <globals.h>
+#include <ArduinoJson.h>
+#include <TaskMQTT.h>
+extern float globalTemperature;
+extern float globalHumidity;
+// Define the parseJson function if missing
+void parseJson(const String &json, bool isFromUI);
 
-float temperature = 0, humidity = 0;
-// Extend IO Pin define
-#define TP_RST 1
-#define LCD_BL 2
-#define LCD_RST 3
-#define SD_CS 4
-#define USB_SEL 5
-
-// I2C Pin define
-#define I2C_MASTER_NUM 0
-#define I2C_MASTER_SDA_IO 8
-#define I2C_MASTER_SCL_IO 9
-
-#define DHT20_SDA_IO 12
-#define DHT20_SCL_IO 13
 // Thời gian để cập nhật
 unsigned long previousMillis = 0;
 const long interval = 3000; // 3 giây
-/**
-// #include <demos/lv_demos.h>
-// #include <examples/lv_examples.h>
 
 /* LVGL porting configurations */
 #define LVGL_TICK_PERIOD_MS (2)
@@ -38,6 +18,20 @@ const long interval = 3000; // 3 giây
 #define LVGL_TASK_PRIORITY (2)
 #define LVGL_BUF_SIZE (ESP_PANEL_LCD_H_RES * 480 / 4)
 
+void TaskUIUpdate(void *pvParameters)
+{
+    while (1)
+    {
+        char buffer[32];
+        sprintf(buffer, "%.2f °C", globalTemperature);
+        lv_label_set_text(ui_ValueTemp, buffer);
+        lv_arc_set_value(ui_TempChart, int(globalTemperature));
+        sprintf(buffer, "%.2f %%", globalHumidity);
+        lv_label_set_text(ui_ValueHumi, buffer);
+        lv_arc_set_value(ui_HumidityChart, int(globalHumidity));
+        vTaskDelay(1500 / portTICK_PERIOD_MS);
+    }
+}
 ESP_Panel *panel = NULL;
 SemaphoreHandle_t lvgl_mux = NULL; // LVGL mutex
 
@@ -92,7 +86,7 @@ static void switch_event_handler(lv_event_t *e)
         lv_slider_set_value(ui_LivActiveFan, fanOnLiv, LV_ANIM_ON); // Cập nhật slider
         lvgl_port_unlock();                                         // Giải phóng mutex
     }
-    else if (target == ui_Switch1 || target == ui_Switch2)
+    else if (target == ui_Switch2)
     {
         acOnLiv += isOn ? 1 : -1;
         char buf[32];
@@ -117,37 +111,13 @@ static void switch_event_handler(lv_event_t *e)
         lv_label_set_text(ui_CountFanB, buf);
         lv_slider_set_value(ui_BedActiveFan, fanOnB, LV_ANIM_ON); // Cập nhật slider
     }
-    else if (target == ui_ACBedRoom1 || target == ui_ACBedRoom2)
+    else if (target == ui_ACBedRoom1)
     {
         acOnB += isOn ? 1 : -1;
         char buf[32];
         snprintf(buf, sizeof(buf), "%s%d%s", "(", int(acOnB), ")");
         lv_label_set_text(ui_CountACB, buf);
         lv_slider_set_value(ui_BedActiveAC, acOnB, LV_ANIM_ON); // Cập nhật slider
-    }
-    else if (target == ui_LightKit1 || target == ui_LightKit2 || target == ui_LightKit3)
-    {
-        lightOnK += isOn ? 1 : -1;
-        char buf[32];
-        snprintf(buf, sizeof(buf), "%s%d%s", "(", int(lightOnK), ")");
-        lv_label_set_text(ui_CountLightK, buf);
-        lv_slider_set_value(ui_KitActiveLight, lightOnK, LV_ANIM_ON); // Cập nhật slider
-    }
-    else if (target == ui_FanKit1 || target == ui_FanKit2)
-    {
-        fanOnK += isOn ? 1 : -1;
-        char buf[32];
-        snprintf(buf, sizeof(buf), "%s%d%s", "(", int(fanOnK), ")");
-        lv_label_set_text(ui_CountFanK, buf);
-        lv_slider_set_value(ui_KitActiveFan, fanOnK, LV_ANIM_ON); // Cập nhật slider
-    }
-    else if (target == ui_SWAirKIT1 || target == ui_SWAirKIT2)
-    {
-        acOnK += isOn ? 1 : -1;
-        char buf[32];
-        snprintf(buf, sizeof(buf), "%s%d%s", "(", int(acOnK), ")");
-        lv_label_set_text(ui_CountACK, buf);
-        lv_slider_set_value(ui_KitActiveAC, acOnK, LV_ANIM_ON); // Cập nhật slider
     }
 }
 #if ESP_PANEL_LCD_BUS_TYPE == ESP_PANEL_BUS_TYPE_RGB
@@ -192,7 +162,7 @@ void lvgl_port_tp_read(lv_indev_drv_t *indev, lv_indev_data_t *data)
         data->point.x = point.x;
         data->point.y = point.y;
 
-        Serial.printf("Touch point: x %d, y %d\n", point.x, point.y);
+        // Serial.printf("Touch point: x %d, y %d\n", point.x, point.y);
     }
 }
 #endif
@@ -280,9 +250,9 @@ void setup()
     /* Start panel */
     panel->begin();
 
-    Wire1.begin(DHT20_SDA_IO, DHT20_SCL_IO, 100000); // Bắt đầu với 100kHz
+    // Wire1.begin(DHT20_SDA_IO, DHT20_SCL_IO, 100000); // Bắt đầu với 100kHz
 
-    dht20.begin();
+    // dht20.begin();
     /* Create a task to run the LVGL task periodically */
     lvgl_mux = xSemaphoreCreateRecursiveMutex();
     xTaskCreate(lvgl_port_task, "lvgl", LVGL_TASK_STACK_SIZE, NULL, LVGL_TASK_PRIORITY, NULL);
@@ -301,7 +271,6 @@ void setup()
     lv_obj_add_event_cb(ui_FanLvRoom2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
     lv_label_set_text(ui_CountFanLV, "(0)");
     lv_slider_set_value(ui_LivActiveFan, 0, LV_ANIM_OFF);
-    lv_obj_add_event_cb(ui_Switch1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_add_event_cb(ui_Switch2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
     lv_label_set_text(ui_CountACLV, "(0)");
 
@@ -315,53 +284,17 @@ void setup()
     lv_label_set_text(ui_CountFanB, "(0)");
     lv_slider_set_value(ui_BedActiveFan, 0, LV_ANIM_OFF);
     lv_obj_add_event_cb(ui_ACBedRoom1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_ACBedRoom2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
     lv_label_set_text(ui_CountACB, "(0)");
     lv_slider_set_value(ui_BedActiveAC, 0, LV_ANIM_OFF);
 
-    lv_obj_add_event_cb(ui_LightKit1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_LightKit2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_LightKit3, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_label_set_text(ui_CountLightK, "(0)");
-    lv_slider_set_value(ui_KitActiveLight, 0, LV_ANIM_OFF);
-    lv_obj_add_event_cb(ui_FanKit1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_FanKit2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_label_set_text(ui_CountFanK, "(0)");
-    lv_slider_set_value(ui_KitActiveFan, 0, LV_ANIM_OFF);
-    lv_obj_add_event_cb(ui_SWAirKIT1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_add_event_cb(ui_SWAirKIT2, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_label_set_text(ui_CountACK, "(0)");
-    lv_slider_set_value(ui_KitActiveAC, 0, LV_ANIM_OFF);
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_unlock();
 
+    xTaskCreatePinnedToCore(mqttTask, "MQTT", 4096, NULL, 1, NULL, 1);
+    xTaskCreatePinnedToCore(TaskUIUpdate, "TaskUIUpdate", 4096, NULL, 1, NULL, 1);
+    setupRS485(); // Setup RS485
     /* Release the mutex */
     Serial.println("Setup done");
-}
-
-void update_sensor()
-{
-    Serial.println("Reading DHT20...");
-    int status = dht20.read();
-    if (status == DHT20_OK)
-    {
-        Serial.println("DHT20 read success!");
-        temperature = dht20.getTemperature();
-        humidity = dht20.getHumidity();
-        Serial.printf("Temp: %.1f°C, Hum: %.1f%%\n", temperature, humidity);
-        lvgl_port_lock(-1);
-        lv_arc_set_value(ui_TempChart, int(temperature));
-        lv_arc_set_value(ui_HumidityChart, int(humidity));
-        String tempString = String(temperature, 1) + "\u00B0C";
-        lv_label_set_text(ui_ValueTemp, tempString.c_str());
-        String humidString = String(humidity, 1) + "%";
-        lv_label_set_text(ui_ValueHumi, humidString.c_str());
-        lvgl_port_unlock();
-    }
-    else
-    {
-        Serial.printf("DHT20 read failed, status: %d\n", status);
-    }
 }
 
 void loop()
@@ -369,12 +302,4 @@ void loop()
     // Xử lý sự kiện LVGL
     lv_task_handler();
     delay(5);
-
-    // Kiểm tra thời gian để cập nhật giá trị
-    unsigned long currentMillis = millis();
-    if (currentMillis - previousMillis >= interval)
-    {
-        previousMillis = currentMillis;
-        update_sensor(); // Cập nhật giá trị ngẫu nhiên
-    }
 }
