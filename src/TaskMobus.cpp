@@ -1,48 +1,131 @@
 #include "TaskMobus.h"
 
-HardwareSerial RS485(1);
+// Topic MQTT cho điều khiển relay (cùng với relay)
+const char *RELAY_CONTROL_TOPICS[6] = {
+    "vinhngtr/feeds/relay1",
+    "vinhngtr/feeds/relay2",
+    "vinhngtr/feeds/relay3",
+    "vinhngtr/feeds/relay4",
+    "vinhngtr/feeds/relay5",
+    "vinhngtr/feeds/relay6"};
 
-// / Lệnh bật từng relay
-uint8_t relayOnCommands[6][8] = {
-    {0x01, 0x05, 0x00, 0x00, 0xFF, 0x00, 0x8C, 0x3A}, // CH1 ON - FF là giá trị ON
-    {0x06, 0x05, 0x00, 0x02, 0x55, 0x00, 0x52, 0xED}, // CH2 ON
-    {0x06, 0x05, 0x00, 0x03, 0x55, 0x00, 0x03, 0x2D}, // CH3 ON
-    {0x06, 0x05, 0x00, 0x04, 0x55, 0x00, 0xB2, 0xEC}, // CH4 ON
-    {0x06, 0x05, 0x00, 0x05, 0x55, 0x00, 0xE3, 0x2C}, // CH5 ON
-    {0x06, 0x05, 0x00, 0x06, 0x55, 0x00, 0x13, 0x2C}  // CH6 ON
-};
+// Instance toàn cục
+RelayController relayController;
 
-// Lệnh tắt từng relay (giống lệnh bật)
-uint8_t relayOffCommands[6][8] = {
-    {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA}, // CH1 OFF - 00 là giá trị OFF
-    {0x06, 0x05, 0x00, 0x02, 0x55, 0x00, 0x52, 0xED}, // CH2 ON
-    {0x06, 0x05, 0x00, 0x03, 0x55, 0x00, 0x03, 0x2D}, // CH3 ON
-    {0x06, 0x05, 0x00, 0x04, 0x55, 0x00, 0xB2, 0xEC}, // CH4 ON
-    {0x06, 0x05, 0x00, 0x05, 0x55, 0x00, 0xE3, 0x2C}, // CH5 ON
-    {0x06, 0x05, 0x00, 0x06, 0x55, 0x00, 0x13, 0x2C}  // CH6 ON
-};
-
-void stateRS485(int i, bool state)
+RelayController::RelayController() : mqttClient(nullptr), initialized(false)
 {
-    Serial.print("Relay ");
-        Serial.print(i + 1);
-        Serial.println(state ? " ON" : " OFF");
-        
-        // Gửi lệnh
-        RS485.write(state ? relayOnCommands[i] : relayOffCommands[i], 8);
-        RS485.flush(); // Đảm bảo dữ liệu được gửi hết
-        
-        // Chờ một khoảng thời gian cho quá trình truyền hoàn tất
-        delay(10);
 }
 
-void setupRS485()
+RelayController::~RelayController()
 {
-    // Khởi tạo UART cho RS485 - thử với tốc độ baud 9600 phổ biến
-    RS485.begin(9600, SERIAL_8N1, 15, 16);
-    
-    // Xóa bất kỳ dữ liệu buffer nào còn sót lại
-    while(RS485.available()) {
-        RS485.read();
+    // Không cần làm gì đặc biệt
+}
+
+void RelayController::begin(PubSubClient *client)
+{
+    mqttClient = client;
+    initialized = true;
+
+    Serial.println("=== RelayController: Đã khởi tạo điều khiển relay ===");
+}
+
+void RelayController::checkMqttStatus()
+{
+    if (!initialized)
+    {
+        Serial.println("RelayController: Chưa được khởi tạo");
+        return;
+    }
+
+    if (!mqttClient)
+    {
+        Serial.println("RelayController: MQTT client chưa được thiết lập");
+        return;
+    }
+
+    if (mqttClient->connected())
+    {
+        Serial.println("RelayController: ✓ MQTT đã kết nối - Sẵn sàng điều khiển relay!");
+    }
+    else
+    {
+        Serial.println("RelayController: ⚠ MQTT chưa kết nối - Đang chờ kết nối...");
+    }
+}
+
+bool RelayController::sendRelayCommand(int relayNumber, bool state)
+{
+    return sendRelayCommand(relayNumber, state ? "1" : "0");
+}
+
+bool RelayController::sendRelayCommand(int relayNumber, const char *command)
+{
+    // Kiểm tra khởi tạo
+    if (!initialized)
+    {
+        Serial.println("RelayController: Chưa được khởi tạo! Gọi begin() trước.");
+        return false;
+    }
+
+    // Kiểm tra số relay hợp lệ (1-6)
+    if (relayNumber < 1 || relayNumber > 6)
+    {
+        Serial.printf("RelayController: Số relay không hợp lệ: %d (phải từ 1-6)\n", relayNumber);
+        return false;
+    }
+
+    // Kiểm tra MQTT client
+    if (!mqttClient)
+    {
+        Serial.println("RelayController: MQTT client chưa được thiết lập!");
+        return false;
+    }
+
+    // Kiểm tra kết nối MQTT
+    if (!mqttClient->connected())
+    {
+        Serial.printf("RelayController: MQTT chưa kết nối, không thể gửi lệnh relay %d\n", relayNumber);
+        Serial.println("RelayController: Hãy đảm bảo WiFi và MQTT đã kết nối");
+        return false;
+    }
+
+    // Lấy topic tương ứng (index = relayNumber - 1)
+    const char *topic = RELAY_CONTROL_TOPICS[relayNumber - 1];
+
+    Serial.printf("RelayController: Đang gửi lệnh '%s' đến relay %d...\n", command, relayNumber);
+    Serial.printf("RelayController: Topic: %s\n", topic);
+
+    // Gửi lệnh
+    bool result = mqttClient->publish(topic, command);
+
+    if (result)
+    {
+        Serial.printf("RelayController: ✓ Gửi lệnh thành công! Relay %d -> %s\n", relayNumber, command);
+    }
+    else
+    {
+        Serial.printf("RelayController: ✗ Gửi lệnh thất bại! Relay %d\n", relayNumber);
+    }
+
+    return result;
+}
+
+bool RelayController::isReady()
+{
+    return (initialized && mqttClient != nullptr && mqttClient->connected());
+}
+
+// thông báo khi MQTT kết nối
+bool RelayController::onMqttConnected()
+{
+    if (initialized && mqttClient && mqttClient->connected())
+    {
+        Serial.println("=== RelayController: MQTT đã kết nối - Sẵn sàng điều khiển relay! ===");
+        return true;
+    }
+    else
+    {
+        Serial.println("=== RelayController: MQTT chưa kết nối - Không thể điều khiển relay! ===");
+        return false;
     }
 }

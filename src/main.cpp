@@ -1,10 +1,11 @@
 #include <globals.h>
-#include <ArduinoJson.h>
 #include <TaskMQTT.h>
+#include <TaskMobus.h>
+
 extern float globalTemperature;
 extern float globalHumidity;
-// Define the parseJson function if missing
-void parseJson(const String &json, bool isFromUI);
+
+// void parseJson(const String &json, bool isFromUI);
 
 // Thời gian để cập nhật
 unsigned long previousMillis = 0;
@@ -193,7 +194,9 @@ void lvgl_port_task(void *arg)
 
 void setup()
 {
-    Serial.begin(115200); /* prepare for possible serial debug */
+    Serial.begin(115200);           /* prepare for possible serial debug */
+    relayController.begin(&client); // client từ TaskMQTT
+    // Serial2.begin(9600, SERIAL_8N1, 16, 17); /* prepare for possible serial debug */
     String LVGL_Arduino = "Hello LVGL! ";
     LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
 
@@ -250,9 +253,6 @@ void setup()
     /* Start panel */
     panel->begin();
 
-    // Wire1.begin(DHT20_SDA_IO, DHT20_SCL_IO, 100000); // Bắt đầu với 100kHz
-
-    // dht20.begin();
     /* Create a task to run the LVGL task periodically */
     lvgl_mux = xSemaphoreCreateRecursiveMutex();
     xTaskCreate(lvgl_port_task, "lvgl", LVGL_TASK_STACK_SIZE, NULL, LVGL_TASK_PRIORITY, NULL);
@@ -286,14 +286,11 @@ void setup()
     lv_obj_add_event_cb(ui_ACBedRoom1, switch_event_handler, LV_EVENT_VALUE_CHANGED, NULL);
     lv_label_set_text(ui_CountACB, "(0)");
     lv_slider_set_value(ui_BedActiveAC, 0, LV_ANIM_OFF);
-
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
     lvgl_port_unlock();
 
     xTaskCreatePinnedToCore(mqttTask, "MQTT", 4096, NULL, 1, NULL, 1);
     xTaskCreatePinnedToCore(TaskUIUpdate, "TaskUIUpdate", 4096, NULL, 1, NULL, 1);
-    setupRS485(); // Setup RS485
-    /* Release the mutex */
     Serial.println("Setup done");
 }
 

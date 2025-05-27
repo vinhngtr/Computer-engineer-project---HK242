@@ -2,17 +2,20 @@
 // SquareLine Studio version: SquareLine Studio 1.5.1
 // LVGL version: 8.3.6
 // Project name: Squareline
-#include <Arduino.h>
 #include "ui.h"
-#include "../../../src/TaskMobus.h"
+#include "WiFi.h"
+#include <Arduino.h>
 #include <WiFi.h>
+#include <Wire.h>
+#include <PubSubClient.h>
+#include <ArduinoJson.h>
+#include "../../../src/TaskMobus.h"
 
 void setUPWF(const char *ssid, const char *password)
 {
 
 	WiFi.begin(ssid, password);
 	int retry = 0;
-
 
 	while (WiFi.status() != WL_CONNECTED && retry < 20)
 	{
@@ -57,7 +60,14 @@ void LvR_light1(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(0, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(1, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Light 1");
+			return;
+		}
+		Serial.printf("Light 1: %s\n", isOn ? "ON" : "OFF");
 	}
 }
 
@@ -69,7 +79,14 @@ void LvR_light2(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(1, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(2, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Light 2");
+			return;
+		}
+		Serial.printf("Light 2:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 
@@ -81,7 +98,14 @@ void LvR_light3(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(2, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(3, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Light 3");
+			return;
+		}
+		Serial.printf("Light 3:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 
@@ -94,7 +118,14 @@ void LvR_fan1(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(3, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(4, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Fan 1");
+			return;
+		}
+		Serial.printf("Fan 1:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 
@@ -107,7 +138,14 @@ void LvR_fan2(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(4, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(5, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Fan 2");
+			return;
+		}
+		Serial.printf("Fan 2:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 
@@ -119,7 +157,14 @@ void LvR_air1(lv_event_t *e)
 	if (code == LV_EVENT_VALUE_CHANGED)
 	{
 		LV_UNUSED(obj);
-		stateRS485(5, lv_obj_has_state(obj, LV_STATE_CHECKED));
+		bool isOn = lv_obj_has_state(obj, LV_STATE_CHECKED);
+		bool success = relayController.sendRelayCommand(6, isOn);
+		if (!success)
+		{
+			Serial.println("Failed to send command for Air 1");
+			return;
+		}
+		Serial.printf("Air 1:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 

@@ -1,3 +1,7 @@
+#ifndef GLOBALS_H
+#define GLOBALS_H
+
+
 #include <Arduino.h>
 #include <WiFi.h>
 #include <lvgl.h>
@@ -6,17 +10,14 @@
 #include <ui.h>
 #include <Wire.h>
 #include <PubSubClient.h>
-#include "LittleFS.h"
-#include "SPIFFS.h"
-#include <TaskMobus.h>
+// #include <TaskMQTT.h>
 #include <ArduinoJson.h>
-
 
 #define delay_connect 100
 #define MQTT_SERVER "io.adafruit.com"
 #define MQTT_PORT 1883
-#define IO_USERNAME "vinhtrong782002"
-#define IO_KEY "aio_Jurz04TDyrKkT2wVdyKLjeIYNifA"
+#define IO_USERNAME "vinhngtr"
+#define IO_KEY "aio_dqhQ72Ajygz9TrJgKupIDgndLO4U"
 
 // Extend IO Pin define
 #define TP_RST 1
@@ -29,3 +30,6 @@
 #define I2C_MASTER_NUM 0
 #define I2C_MASTER_SDA_IO 8
 #define I2C_MASTER_SCL_IO 9
+
+
+#endif

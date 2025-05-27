@@ -7,8 +7,8 @@ SET(SOURCES screens/ui_SetingWifi.c
     ui_helpers.c
     ui_events.cpp
     images/ui_img_1385603933.c
+    fonts/ui_font_Font20.c
     fonts/ui_font_Font30.c
-    fonts/ui_font_Font48.c
-    fonts/ui_font_Font20.c)
+    fonts/ui_font_Font48.c)
 
 add_library(ui ${SOURCES})
