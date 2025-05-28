@@ -1,18 +1,33 @@
 #include "globals.h"
 
 // Thông tin WiFi (thay bằng thông tin của bạn)
-const char *ssid = "coffee 24/24 lau1";
-const char *password = "khachhanglaso1";
+const char *ssid = "Nha Tro Xanh 1";
+const char *password = "tuanh240620";
 const char *mqtt_server = "io.adafruit.com";
 const char *mqtt_username = "vinhngtr";
-const char *mqtt_key = "aio_dqhQ72Ajygz9TrJgKupIDgndLO4U";
+const char *mqtt_key = "aio_njHI295TX0F51xX45hlAoM8CmplS";
 
 // Định nghĩa chân I2C
 const int SDA_PIN = 8;
 const int SCL_PIN = 9;
 
-// Định nghĩa chân relay
-const int RELAY_PINS[6] = {1, 2, 3, 4, 5, 6};
+// Topic MQTT cho điều khiển relay
+// const char *RELAY_CONTROL_TOPIC = "vinhngtr/feeds/relays-control";
+
+DHT20 dht20;
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// Biến kiểm soát thời gian
+unsigned long previousMillis = 0;
+const long interval = 15000;
+
+// Trạng thái relay (true = ON, false = OFF)
+const int RELAY_PINS[6] = {
+    GPIO_PIN_CH1, GPIO_PIN_CH2, GPIO_PIN_CH3, GPIO_PIN_CH4,
+    GPIO_PIN_CH5, GPIO_PIN_CH6};
+
+bool relayStates[6] = {false, false, false, false, false, false};
 
 // Topic MQTT cho điều khiển relay
 const char *RELAY_CONTROL_TOPICS[6] = {
@@ -22,17 +37,6 @@ const char *RELAY_CONTROL_TOPICS[6] = {
     "vinhngtr/feeds/relay4",
     "vinhngtr/feeds/relay5",
     "vinhngtr/feeds/relay6"};
-
-DHT20 dht20;
-WiFiClient espClient;
-PubSubClient client(espClient);
-
-// Biến kiểm soát thời gian
-unsigned long previousMillis = 0;
-const long interval = 50000;
-
-// Trạng thái relay (true = ON, false = OFF)
-bool relayStates[6] = {false, false, false, false, false, false};
 
 // Hàm callback khi nhận tin nhắn MQTT
 void mqttCallback(char *topic, byte *payload, unsigned int length)
@@ -55,14 +59,14 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
             {
                 digitalWrite(RELAY_PINS[i], HIGH);
                 relayStates[i] = true;
-                delay(100); // Đợi một chút để đảm bảo relay hoạt động
+                delay(100);
                 Serial.printf("Relay %d: ON\n", i + 1);
             }
             else if (message == "OFF" || message == "0")
             {
                 digitalWrite(RELAY_PINS[i], LOW);
                 relayStates[i] = false;
-                delay(100); // Đợi một chút để đảm bảo relay tắt
+                delay(100);
                 Serial.printf("Relay %d: OFF\n", i + 1);
             }
         }
@@ -81,17 +85,7 @@ void reconnect()
             Serial.println("connected");
 
             // Subscribe tới các topic điều khiển relay
-            for (int i = 0; i < 3; i++)
-            {
-                client.subscribe(RELAY_CONTROL_TOPICS[i]);
-                delay(500);
-            }
-
-            // Delay dài giữa 2 đợt
-            delay(2000);
-
-            // Đợt 2: Subcribe 3 feed còn lại
-            for (int i = 3; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 client.subscribe(RELAY_CONTROL_TOPICS[i]);
                 delay(500);
