@@ -1,11 +1,11 @@
 #include "globals.h"
 
-// Thông tin WiFi (thay bằng thông tin của bạn)
-const char *ssid = "Nha Tro Xanh 1";
-const char *password = "tuanh240620";
+// Thông tin WiFi 
+const char *ssid = "vinh ngtr";
+const char *password = "vinhtrong782002";
 const char *mqtt_server = "io.adafruit.com";
-const char *mqtt_username = "vinhngtr";
-const char *mqtt_key = "aio_njHI295TX0F51xX45hlAoM8CmplS";
+const char *mqtt_username = "vinhtrong782002";
+const char *mqtt_key = "aio_IDwi97EwGbXkbEqgGUo5Wvl87BUI";
 
 // Định nghĩa chân I2C
 const int SDA_PIN = 8;
@@ -31,12 +31,12 @@ bool relayStates[6] = {false, false, false, false, false, false};
 
 // Topic MQTT cho điều khiển relay
 const char *RELAY_CONTROL_TOPICS[6] = {
-    "vinhngtr/feeds/relay1",
-    "vinhngtr/feeds/relay2",
-    "vinhngtr/feeds/relay3",
-    "vinhngtr/feeds/relay4",
-    "vinhngtr/feeds/relay5",
-    "vinhngtr/feeds/relay6"};
+    "vinhtrong782002/feeds/relay1",
+    "vinhtrong782002/feeds/relay2",
+    "vinhtrong782002/feeds/relay3",
+    "vinhtrong782002/feeds/relay4",
+    "vinhtrong782002/feeds/relay5",
+    "vinhtrong782002/feeds/relay6"};
 
 // Hàm callback khi nhận tin nhắn MQTT
 void mqttCallback(char *topic, byte *payload, unsigned int length)
