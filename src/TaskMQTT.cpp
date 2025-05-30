@@ -4,15 +4,15 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 // Topic Adafruit cho cảm biến
-const char *TEMPERATURE_TOPIC = "vinhngtr/feeds/temperature";
-const char *HUMIDITY_TOPIC = "vinhngtr/feeds/humidity";
+const char *TEMPERATURE_TOPIC = "vinhtrong782002/feeds/temperature";
+const char *HUMIDITY_TOPIC = "vinhtrong782002/feeds/humidity";
 
 // Biến toàn cục lưu dữ liệu
 float globalTemperature = 0.0;
 float globalHumidity = 0.0;
 
-#define IO_USERNAME "vinhngtr"
-#define IO_KEY "aio_jOmg47Rg3ygV3pTlt7gflzrUAAWT"
+#define IO_USERNAME "vinhtrong782002"
+#define IO_KEY "aio_IDwi97EwGbXkbEqgGUo5Wvl87BUI"
 #define MQTT_SERVER "io.adafruit.com"
 #define MQTT_PORT 1883
 

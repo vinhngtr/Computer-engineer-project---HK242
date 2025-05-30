@@ -10,14 +10,14 @@
 #include <ui.h>
 #include <Wire.h>
 #include <PubSubClient.h>
-// #include <TaskMQTT.h>
+#include <TaskMQTT.h>
 #include <ArduinoJson.h>
 
 #define delay_connect 100
 #define MQTT_SERVER "io.adafruit.com"
 #define MQTT_PORT 1883
-#define IO_USERNAME "vinhngtr"
-#define IO_KEY "aio_dqhQ72Ajygz9TrJgKupIDgndLO4U"
+#define IO_USERNAME "vinhtrong782002"
+#define IO_KEY "aio_IDwi97EwGbXkbEqgGUo5Wvl87BUI"
 
 // Extend IO Pin define
 #define TP_RST 1

@@ -128,7 +128,7 @@ void ui_LVRoomScreen_screen_init(void)
     lv_label_set_text(ui_dvName1, "LIVING ROOM");
     lv_obj_set_style_text_color(ui_dvName1, lv_color_hex(0xD1F100), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_dvName1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_dvName1, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_dvName1, &ui_font_Font48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LightLvRoom1 = lv_switch_create(ui_Panel2);
     lv_obj_set_width(ui_LightLvRoom1, 100);
@@ -267,7 +267,7 @@ void ui_LVRoomScreen_screen_init(void)
     ui_Fan2 = lv_label_create(ui_LVRoomScreen);
     lv_obj_set_width(ui_Fan2, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_Fan2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Fan2, 294);
+    lv_obj_set_x(ui_Fan2, 289);
     lv_obj_set_y(ui_Fan2, -24);
     lv_obj_set_align(ui_Fan2, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Fan2, "FAN 2");

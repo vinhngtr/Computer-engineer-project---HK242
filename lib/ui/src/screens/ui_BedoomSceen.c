@@ -63,7 +63,7 @@ void ui_BedoomSceen_screen_init(void)
     lv_label_set_text(ui_dvName3, "BED ROOM ");
     lv_obj_set_style_text_color(ui_dvName3, lv_color_hex(0xD1F100), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_dvName3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_dvName3, &ui_font_Font30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_dvName3, &ui_font_Font48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LightBedRoom1 = lv_switch_create(ui_Panel5);
     lv_obj_set_width(ui_LightBedRoom1, 100);

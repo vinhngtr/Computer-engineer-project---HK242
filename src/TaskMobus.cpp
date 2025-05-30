@@ -2,12 +2,12 @@
 
 // Topic MQTT cho điều khiển relay (cùng với relay)
 const char *RELAY_CONTROL_TOPICS[6] = {
-    "vinhngtr/feeds/relay1",
-    "vinhngtr/feeds/relay2",
-    "vinhngtr/feeds/relay3",
-    "vinhngtr/feeds/relay4",
-    "vinhngtr/feeds/relay5",
-    "vinhngtr/feeds/relay6"};
+    "vinhtrong782002/feeds/relay1",
+    "vinhtrong782002/feeds/relay2",
+    "vinhtrong782002/feeds/relay3",
+    "vinhtrong782002/feeds/relay4",
+    "vinhtrong782002/feeds/relay5",
+    "vinhtrong782002/feeds/relay6"};
 
 // Instance toàn cục
 RelayController relayController;
@@ -45,11 +45,11 @@ void RelayController::checkMqttStatus()
 
     if (mqttClient->connected())
     {
-        Serial.println("RelayController: ✓ MQTT đã kết nối - Sẵn sàng điều khiển relay!");
+        Serial.println("RelayController: MQTT đã kết nối - Sẵn sàng điều khiển relay!");
     }
     else
     {
-        Serial.println("RelayController: ⚠ MQTT chưa kết nối - Đang chờ kết nối...");
+        Serial.println("RelayController: MQTT chưa kết nối - Đang chờ kết nối...");
     }
 }
 

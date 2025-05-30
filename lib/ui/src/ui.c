@@ -33,16 +33,18 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
+    ui_Initial_Screen_screen_init();
     ui_SetingWifi_screen_init();
     ui_mainScreen_screen_init();
     ui_LVRoomScreen_screen_init();
     ui_BedoomSceen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_SetingWifi);
+    lv_disp_load_scr(ui_Initial_Screen);
 }
 
 void ui_destroy(void)
 {
+    ui_Initial_Screen_screen_destroy();
     ui_SetingWifi_screen_destroy();
     ui_mainScreen_screen_destroy();
     ui_LVRoomScreen_screen_destroy();

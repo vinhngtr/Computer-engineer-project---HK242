@@ -111,8 +111,6 @@ void LvR_light3(lv_event_t *e)
 
 void LvR_fan1(lv_event_t *e)
 {
-	// Your code here
-	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -131,8 +129,6 @@ void LvR_fan1(lv_event_t *e)
 
 void LvR_fan2(lv_event_t *e)
 {
-	// Your code here
-	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -142,16 +138,15 @@ void LvR_fan2(lv_event_t *e)
 		bool success = relayController.sendRelayCommand(5, isOn);
 		if (!success)
 		{
-			Serial.println("Failed to send command for Fan 2");
+			Serial.println("Failed to send command for Fan 1");
 			return;
 		}
-		Serial.printf("Fan 2:%s\n", isOn ? "ON" : "OFF");
+		Serial.printf("Fan 1:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 
 void LvR_air1(lv_event_t *e)
 {
-	// Your code here
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t *obj = lv_event_get_target(e);
 	if (code == LV_EVENT_VALUE_CHANGED)
@@ -161,10 +156,10 @@ void LvR_air1(lv_event_t *e)
 		bool success = relayController.sendRelayCommand(6, isOn);
 		if (!success)
 		{
-			Serial.println("Failed to send command for Air 1");
+			Serial.println("Failed to send command for Fan 1");
 			return;
 		}
-		Serial.printf("Air 1:%s\n", isOn ? "ON" : "OFF");
+		Serial.printf("Fan 1:%s\n", isOn ? "ON" : "OFF");
 	}
 }
 

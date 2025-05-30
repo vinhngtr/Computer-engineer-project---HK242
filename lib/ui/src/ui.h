@@ -27,6 +27,7 @@ extern "C" {
 
 ///////////////////// SCREENS ////////////////////
 
+#include "screens/ui_Initial_Screen.h"
 #include "screens/ui_SetingWifi.h"
 #include "screens/ui_mainScreen.h"
 #include "screens/ui_LVRoomScreen.h"
@@ -40,6 +41,7 @@ extern "C" {
 extern lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+LV_IMG_DECLARE(ui_img_hcmut_png);    // assets/hcmut.png
 LV_IMG_DECLARE(ui_img_1385603933);    // assets/icons8-left-25.png
 
 // FONTS
