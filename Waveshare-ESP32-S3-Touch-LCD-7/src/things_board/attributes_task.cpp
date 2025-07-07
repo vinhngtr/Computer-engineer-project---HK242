@@ -129,27 +129,6 @@ void attributesTask(void *pvParameters) {
       }
     }
 
-    // Yêu cầu client attributes định kỳ
-    // if (currentTime - lastAttributeRequest >= attributeRequestInterval) {
-    //   lastAttributeRequest = currentTime;
-      
-    //   bool isWifiConnected = false;
-    //   bool isTbConnected = false;
-
-    //   portENTER_CRITICAL(&wifiMux);
-    //   isWifiConnected = wifiConnected;
-    //   portEXIT_CRITICAL(&wifiMux);
-
-    //   portENTER_CRITICAL(&tbMux);
-    //   isTbConnected = coreiotConnected;
-    //   portEXIT_CRITICAL(&tbMux);
-
-    //   if (isWifiConnected && isTbConnected && tb.connected()) {
-    //     // Yêu cầu client attributes từ server
-    //     requestClientAttributes();
-    //   }
-    // }
-
     // Kiểm tra và đăng ký RPC nếu chưa đăng ký
     if (!subscribed) {
       if (tb.connected()) {

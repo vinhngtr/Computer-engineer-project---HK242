@@ -3,20 +3,6 @@
 // Task handle for CoreIOT task
 TaskHandle_t coreiotTaskHandle = NULL;
 
-// // Shared attributes list
-// constexpr std::array<const char *, 2U> SHARED_ATTRIBUTES_LIST = {
-//   LED_STATE_ATTR,
-//   BLINKING_INTERVAL_ATTR
-// };
-
-// // RPC callbacks array
-// const std::array<RPC_Callback, 1U> callbacks = {
-//   RPC_Callback{ "setLedSwitchValue", setLedSwitchState }
-// };
-
-// // Attribute callbacks
-// const Shared_Attribute_Callback attributes_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
-// const Attribute_Request_Callback attribute_shared_request_callback(&processSharedAttributes, SHARED_ATTRIBUTES_LIST.cbegin(), SHARED_ATTRIBUTES_LIST.cend());
 
 void set_tb_state(bool connected) {
   if (connected) {

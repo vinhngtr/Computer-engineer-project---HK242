@@ -1,103 +1,81 @@
-print("Hello Core IOT")
+print("🚀 Giả lập Core IOT bắt đầu...")
 
-import paho.mqtt.client as mqttclient
 import time
 import json
 import random
+import paho.mqtt.client as mqtt
 
-BROKER_ADDRESS = "app.coreiot.io"
+# ⚙️ MQTT Configuration
+BROKER = "app.coreiot.io"
 PORT = 1883
-ACCESS_TOKEN = "vns9s1vqy67gnpfccc6c"
+ACCESS_TOKEN = "RaJWiAN3wj6XlAZr2PjP"
 
-relay_states = {
-    "sw1": False,
-    "sw2": False,
-    "sw3": False,
-    "sw4": False,
-    "sw5": False,
-    "sw6": False
+# 🟢 Trạng thái relay
+relay_states = {f"brsw{i}": False for i in range(1, 7)}
+
+# 🌡️ Dữ liệu cảm biến
+sensor_data = {
+    "temperature": 25.0,
+    "humidity": 50.0,
+    "light": 200.0
 }
 
-def subscribed(client, userdata, mid, granted_qos):
-    print("Subscribed...")
-
-def recv_message(client, userdata, message):
-    print("Received:", message.topic, message.payload.decode("utf-8"))
-    try:
-        if message.topic.startswith("v1/devices/me/rpc/request/"):
-            # Handle RPC control
-            jsonobj = json.loads(message.payload)
-            if jsonobj['method'].startswith("sw"):
-                key = jsonobj['method']
-                value = jsonobj['params']
-                if key in relay_states:
-                    relay_states[key] = value
-                    print(f"[Relay] {key} => {'ON' if value else 'OFF'}")
-                    client.publish('v1/devices/me/attributes', json.dumps(relay_states), 1)
-
-        elif message.topic.startswith("v1/devices/me/attributes/response/"):
-            # Handle attribute response (both client and shared)
-            data = json.loads(message.payload.decode())
-
-            # Xử lý CLIENT attributes
-            client_attr = data.get("client", {})
-            temp_client = client_attr.get("temperature")
-            humi_client = client_attr.get("humidity")
-
-            if temp_client is not None:
-                print(f"[CLIENT ATTR] temperature = {temp_client}")
-            if humi_client is not None:
-                print(f"[CLIENT ATTR] humidity = {humi_client}")
-
-    except Exception as e:
-        print("Error in on_message:", e)
-
-def connected(client, userdata, flags, rc):
+# 📥 Callback khi kết nối thành công
+def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        print("Connected successfully!!")
+        print("[MQTT] ✅ Đã kết nối!")
         client.subscribe("v1/devices/me/rpc/request/+")
         client.subscribe("v1/devices/me/attributes/response/+")
-        # Gửi yêu cầu lấy CLIENT attributes
-        client.publish("v1/devices/me/attributes/request/1", json.dumps({
-            "clientKeys": "temperature,humidity"
-        }))
+        attr_req = json.dumps({"clientKeys": ",".join(sensor_data.keys())})
+        client.publish("v1/devices/me/attributes/request/1", attr_req)
     else:
-        print("Connection failed with code", rc)
+        print(f"[MQTT] ❌ Lỗi kết nối: {rc}")
 
-client = mqttclient.Client("IOT_SERVER")
+# 📩 Callback khi nhận tin nhắn
+def on_message(client, userdata, msg):
+    try:
+        payload = json.loads(msg.payload.decode())
+        topic = msg.topic
+
+        if topic.startswith("v1/devices/me/rpc/request/"):
+            method = payload.get("method")
+            value = payload.get("params")
+            if method in relay_states:
+                relay_states[method] = value
+                print(f"[RPC] Công tắc {method} => {'BẬT' if value else 'TẮT'}")
+                # Cập nhật trạng thái relay lên attribute
+                # client.publish("v1/devices/me/attributes", json.dumps({method: value}))
+
+    except Exception as e:
+        print("❗ Lỗi xử lý message:", e)
+
+# 🔁 Giả lập cảm biến
+def update_fake_sensor():
+    sensor_data["temperature"] = round(random.uniform(20, 60), 2)
+    sensor_data["humidity"] = round(random.uniform(40, 100), 2)
+    sensor_data["light"] = round(random.uniform(100, 800), 1)
+
+# 🚀 Khởi tạo client
+client = mqtt.Client("CORE_IOT_SIM")
 client.username_pw_set(ACCESS_TOKEN)
+client.on_connect = on_connect
+client.on_message = on_message
 
-client.on_connect = connected
-client.on_subscribe = subscribed
-client.on_message = recv_message
-
-client.connect(BROKER_ADDRESS, PORT)
+client.connect(BROKER, PORT)
 client.loop_start()
 
-temp = 30
-humi = 50
+# 🔄 Gửi telemetry sensor mỗi 30s
+try:
+    while True:
+        # update_fake_sensor()
 
-while True:
-    collect_data = {
-        'temperature': temp,
-        'humidity': humi,
-        **relay_states
-    }
+        payload = json.dumps(sensor_data)
+        print(f"[MQTT] 📤 Telemetry (sensor): {payload}")
+        # client.publish("v1/devices/me/telemetry", payload)
 
-    # Cập nhật shared attributes với temp+2, humi+2 (nếu cần)
-    shared_update = {
-        "temperature": temp + 2,
-        "humidity": humi + 2
-    }
-    client.publish("v1/devices/me/attributes", json.dumps(shared_update), 1)
-    
-    # Gửi trạng thái relay
-    client.publish('v1/devices/me/attributes', json.dumps(relay_states), 1)
+        time.sleep(600)
 
-    # Gửi telemetry
-    client.publish('v1/devices/me/telemetry', json.dumps(collect_data), 1)
-
-    # Sinh dữ liệu mới
-    temp = random.randint(16, 40)
-    humi = random.randint(50, 100)
-    time.sleep(5)
+except KeyboardInterrupt:
+    print("🛑 Dừng giả lập.")
+    client.loop_stop()
+    client.disconnect()
