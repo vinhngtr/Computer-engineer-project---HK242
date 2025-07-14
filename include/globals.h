@@ -7,7 +7,9 @@
 #include <Wire.h>
 #include <Arduino.h>
 #include <ArduinoJson.h>
-
+#include <Thingsboard.h>
+#include <Arduino_MQTT_Client.h>
+#include <ArduinoOTA.h>
 // DEFINE RELAYS
 #ifndef GPIO_PIN_CH1
 #define GPIO_PIN_CH1 1
@@ -32,5 +34,7 @@
 #ifndef GPIO_PIN_CH6
 #define GPIO_PIN_CH6 6
 #endif
+
+extern bool wifiConnected;
 
 #endif
